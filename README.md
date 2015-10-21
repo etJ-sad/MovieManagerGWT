@@ -1,11 +1,7 @@
-# isw 15 16 ABGABE
-Uni Heidelberg | ISW 15/16
-Abgabe / Losungen
+# Uni Heidelberg ISW WS 15/16 ABGABE
+# Abgabe | Losungen | Punkten | ETC
 
-
-Version :
-
-x.y.z
+Version : x.y.z
 
 bsp : 1.4.8
 
