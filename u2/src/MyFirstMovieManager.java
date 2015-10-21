@@ -54,7 +54,7 @@ public class MyFirstMovieManager {
   
   /** public void clearPerformers(Movie getMovie)
    * Blatt 1, Aufgabe 1.3
-   * Relase v1.0.7
+   * Relase v1.0.9
    */
   
   public Performer getPerformer(Movie movie, int ii) {
@@ -67,7 +67,7 @@ public class MyFirstMovieManager {
   }
   /** getOutstandingPerformers(Movie movie)
    * Blatt 1, Aufgabe 1.3
-   * Relase v1.0.7
+   * Relase v1.0.42
    */
   public List<Performer> getOutstandingPerformers(Movie movie)  {
     final List<Performer> performers = this.getPerformers(movie);
@@ -82,7 +82,7 @@ public class MyFirstMovieManager {
   }
   /** searchPerformer(Movie getMovie, String byName)
    * Blatt 1, Aufgabe 1.3
-   * Relase v1.0.7
+   * Relase v1.0.48
    */
   public Boolean searchPerformer(Movie getMovie, String byName) {
     final List<Performer> performers = this.getPerformers(getMovie);
@@ -95,9 +95,9 @@ public class MyFirstMovieManager {
     return false;
   }
   
-  /** searchPerformer(Movie getMovie, String byName)
+  /** main
    * Blatt 1, Aufgabe 1.3
-   * Relase v1.0.7
+   * Relase v1.0.92
    */
   public static void main(String[] args)  {
     final MyFirstMovieManager manager = new MyFirstMovieManager();

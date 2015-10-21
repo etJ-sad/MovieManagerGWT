@@ -78,7 +78,7 @@ public class Movie {
    * ISW 15|16
    * 
    * @autor Soloninov Aleksandr
-   * @version 2.0.7:3772   
+   * @version 2.2.8   
    */
   
   public void showInformation() {
@@ -96,7 +96,7 @@ public class Movie {
   /** Main
    * 
    * @autor Soloninov Aleksandr
-   * @version 1.12   
+   * @version 1.0.4   
    */
   public static void main(String[] args) {
     final Movie zero;

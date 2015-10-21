@@ -15,7 +15,7 @@ public class Customer {
   /** loanMovie(Movie movie)
    * <b>movie</b>
    * @autor Soloninov Aleksandr
-   * @version 1.0.3
+   * @version 2.2.226
    */
   
   public boolean loanMovie(Movie movie) {
@@ -51,7 +51,7 @@ public class Customer {
   /** main 
    * 
    * @autor Soloninov Aleksandr
-   * @version 1.0.0   
+   * @version 2.2.19   
    */
 
   public static void main(String[] args)  {
