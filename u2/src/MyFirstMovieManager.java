@@ -96,9 +96,10 @@ public class MyFirstMovieManager {
   }
   
   /** main
-   * Blatt 1, Aufgabe 1.3
-   * Relase v1.0.92
+   * 
+   * Relase v1.0.93
    */
+  
   public static void main(String[] args)  {
     final MyFirstMovieManager manager = new MyFirstMovieManager();
     final Movie futurama = new Movie("Futurama", 100500);
