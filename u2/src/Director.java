@@ -3,7 +3,7 @@
  * Aufgabe 2.2 ISW 15|16
  * <b>movieCounter</b>
  * @autor Soloninov Aleksandr
- * @version 1.12   
+ * @version 2.2.8   
  */
 
 public class Director extends Performer {

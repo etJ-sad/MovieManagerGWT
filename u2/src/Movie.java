@@ -2,7 +2,7 @@
  * ISW 15|16
  * 
  * @autor Soloninov Aleksandr
- * @version 2.0.7:3772   
+ * @version 1.2.18   
  */
 
 public class Movie {

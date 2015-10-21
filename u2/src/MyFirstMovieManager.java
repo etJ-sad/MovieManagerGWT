@@ -1,6 +1,6 @@
 /** Soloninov Aleksandr, ISW WS 15|16
  * Blatt 1, Aufgabe 1.3
- * Relase v2.1.28
+ * Relase 1.2.37
  */
 
 import java.util.ArrayList;

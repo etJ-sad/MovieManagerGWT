@@ -2,7 +2,7 @@
  * Aufgabe 2.1 ISW 15|16
  * <b>movieCounter</b>
  * @autor Soloninov Aleksandr
- * @version 1.12   
+ * @version 2.2.227   
  */
 
 import java.util.LinkedList;
