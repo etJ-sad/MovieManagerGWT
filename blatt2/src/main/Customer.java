@@ -11,7 +11,7 @@ package main;
 import java.util.LinkedList;
 import java.util.List;
 
-  /** Customer Class
+/** Customer Class.
    * Aufgabe 2.1 ISW 15|16
    * <b>movieCounter</b>
    * @version 2.2.227
@@ -19,19 +19,29 @@ import java.util.List;
 
 
 public class Customer {
+
+  /** The Constant MAX_MOVIE_LOANS. */
+  private static final int MAX_MOVIE_LOANS = 5;
+
+  /** The name. */
   private String name;
+
+  /** The loaned movie. */
   private final List<Movie> loanedMovie;
 
-/** loanMovie(Movie movie)
-   * <b>movie</b>
-   * @autor Soloninov Aleksandr
-   * @version 2.2.226
-   */
+/**
+ *  loanMovie(Movie movie)
+ * <b>movie</b>.
+ *
+ * @version 2.2.226
+ * @param movie the movie
+ * @return true, if successful
+ * @autor Soloninov Aleksandr
+ */
 
-  public boolean loanMovie(Movie movie) {
+  public final boolean loanMovie(final Movie movie) {
 
-    // 0, 1, 2, 3 ,4
-    if  (loanedMovie.size() < 5) {
+    if  (loanedMovie.size() < MAX_MOVIE_LOANS) {
       // wenn keinen Customer da ist
       if  (movie.getCustomer() == null) {
         // put rein
@@ -51,29 +61,41 @@ public class Customer {
     }
   }
 
-  public String toString()  {
+  /**
+   *  toString.
+   *
+   * @return the string
+   * @see java.lang.Object#toString()
+   */
+  public final String toString()  {
     return this.name;
   }
 
-  public Customer(String name) {
-    this.name = name;
+  /**
+   * Instantiates a new customer.
+   *
+   * @param getName the name
+   */
+  public Customer(final String getName) {
+    this.name = getName;
     this.loanedMovie = new LinkedList<Movie>();
   }
 
-  /** main 
+  /** main.
    *
-   * @autor Soloninov Aleksandr
    * @version 2.2.19
+   * @param args the arguments
+   * @autor Soloninov Aleksandr
    */
 
-  public static void main(String[] args)  {
+  public static void main(final String[] args)  {
     final Customer alex = new Customer("Alex");
-    final Customer miranda  = new Customer("Miranda");
+    final Customer oliver  = new Customer("Miranda");
 
     final Movie futurama = new Movie("Futurama", 1);
 
     alex.loanMovie(futurama);
-    miranda.loanMovie(futurama);
+    oliver.loanMovie(futurama);
 
     final Movie starWarsOne = new Movie("Star Wars I", 2);
     final Movie starWarsTwo = new Movie("Star Wars II", 2);
@@ -82,12 +104,12 @@ public class Customer {
     final Movie starWarsFive = new Movie("Star Wars V", 2);
     final Movie starWarsSix = new Movie("Star Wars VI", 2);
 
-    miranda.loanMovie(starWarsOne);
-    miranda.loanMovie(starWarsTwo);
-    miranda.loanMovie(starWarsThree);
-    miranda.loanMovie(starWarsFour);
-    miranda.loanMovie(starWarsFive);
-    miranda.loanMovie(starWarsSix);
+    oliver.loanMovie(starWarsOne);
+    oliver.loanMovie(starWarsTwo);
+    oliver.loanMovie(starWarsThree);
+    oliver.loanMovie(starWarsFour);
+    oliver.loanMovie(starWarsFive);
+    oliver.loanMovie(starWarsSix);
 
   }
 

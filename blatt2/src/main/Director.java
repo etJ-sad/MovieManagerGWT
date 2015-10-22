@@ -1,26 +1,48 @@
 package main;
 
 
-/** Director Class
+/**  Director Class.
  * Aufgabe 2.2 ISW 15|16
  * <b>movieCounter</b>
- * @autor Soloninov Aleksandr
- * @version 2.2.8   
+ *
+ * @version 2.2.8
+
  */
 
 public class Director extends Performer {
 
+  /** The movie counter. */
   private  int movieCounter;
+
+  /**
+   * Gets the movie count.
+   *
+   * @return the movie count
+   */
   //@getter
-  public int getMovieCount() {   
-    return this.movieCounter; 
+  public final int getMovieCount() {
+    return this.movieCounter;
   }
-  //@setter
-  public void setMovieCount(int movieCount) {
+  /**
+   * Sets the movie count.
+   *
+   * @param movieCount the new movie count
+   */
+  public final void setMovieCount(final int movieCount) {
     this.movieCounter = movieCount;
   }
-  //@constructor
-  public Director(String getFirstname, String getLastname, Gender getGender, int getMovieCounter) {
+
+  /**
+   * Instantiates a new director.
+   *
+   * @param getFirstname the get firstname
+   * @param getLastname the get lastname
+   * @param getGender the get gender
+   * @param getMovieCounter the get movie counter
+   */
+
+  public Director(final String getFirstname,  final String getLastname,
+      final Gender getGender, final int getMovieCounter) {
     super(getFirstname, getLastname, getGender);
     this.movieCounter = getMovieCounter;
   }

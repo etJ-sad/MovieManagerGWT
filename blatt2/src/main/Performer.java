@@ -5,7 +5,7 @@ package main;
  * Relase 1.2.38
  */
 
-/** class Performer
+/** class Performer.
  * <b>firstname</b> - first name
  * <b>lastname</b> - last name
  * <b>gender</b> - gender
@@ -15,83 +15,141 @@ package main;
  */
 
 public class Performer {
+
+  /** The firstname. */
   private String firstname;
+
+  /** The lastname. */
   private String lastname;
+
+  /** The gender. */
   private Gender gender;
+
+  /** The movie. */
   private Movie movie;
+
+  /** The outstanding. */
   private Boolean outstanding  = false;
-  
-  /** Constructor 
-   * <b>getFastName</b>
-   * <b>getLastName</b>
-   * <b>getGender</b>
-   * Relase 1.2.20
+
+  /**
+   *  Constructor.
+   *
+   * @param getFirstName the get first name
+   * @param getLastName Relase 1.2.20
+   * @param getGender the get gender
    */
-  Performer(String getFirstName, String getLastName, Gender getGender)  {
-    this.firstname = getFirstName;   
+  Performer(final String getFirstName,  final String getLastName,
+        final Gender getGender) {
+    this.firstname = getFirstName;
     this.lastname = getLastName;
     this.gender = getGender;
   }
-  
-  /** getFirstname() 
-   * <b>this.firstname</b>
-   * Relase 1.2.20
+
+  /**
+   *  firstmame.
+   *
+   * @return the firstname
    */
-  
-  public String getFirstname() {
+
+  public final String getFirstname() {
     return this.firstname;
   }
-  
-  /** setFirstname(String firstname) 
+
+  /** setFirstname(String firstname.
    * <b>firstname</b>
    * Relase 1.2.20
+   *
+   * @param getFirstname the new firstname
    */
-  
-  public void setFirstname(String firstname) {
-    this.firstname = firstname;
+
+  public final void  setFirstname(final String getFirstname) {
+    this.firstname = getFirstname;
   }
-  
-  /** getLastname() 
+
+  /** getLastname().
+
    * <b>this.lastname</b>
    * Relase 1.2.20
+   *
+   * @return the lastname
    */
-  
-  public String getLastname() {
+
+  public final String getLastname() {
     return this.lastname;
   }
-  
-  public void setLastname(String lastname) {
-    this.lastname = lastname;
+  /**
+   * Sets the lastname.
+   *
+   * @param getLastname the new lastname
+   */
+  public final void setLastname(final String getLastname) {
+    this.lastname = getLastname;
   }
-  
-  public Gender getGender() {
+
+  /**
+   * Gets the gender.
+   *
+   * @return the gender
+   */
+  public final Gender getGender() {
     return this.gender;
   }
-  
-  public void setGender(Gender gender) {
-    this.gender = gender;
+
+  /**
+   * Sets the gender.
+   *
+   * @param getGender the new gender
+   */
+  public final void setGender(final Gender getGender) {
+    this.gender = getGender;
   }
-  
-  public Movie getMovie() {
+
+  /**
+   * Gets the movie.
+   *
+   * @return the movie
+   */
+  public final Movie getMovie() {
     return movie;
   }
 
-  public void setMovie(Movie movie) {
-    this.movie = movie;
+  /**
+   * Sets the movie.
+   *
+   * @param getMovie the new movie
+   */
+  public final void setMovie(final Movie getMovie) {
+    this.movie = getMovie;
   }
 
+  /**
+   * Sets the outstanding.
+   *
+   * @param getOutstanding the new outstanding
+   */
   // setter()
-  public void setOutstanding(Boolean outstanding) { 
-    this.outstanding = outstanding; 
+  public final void setOutstanding(final Boolean getOutstanding) {
+    this.outstanding = getOutstanding;
   }
+  /**
+   * Checks if is outstanding.
+   *
+   * @return true, if is outstanding
+   */
   // getter();
-  public boolean isOutstanding() {
-    return this.outstanding; 
+  public final boolean isOutstanding() {
+    return this.outstanding;
   }
   // braucht man zum conv @ to string
-  
-  public String toString()  {
-    return "Performer >> " + firstname + " " + lastname + " is " +  " " + gender;
+
+  /** (non-Javadoc).
+   * @see java.lang.Object#toString()
+   * @return Performer list
+   */
+  @Override
+  public final String toString()  {
+    return "Performer >> " + firstname + " "
+        + lastname + " is " +  " " + gender;
   }
 }
 

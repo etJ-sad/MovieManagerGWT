@@ -7,26 +7,44 @@ package main;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import java.util.List;
 
-
-
-
+/**
+ * The Class MyFirstMovieManager.
+ */
 public class MyFirstMovieManager extends Movie {
 
+  /**Instantiates a new my first movie manager.
 
+   */
+  private static final int DEFAUL_ARGS = 99999;
+
+  /** The map. */
+  private Map<Movie, ArrayList<Performer>> map;
+
+  /**Instantiates a new my first movie manager.
+
+   */
   public  MyFirstMovieManager() {
-    super("manager", 99999);
+    super("manager", DEFAUL_ARGS);
+    map = new HashMap<Movie, ArrayList<Performer>>();
   } // Constructor
-  
-  /** void addPerformer(Movie getMovie, Performer getPerformer)
+
+  /** void addPerformer(Movie getMovie, Performer getPerformer).
+
    * Blatt 1, Aufgabe 1.3
    * Relase v1.0.7
+   *
+   * @param getMovie the get movie
+   * @param getPerformer the get performer
    */
-  
-  public void addPerformer(Movie getMovie, Performer getPerformer)  {
-    List<Performer> performers = Movie.map.get(getMovie);           //
+
+  public final void addPerformer(final Movie getMovie,
+      final Performer getPerformer)  {
+    List<Performer> performers = map.get(getMovie);           //
     if  (performers == null)  {
       // wenn keinen prf, erzugen nen neuen
       performers = new ArrayList<Performer>();
@@ -34,45 +52,65 @@ public class MyFirstMovieManager extends Movie {
 
     if  (!performers.contains(getPerformer))  {
       performers.add(getPerformer);
-      Movie.map.put(getMovie, (ArrayList<Performer>)performers);
+      map.put(getMovie, (ArrayList<Performer>)  performers);
     }
   }
-  
-  /** public void clearPerformers(Movie getMovie)
+
+  /** public void clearPerformers(Movie getMovie).
+
    * Blatt 1, Aufgabe 1.3
    * Relase v1.0.7
+   *
+   * @param getMovie the get movie
    */
 
-  public void clearPerformers(Movie getMovie) {
-    final List<Performer> performers = Movie.map.get(getMovie);
+  public final void clearPerformers(final Movie getMovie) {
+    final List<Performer> performers = map.get(getMovie);
     if  (performers != null)  {
       performers.clear();
-      Movie.map.put(getMovie, (ArrayList<Performer>)performers);
+      map.put(getMovie, (ArrayList<Performer>)  performers);
     }
   }
+
+  /**
+   * Gets the performers.
+   *
+   * @param getMovie the get movie
+   * @return the performers
+   */
   // gibt alle performers ins Movie
-  public List<Performer> getPerformers(Movie getMovie)  {
-    return Movie.map.get(getMovie);
+  public final List<Performer> getPerformers(final Movie getMovie)  {
+    return map.get(getMovie);
   }
-  
-  /** public void clearPerformers(Movie getMovie)
+
+  /**
+   *  public void clearPerformers(Movie getMovie).
    * Blatt 1, Aufgabe 1.3
    * Relase v1.0.9
+   *
+   * @param movie the movie
+   * @param ii the ii
+   * @return the performer
    */
-  
-  public Performer getPerformer(Movie movie, int ii) {
+
+  public final Performer getPerformer(final Movie movie, final int ii) {
     final List<Performer>  performers = this.getPerformers(movie);
-    if  (performers != null && performers.size() > ii )  {
+    if  (performers != null && performers.size() > ii)  {
       return performers.get(ii);
     } else {
       return null;
     }
   }
-  /** getOutstandingPerformers(Movie movie)
+
+  /**
+   *  getOutstandingPerformers(Movie movie).
    * Blatt 1, Aufgabe 1.3
    * Relase v1.0.42
+   *
+   * @param movie the movie
+   * @return the outstanding performers
    */
-  public List<Performer> getOutstandingPerformers(Movie movie)  {
+  public final List<Performer> getOutstandingPerformers(final Movie movie)  {
     final List<Performer> performers = this.getPerformers(movie);
 
     final  List<Performer> returnList = new ArrayList<Performer>();
@@ -83,11 +121,18 @@ public class MyFirstMovieManager extends Movie {
     }
     return returnList;
   }
-  /** searchPerformer(Movie getMovie, String byName)
+
+  /**
+   *  searchPerformer(Movie getMovie, String byName).
    * Blatt 1, Aufgabe 1.3
    * Relase v1.0.48
+   *
+   * @param getMovie the get movie
+   * @param byName the by name
+   * @return the boolean
    */
-  public Boolean searchPerformer(Movie getMovie, String byName) {
+  public final Boolean searchPerformer(final Movie getMovie,
+      final String byName) {
     final List<Performer> performers = this.getPerformers(getMovie);
     for (Performer performer : performers)  {
       if  (performer.getFirstname().equalsIgnoreCase(byName)
@@ -99,7 +144,10 @@ public class MyFirstMovieManager extends Movie {
   }
 
 /**
+ * The main method.
+ *
  * @author isw15044
+ * @param args the arguments
  */
 
   public static void main(final String[] args)  {
@@ -132,10 +180,10 @@ public class MyFirstMovieManager extends Movie {
     System.out.println("Fry + Leela  = "  +  leela.getLastname()
         + " " + leela.getFirstname());
 
-    if  (manager.searchPerformer(futurama, "Vader").equals(futurama) ) { 
-      System.out.println("Performer not in this movie" ); 
-    } else  { 
-      System.out.println("Performer is in this movie"); 
+    if  (manager.searchPerformer(futurama, "Vader").equals(futurama)) {
+      System.out.println("Performer not in this movie" );
+    } else  {
+      System.out.println("Performer is in this movie");
     }
     System.out.println("Futurama is closed  :( ");
     manager.clearPerformers(futurama);
@@ -149,13 +197,11 @@ public class MyFirstMovieManager extends Movie {
  >> Ein Array -> Schneller Indexzugriff
  >> Langsame Suche nach Schluesseln
 
-  
  HashSet:
  >> Implementiert eine gehashte Menge >>  Schneller Schluesselzugriff
  >> Nicht direkte Map >>  Zuordnung muesste extern geschehen
  >> Keine Reihenfolge definierbar
 
-  
  HashMap:
  >> Suche und Zugriff  sind langsam
  >> Gehashte Zuordnung >>  Schneller Schluesseszugriff
