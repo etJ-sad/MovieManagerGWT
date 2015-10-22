@@ -1,17 +1,20 @@
-/** Soloninov Aleksandr, ISW WS 15|16
+package main;
+
+/** Soloninov Aleksandr
  * Blatt 1, Aufgabe 1.3
  * Relase 1.2.37
  */
 
+
 import java.util.ArrayList;
-import java.util.HashMap;
+
 import java.util.List;
-import java.util.Map;
+
 
 
 
 public class MyFirstMovieManager extends Movie {
-  
+
 
   public  MyFirstMovieManager() {
     super("manager", 99999);
@@ -94,22 +97,24 @@ public class MyFirstMovieManager extends Movie {
     }
     return false;
   }
-  
-  /** main
-   * Relase v1.0.93
-   */
-  
-  public static void main(String[] args)  {
+
+/**
+ * @author isw15044
+ */
+
+  public static void main(final String[] args)  {
     final MyFirstMovieManager manager = new MyFirstMovieManager();
     final Movie futurama = new Movie("Futurama", 100500);
     System.out.println(futurama);
     final Performer fry = new Performer("Philip J.", "Fry", Gender.MALE);
     final Performer leela = new Performer("Turanga", "Leela", Gender.FEMALE);
-    final Performer bender = new Performer("Bieger Rodriguez", "Bender ", Gender.MALE);
-    final Performer zoidberg = new Performer("Dr. John", "Zoidberg", Gender.MALE);
+    final Performer bender = new Performer("Bieger Rodriguez",
+        "Bender ", Gender.MALE);
+    final Performer zoidberg = new Performer("Dr. John", "Zoidberg",
+        Gender.MALE);
     final Performer conrad = new Performer("Hermes", "Conrad", Gender.MALE);
     final Performer amy = new Performer("Wong", "Amy", Gender.FEMALE);
-    
+
     bender.setOutstanding(true);
     zoidberg.setOutstanding(true);
 
@@ -119,12 +124,13 @@ public class MyFirstMovieManager extends Movie {
     manager.addPerformer(futurama, zoidberg);
     manager.addPerformer(futurama, conrad);
     manager.addPerformer(futurama, amy);
-    
     System.out.println(manager.getPerformers(futurama));
-    System.out.println("Outstanding Performers : " + manager.getOutstandingPerformers(futurama));
+    System.out.println("Outstanding Performers : "
+        + manager.getOutstandingPerformers(futurama));
 
     leela.setLastname(fry.getLastname());
-    System.out.println("Fry + Leela  = "  +  leela.getLastname() + " " + leela.getFirstname());
+    System.out.println("Fry + Leela  = "  +  leela.getLastname()
+        + " " + leela.getFirstname());
 
     if  (manager.searchPerformer(futurama, "Vader").equals(futurama) ) { 
       System.out.println("Performer not in this movie" ); 

@@ -1,27 +1,37 @@
+package main;
+
+
 /** Customer Class
  * Aufgabe 2.1 ISW 15|16
  * <b>movieCounter</b>
- * @autor Soloninov Aleksandr
- * @version 2.2.227   
+ * @autor Alex, Oliver
+ * @version 2.2.227
  */
 
 import java.util.LinkedList;
 import java.util.List;
 
+  /** Customer Class
+   * Aufgabe 2.1 ISW 15|16
+   * <b>movieCounter</b>
+   * @version 2.2.227
+   */
+
+
 public class Customer {
   private String name;
-  final List<Movie> loanedMovie;
-  
-  /** loanMovie(Movie movie)
+  private final List<Movie> loanedMovie;
+
+/** loanMovie(Movie movie)
    * <b>movie</b>
    * @autor Soloninov Aleksandr
    * @version 2.2.226
    */
-  
+
   public boolean loanMovie(Movie movie) {
 
     // 0, 1, 2, 3 ,4
-    if  (loanedMovie.size() < 5)  {
+    if  (loanedMovie.size() < 5) {
       // wenn keinen Customer da ist
       if  (movie.getCustomer() == null) {
         // put rein
@@ -30,16 +40,18 @@ public class Customer {
         movie.setCustomer(this);
         return true;
       } else {
-        System.out.println("Film ist schon an " + movie.getCustomer() + " verliehen");
-        return false; 
+        System.out.println("Film ist schon an "
+            + movie.getCustomer() + " verliehen");
+        return false;
       }
-    } else { 
-      System.out.println("Kunde "  + this +  " hat  "  + movie.getNumber() + " Filme ausgeliehen");
+    } else {
+      System.out.println("Kunde "  + this +  " hat  "
+          + movie.getNumber() + " Filme ausgeliehen");
       return false;
     }
   }
 
-  public String toString() {
+  public String toString()  {
     return this.name;
   }
 
@@ -47,11 +59,11 @@ public class Customer {
     this.name = name;
     this.loanedMovie = new LinkedList<Movie>();
   }
-  
+
   /** main 
-   * 
+   *
    * @autor Soloninov Aleksandr
-   * @version 2.2.19   
+   * @version 2.2.19
    */
 
   public static void main(String[] args)  {
@@ -62,7 +74,7 @@ public class Customer {
 
     alex.loanMovie(futurama);
     miranda.loanMovie(futurama);
-    
+
     final Movie starWarsOne = new Movie("Star Wars I", 2);
     final Movie starWarsTwo = new Movie("Star Wars II", 2);
     final Movie starWarsThree = new Movie("Star Wars III", 2);
@@ -76,7 +88,7 @@ public class Customer {
     miranda.loanMovie(starWarsFour);
     miranda.loanMovie(starWarsFive);
     miranda.loanMovie(starWarsSix);
-    
+
   }
 
 }

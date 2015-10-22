@@ -1,3 +1,5 @@
+package main;
+
 
 /** Director Class
  * Aufgabe 2.2 ISW 15|16

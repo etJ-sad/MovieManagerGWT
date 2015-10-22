@@ -1,6 +1,9 @@
+package main;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
 
 /** Movie Class
  * ISW 15|16
