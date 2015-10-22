@@ -18,7 +18,7 @@ public class Movie {
   private Customer customer;
   //public stack
   private static int nextNumber; // Nummer des Objekts und erhöht die Klassenvariable
-  public static Map<Movie, ArrayList<Performer>> map;
+  protected static Map<Movie, ArrayList<Performer>> map;
   
   Movie(String getTitle, int getTime) { 
     map = new HashMap<Movie, ArrayList<Performer>>();// Erzeugen die Map
