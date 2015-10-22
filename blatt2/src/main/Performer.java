@@ -1,7 +1,7 @@
 package main;
 
 /** Performer Class.
- * @version 1.1.29
+ * @version 1.1.30
  */
 
 public class Performer {
