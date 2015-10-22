@@ -24,7 +24,7 @@ public class Customer {
   private static final int MAX_MOVIE_LOANS = 5;
 
   /** The name. */
-  private String name;
+  private final String name;
 
   /** The loaned movie. */
   private final List<Movie> loanedMovie;

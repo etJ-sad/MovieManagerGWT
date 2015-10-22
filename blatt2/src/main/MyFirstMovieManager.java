@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * The Class MyFirstMovieManager.
  */
-public class MyFirstMovieManager extends Movie {
+public class MyFirstMovieManager {
 
   /**Instantiates a new my first movie manager.
 
@@ -23,13 +23,13 @@ public class MyFirstMovieManager extends Movie {
   private static final int DEFAUL_ARGS = 99999;
 
   /** The map. */
-  private Map<Movie, ArrayList<Performer>> map;
+  private final Map<Movie, ArrayList<Performer>> map;
 
   /**Instantiates a new my first movie manager.
 
    */
   public  MyFirstMovieManager() {
-    super("manager", DEFAUL_ARGS);
+   // super("manager", DEFAUL_ARGS);
     map = new HashMap<Movie, ArrayList<Performer>>();
   } // Constructor
 
