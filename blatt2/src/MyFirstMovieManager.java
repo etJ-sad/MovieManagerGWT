@@ -10,11 +10,11 @@ import java.util.Map;
 
 
 
-public class MyFirstMovieManager {
-  private final Map<Movie, ArrayList<Performer>> map;
+public class MyFirstMovieManager extends Movie {
+  
 
   public  MyFirstMovieManager() {
-    this.map = new HashMap<Movie, ArrayList<Performer>>();// Erzeugen die Map
+    super("manager", 99999);
   } // Constructor
   
   /** void addPerformer(Movie getMovie, Performer getPerformer)
@@ -23,7 +23,7 @@ public class MyFirstMovieManager {
    */
   
   public void addPerformer(Movie getMovie, Performer getPerformer)  {
-    List<Performer> performers = this.map.get(getMovie);           //
+    List<Performer> performers = Movie.map.get(getMovie);           //
     if  (performers == null)  {
       // wenn keinen prf, erzugen nen neuen
       performers = new ArrayList<Performer>();
@@ -31,7 +31,7 @@ public class MyFirstMovieManager {
 
     if  (!performers.contains(getPerformer))  {
       performers.add(getPerformer);
-      this.map.put(getMovie, (ArrayList<Performer>)performers);
+      Movie.map.put(getMovie, (ArrayList<Performer>)performers);
     }
   }
   
@@ -41,15 +41,15 @@ public class MyFirstMovieManager {
    */
 
   public void clearPerformers(Movie getMovie) {
-    final List<Performer> performers = this.map.get(getMovie);
+    final List<Performer> performers = Movie.map.get(getMovie);
     if  (performers != null)  {
       performers.clear();
-      this.map.put(getMovie, (ArrayList<Performer>)performers);
+      Movie.map.put(getMovie, (ArrayList<Performer>)performers);
     }
   }
   // gibt alle performers ins Movie
   public List<Performer> getPerformers(Movie getMovie)  {
-    return this.map.get(getMovie);
+    return Movie.map.get(getMovie);
   }
   
   /** public void clearPerformers(Movie getMovie)
