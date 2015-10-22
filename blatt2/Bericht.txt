@@ -1,0 +1,42 @@
+Driver: Alex, Observer: Oliver
+
+	- Eine neue Klasse Customer wurde erstellt.
+	- java.uti.LikedList wurde importiert
+	- Die Klasse hat eine String 'name' und eine Liste ausgeliehnen Filmen List<Moivie> loanedMovie
+	- Constructor :
+		Kundenname wird übergeben
+		Erstellen die Liste
+
+
+Driver: Alex, Observer: Oliver
+
+	- Fügt der Klasse Movie ein Attribut Customer zu. Setter/Getter sind auch dazu.
+	- Fügt der Klasse Movie ein Konstante Attribut MAX_MOVIE_LOANS = 5
+	- Fügt in Customer.loanMovie(Movie getMovie) eine Anweisung zu, die das Movie zur Liste der Ausgeliehen en Filme zufügt.
+	- Fügt weiterhin einen Vergleich ein, ob der Film schon ausgeliehen ist und fügt ein, dass in Movie der Ausleiher gesetzt wird.
+	- Wenn das Ausleihen funktioniert hat, wird 'true', sonst 'false' zurückgegeben.
+
+Driver : Oliver, Observer : Alex
+	
+	- Ändert die Methode loanedMovie() so, dass ein Kunde nur Filme gleichzeitig Ausleien darf, dadurch loanedMovies.size) < MAX_MOVIE_LOANS
+	- Erweitert die Methode loanedMovie() so, wenn in der Falle das die Methode false liefert, eine richtige Ausgabe ausgegeben werden könnte.
+	- Fügt eine String Methode, die die Name der Kunde leifert.
+	- Schreibt die main-Methode für das Testen neuen Features.
+	- Wird zwei Kunden eingelegt und sieben Filmen, um zu prüfen, was passieren würde, wenn ein
+	- Kunde mehr als 5 Filme ausleihen will, oder zwei Kunden versuchen den gleichen Film auszuleihen.
+
+Test Phase :
+
+In die main-Methode Kunde 'Alex' leiht ein Film aus und die restliche Filmen lieht Kunde 'Oliver'.
+In die main-Methode versucht Kunde1 einen verliehenen Film auszuleihen.
+> Ausgabe: 'Futurama' ist an 'Alex' ausgeliehen.
+> Ausgabe: Oliver hat schon 5 Filme ausgeliehen.
+
+
+Erfahrungsbericht Alex für das Pair-Programming :
+
+Es ist eine neue Erfahrung, nicht mehr nur vollendeten Code zu Gesicht zu bekommen, sondern auch, wie dieser entsteht.
+Insbesondere hat mich dabei überrascht, wie sehr sich einzelne Menschen in der Art unterscheiden können, in der sie Code schreiben.
+Während man bei größeren Codefragmenten, die man erst im fertigen Zustand sieht, oft von ihrer schieren Masse überwältigt ist, ist
+es im Gegensatz dazu eher entspannend bis langweilig, der Entstehnung zuzuschauen. 
+Dabei kann man übersehen, welche Entscheidungen der andere in der Zeit treffen muss, die man möglicherweise selbst schlichtweg übersehen hat.
