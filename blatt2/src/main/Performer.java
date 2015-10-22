@@ -1,17 +1,7 @@
 package main;
 
-/** Soloninov Aleksandr, ISW WS 15|16
- * Blatt 1, Aufgabe 1.3
- * Relase 1.2.38
- */
-
-/** class Performer.
- * <b>firstname</b> - first name
- * <b>lastname</b> - last name
- * <b>gender</b> - gender
- * <b>movie</b> - movie
- * <b>oustanding</b> - outstanding
- * Relase 1.2.19
+/** Performer Class.
+ * @version 1.1.29
  */
 
 public class Performer {
@@ -33,9 +23,8 @@ public class Performer {
 
   /**
    *  Constructor.
-   *
    * @param getFirstName the get first name
-   * @param getLastName Relase 1.2.20
+   * @param getLastName the get last name
    * @param getGender the get gender
    */
   Performer(final String getFirstName,  final String getLastName,
@@ -46,34 +35,23 @@ public class Performer {
   }
 
   /**
-   *  firstmame.
-   *
+   *  getFirstname.
    * @return the firstname
    */
-
   public final String getFirstname() {
     return this.firstname;
   }
 
-  /** setFirstname(String firstname.
-   * <b>firstname</b>
-   * Relase 1.2.20
-   *
+  /** setFirstname.
    * @param getFirstname the new firstname
    */
-
   public final void  setFirstname(final String getFirstname) {
     this.firstname = getFirstname;
   }
 
   /** getLastname().
-
-   * <b>this.lastname</b>
-   * Relase 1.2.20
-   *
    * @return the lastname
    */
-
   public final String getLastname() {
     return this.lastname;
   }
@@ -127,7 +105,6 @@ public class Performer {
    *
    * @param getOutstanding the new outstanding
    */
-  // setter()
   public final void setOutstanding(final Boolean getOutstanding) {
     this.outstanding = getOutstanding;
   }

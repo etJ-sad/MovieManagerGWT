@@ -1,14 +1,10 @@
 package main;
 
-
-/** Soloninov Aleksandr, ISW WS 15|16.
- * Blatt 1, Aufgabe 1.3
- * Relase 1.0.0
+/**  Gender Class.
+ * @version 1.2.1
  */
-
 /** Gender.
  */
-
 public enum Gender {
 
     /** The male. */

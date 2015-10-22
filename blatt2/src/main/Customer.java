@@ -1,23 +1,11 @@
 package main;
 
-
-/** Customer Class
- * Aufgabe 2.1 ISW 15|16
- * <b>movieCounter</b>
- * @autor Alex, Oliver
- * @version 2.2.227
- */
-
 import java.util.LinkedList;
 import java.util.List;
 
 /** Customer Class.
-   * Aufgabe 2.1 ISW 15|16
-   * <b>movieCounter</b>
    * @version 2.2.227
    */
-
-
 public class Customer {
 
   /** The Constant MAX_MOVIE_LOANS. */
@@ -30,13 +18,9 @@ public class Customer {
   private final List<Movie> loanedMovie;
 
 /**
- *  loanMovie(Movie movie)
- * <b>movie</b>.
- *
- * @version 2.2.226
+ *  loanMovie(Movie movie).
  * @param movie the movie
  * @return true, if successful
- * @autor Soloninov Aleksandr
  */
 
   public final boolean loanMovie(final Movie movie) {
@@ -82,15 +66,11 @@ public class Customer {
   }
 
   /** main.
-   *
-   * @version 2.2.19
    * @param args the arguments
-   * @autor Soloninov Aleksandr
    */
-
   public static void main(final String[] args)  {
     final Customer alex = new Customer("Alex");
-    final Customer oliver  = new Customer("Miranda");
+    final Customer oliver  = new Customer("Oliver");
 
     final Movie futurama = new Movie("Futurama", 1);
 
@@ -114,3 +94,4 @@ public class Customer {
   }
 
 }
+

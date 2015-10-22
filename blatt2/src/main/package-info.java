@@ -1,5 +1,5 @@
 /**
- * This package contains class for doing some stuff.
- */
+  *
+  * Package-info, Soloninov Aleksandr | ISW 15/16.
+  */
 package main;
-
