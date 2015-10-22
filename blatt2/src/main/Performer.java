@@ -1,7 +1,7 @@
 package main;
 
 /** Performer Class.
- * @version 1.1.30
+ * @version 1.1.30:relase
  */
 
 public class Performer {

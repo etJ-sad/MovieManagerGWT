@@ -8,7 +8,7 @@ import java.util.List;
 
 /**
  * The Class MyFirstMovieManager.
- *  @version 1.2.95
+ *  @version 1.2.95:relase
  */
 public class MyFirstMovieManager {
 

@@ -1,7 +1,7 @@
 package main;
 
 /**  Director Class.
- * @version 2.2.17
+ * @version 2.2.17:relase
  */
 public class Director extends Performer {
 

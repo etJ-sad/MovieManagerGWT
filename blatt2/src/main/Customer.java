@@ -4,7 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 /** Customer Class.
-   * @version 2.2.228
+   * @version 2.2.228:relase
    */
 public class Customer {
 
