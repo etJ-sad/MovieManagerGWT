@@ -14,7 +14,7 @@ public class Movie {
   private String title;
   private int time;
   private int number;
-  private Director director;
+  protected Director director;
   private Customer customer;
   //public stack
   private static int nextNumber; // Nummer des Objekts und erhöht die Klassenvariable
