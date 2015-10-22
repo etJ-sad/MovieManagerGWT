@@ -1,6 +1,5 @@
-/** This package represents.
- *
- * @author ME
+/**
+ * This package contains class for doing some stuff.
  */
-@Deprecated
 package main;
+

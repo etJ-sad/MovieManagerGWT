@@ -1,5 +1,4 @@
 package main;
-
 /** Soloninov Aleksandr
  * Blatt 1, Aufgabe 1.3
  * Relase 1.2.37
@@ -17,10 +16,6 @@ import java.util.List;
  */
 public class MyFirstMovieManager {
 
-  /**Instantiates a new my first movie manager.
-
-   */
-  private static final int DEFAUL_ARGS = 99999;
 
   /** The map. */
   private final Map<Movie, ArrayList<Performer>> map;
@@ -29,7 +24,7 @@ public class MyFirstMovieManager {
 
    */
   public  MyFirstMovieManager() {
-   // super("manager", DEFAUL_ARGS);
+
     map = new HashMap<Movie, ArrayList<Performer>>();
   } // Constructor
 
@@ -181,7 +176,7 @@ public class MyFirstMovieManager {
         + " " + leela.getFirstname());
 
     if  (manager.searchPerformer(futurama, "Vader").equals(futurama)) {
-      System.out.println("Performer not in this movie" );
+      System.out.println("Performer not in this movie");
     } else  {
       System.out.println("Performer is in this movie");
     }
