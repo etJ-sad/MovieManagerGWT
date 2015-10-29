@@ -1,19 +1,9 @@
 package de.unihd.movies.client;
 
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
-
-import com.google.gwt.cell.client.DateCell;
 import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.user.cellview.client.CellTable;
-import com.google.gwt.user.cellview.client.Column;
-import com.google.gwt.user.cellview.client.TextColumn;
-import com.google.gwt.user.cellview.client.HasKeyboardSelectionPolicy.KeyboardSelectionPolicy;
-import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.ui.RootPanel;
-import com.google.gwt.view.client.SelectionChangeEvent;
-import com.google.gwt.view.client.SingleSelectionModel;
+
 
 
 /**
@@ -22,8 +12,18 @@ import com.google.gwt.view.client.SingleSelectionModel;
 
 public class MovieManager  implements EntryPoint {
 		  
-		  
-		  public void onModuleLoad() {
+	public final List<Movie> CONTACTS = Arrays.asList(
+			  new Movie (1,	"Star Wars I",	166, "English", "First Film new Trilogy", "space"),
+			  new Movie (2,	"Star Wars II",	198, "English", "Second Film new Trilogy", "space"),
+			  new Movie (3,	"Star Wars III",211, "English", "Three Film new Trilogy", "space"),
+			  new Movie (4,	"Star Wars IV",	149, "English", "First Film old Trilogy", "space"),
+			  new Movie (5,	"Star Wars V",	154, "English", "Second Film old Trilogy", "space"),
+			  new Movie (6,	"Star Wars VI",	171, "English", "Three Film old Trilogy", "space"));  
+	
+	public MovieManager() {
+	}
+	
+	public void onModuleLoad() {
 			  MovieUI run = new MovieUI();
 			  run.show();
 		}

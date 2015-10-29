@@ -1,6 +1,5 @@
 package de.unihd.movies.client;
 
-import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
@@ -15,15 +14,9 @@ import com.google.gwt.view.client.ListDataProvider;
 
 public class MovieUI extends Composite {
 
-	private VerticalPanel panel;
+	MovieManager manager = new MovieManager();
 	
-	private static final List<Movie> CONTACTS = Arrays.asList(
-			  new Movie (1,	"Star Wars I",	166, "English", "First Film new Trilogy", "space"),
-			  new Movie (2,	"Star Wars II",	198, "English", "Second Film new Trilogy", "space"),
-			  new Movie (3,	"Star Wars III",211, "English", "Three Film new Trilogy", "space"),
-			  new Movie (4,	"Star Wars IV",	149, "English", "First Film old Trilogy", "space"),
-			  new Movie (5,	"Star Wars V",	154, "English", "Second Film old Trilogy", "space"),
-			  new Movie (6,	"Star Wars VI",	171, "English", "Three Film old Trilogy", "space"));
+	private VerticalPanel panel;
 	
 	public static CellTable<Movie> table = new CellTable<Movie>();
 	
@@ -38,10 +31,7 @@ public class MovieUI extends Composite {
 			    	  String buffer = String.valueOf(object.getId());
 			    	  return buffer;
 			      }
-			    };
-			table.addColumn(idColumn, "id");
-			idColumn.setSortable(true);
-
+			    }; table.addColumn(idColumn, "id");
 		    
 			//Name
 		    TextColumn<Movie> nameColumn = new TextColumn<Movie>() {
@@ -49,8 +39,7 @@ public class MovieUI extends Composite {
 		      public String getValue(Movie object) {
 		        return object.getName();
 		      }
-		    };
-		    table.addColumn(nameColumn, "Name");
+		       }; table.addColumn(nameColumn, "Name");
 		    
 		    //Time
 		    TextColumn<Movie> timeColumn = new TextColumn<Movie>() {
@@ -59,8 +48,7 @@ public class MovieUI extends Composite {
 			    	  String buffer = String.valueOf(object.getTime());
 			    	  return buffer;
 			      }
-			    };
-			table.addColumn(timeColumn, "Time");
+			    }; table.addColumn(timeColumn, "Time");
 			
 			//Language
 		    TextColumn<Movie> languageColumn = new TextColumn<Movie>() {
@@ -68,8 +56,7 @@ public class MovieUI extends Composite {
 			      public String getValue(Movie object) {
 			        return object.getLanguage();
 			      }
-			    };
-			table.addColumn(languageColumn, "Language");
+			    }; table.addColumn(languageColumn, "Language");
 			
 			//Description
 		    TextColumn<Movie> DescriptionColumn = new TextColumn<Movie>() {
@@ -77,8 +64,7 @@ public class MovieUI extends Composite {
 			      public String getValue(Movie object) {
 			        return object.getDescription();
 			      }
-			    };
-			table.addColumn(DescriptionColumn, "Description");
+			    }; table.addColumn(DescriptionColumn, "Description");
 		    
 		    
 		    //Place
@@ -87,39 +73,34 @@ public class MovieUI extends Composite {
 		      public String getValue(Movie object) {
 		        return object.getPlace();
 		      }
-		    };
-		    table.addColumn(placeColumn, "Place");
-		
-
+		    }; table.addColumn(placeColumn, "Place");
+			
 		    
-			//dataProvider
+		    
+		    nameColumn.setSortable(true);
+		    
+		    //dataProvider
 		    List<Movie> list = dataProvider.getList();
-		    for (Movie contact : CONTACTS) {
+		    for (Movie contact : manager.CONTACTS) {
 		      list.add(contact);
 		    }
 
+		    //Handler
 		    ListHandler<Movie> columnSortHandler = new ListHandler<Movie>(list);
-		    columnSortHandler.setComparator(idColumn, new Comparator<Movie>() {
-		          public int compare(Movie o1, Movie o2) {
-		            if (o1 == o2) {
-		              return 0;
-		            }
-		            if (o1 != null) {
-		            	String buffer_o1 = String.valueOf(o1.getId());
-		            	String buffer_o2 = String.valueOf(o2.getId());
-		            	
-		              return (o2 != null) ? buffer_o1.compareTo(buffer_o2) : 1;
-		            }
-		            return -1;
-		          }
-
-
-		        });
+		    columnSortHandler.setComparator(idColumn,
+		            new Comparator<Movie>() {
+		              public int compare(Movie t1, Movie t2) {
+		            	  final String BUFFER_T1 = String.valueOf(t1.getId());
+		            	  final String BUFFER_T2 = String.valueOf(t2.getId()); 
+		                return BUFFER_T1.compareTo(BUFFER_T2);
+		              }
+		            });
 		
+		    // add
 		    table.addColumnSortHandler(columnSortHandler);
 		    table.getColumnSortList().push(idColumn);
-		    table.setRowCount(CONTACTS.size(), true);
-		    table.setRowData(0, CONTACTS);
+		    table.setRowCount(manager.CONTACTS.size(), true);
+		    table.setRowData(0, manager.CONTACTS);
 		    RootPanel.get().add(table);
 		    }
 		
