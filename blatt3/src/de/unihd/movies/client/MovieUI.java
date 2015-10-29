@@ -77,7 +77,7 @@ public class MovieUI extends Composite {
 			
 		    
 		    
-		    nameColumn.setSortable(true);
+		    idColumn.setSortable(true);
 		    
 		    //dataProvider
 		    List<Movie> list = dataProvider.getList();
