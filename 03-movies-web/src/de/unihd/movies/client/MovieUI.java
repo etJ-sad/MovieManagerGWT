@@ -94,15 +94,8 @@ public class MovieUI extends Composite {
 		    });
 		    // Set the total row count. This isn't strictly necessary, but it affects
 		    // paging calculations, so its good habit to keep the row count up to date.
-		    table.setRowCount(CONTACTS.size(), true);
-		    // Push the data into the widget.
-		    table.setRowData(0, CONTACTS);
-		    // Add it to the root panel.
-		    RootPanel.get().add(table);
 		  }
 		
-	
-
 	/**
 	 * Shows the content of the MovieUI.
 	 * */
@@ -110,6 +103,11 @@ public class MovieUI extends Composite {
 		initWidget(panel);
 		RootPanel.get("content").add(this);
 		this.setVisible(true);
+	    table.setRowCount(CONTACTS.size(), true);
+	    // Push the data into the widget.
+	    table.setRowData(0, CONTACTS);
+	    // Add it to the root panel.
+	    RootPanel.get().add(table);
 	}
 
 }
