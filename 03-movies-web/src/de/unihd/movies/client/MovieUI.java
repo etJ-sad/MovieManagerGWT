@@ -19,24 +19,16 @@ import com.google.gwt.view.client.SingleSelectionModel;
  * */
 public class MovieUI extends Composite {
 
-	/**
-	 * The main panel which contain all other widgets
-	 * */
 	private VerticalPanel panel;
-
-	/**
-	 * Creates a MovieUI with the given list of movies.
-	 * 
-	 * @param movies
-	 *            The list of movies to show.
-	 * */
-	  private static final List<Movie> CONTACTS = Arrays.asList(
+	private static final List<Movie> CONTACTS = Arrays.asList(
 			  new Movie(1,"John",150,"GER", "HERO", "ME"));
+	
 	public static CellTable<Movie> table = new CellTable<Movie>();
+	
 	public MovieUI() {
 		  MovieUI.table.setKeyboardSelectionPolicy(KeyboardSelectionPolicy.ENABLED);
 		    
-		    
+		   //id 
 		    TextColumn<Movie> idColumn = new TextColumn<Movie>() {
 			      @Override
 			      public String getValue(Movie object) {
@@ -46,7 +38,7 @@ public class MovieUI extends Composite {
 			    };
 			MovieUI.table.addColumn(idColumn, "id");
 		    
-			//
+			//Name
 		    TextColumn<Movie> nameColumn = new TextColumn<Movie>() {
 		      @Override
 		      public String getValue(Movie object) {
@@ -55,7 +47,7 @@ public class MovieUI extends Composite {
 		    };
 		    table.addColumn(nameColumn, "Name");
 		    
-		    
+		    //Time
 		    TextColumn<Movie> timeColumn = new TextColumn<Movie>() {
 			      @Override
 			      public String getValue(Movie object) {
@@ -92,22 +84,19 @@ public class MovieUI extends Composite {
 		        }
 		      }
 		    });
-		    // Set the total row count. This isn't strictly necessary, but it affects
-		    // paging calculations, so its good habit to keep the row count up to date.
-		  }
+		    table.setRowCount(CONTACTS.size(), true);
+		    // Push the data into the widget.
+		    table.setRowData(0, CONTACTS);
+		    // Add it to the root panel.
+		    RootPanel.get().add(table);
+		    }
 		
-	/**
-	 * Shows the content of the MovieUI.
-	 * */
+	
 	public void show() {
 		initWidget(panel);
 		RootPanel.get("content").add(this);
 		this.setVisible(true);
-	    table.setRowCount(CONTACTS.size(), true);
-	    // Push the data into the widget.
-	    table.setRowData(0, CONTACTS);
-	    // Add it to the root panel.
-	    RootPanel.get().add(table);
+		
 	}
 
 }
