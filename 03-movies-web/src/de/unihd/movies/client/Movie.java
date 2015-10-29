@@ -12,7 +12,7 @@ public class Movie implements Serializable
 	private static final long serialVersionUID = 1L;
 
 	/** The id. */
-	private int id;
+	int id;
 	
 	/** The name. */
 	private String name;

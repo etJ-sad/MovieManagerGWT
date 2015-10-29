@@ -1,32 +1,35 @@
 package de.unihd.movies.client;
 
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 import com.google.gwt.user.cellview.client.CellTable;
+import com.google.gwt.user.cellview.client.ColumnSortEvent.ListHandler;
 import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.cellview.client.HasKeyboardSelectionPolicy.KeyboardSelectionPolicy;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
-import com.google.gwt.view.client.SelectionChangeEvent;
-import com.google.gwt.view.client.SingleSelectionModel;
+import com.google.gwt.view.client.ListDataProvider;
 
-/**
- * MovieUI that contains a table of movies.
- * */
 public class MovieUI extends Composite {
 
 	private VerticalPanel panel;
+	
 	private static final List<Movie> CONTACTS = Arrays.asList(
-			  new Movie(1,"John",150,"GER", "HERO", "ME"));
+			  new Movie (1,	"Star Wars I",	166, "English", "First Film new Trilogy", "space"),
+			  new Movie (2,	"Star Wars II",	198, "English", "Second Film new Trilogy", "space"),
+			  new Movie (3,	"Star Wars III",211, "English", "Three Film new Trilogy", "space"),
+			  new Movie (4,	"Star Wars IV",	149, "English", "First Film old Trilogy", "space"),
+			  new Movie (5,	"Star Wars V",	154, "English", "Second Film old Trilogy", "space"),
+			  new Movie (6,	"Star Wars VI",	171, "English", "Three Film old Trilogy", "space"));
 	
 	public static CellTable<Movie> table = new CellTable<Movie>();
 	
 	public MovieUI() {
 		  MovieUI.table.setKeyboardSelectionPolicy(KeyboardSelectionPolicy.ENABLED);
+		  ListDataProvider<Movie> dataProvider = new ListDataProvider<Movie>();
 		    
 		   //id 
 		    TextColumn<Movie> idColumn = new TextColumn<Movie>() {
@@ -36,7 +39,9 @@ public class MovieUI extends Composite {
 			    	  return buffer;
 			      }
 			    };
-			MovieUI.table.addColumn(idColumn, "id");
+			table.addColumn(idColumn, "id");
+			idColumn.setSortable(true);
+
 		    
 			//Name
 		    TextColumn<Movie> nameColumn = new TextColumn<Movie>() {
@@ -55,39 +60,66 @@ public class MovieUI extends Composite {
 			    	  return buffer;
 			      }
 			    };
-			MovieUI.table.addColumn(timeColumn, "Time");
+			table.addColumn(timeColumn, "Time");
+			
+			//Language
+		    TextColumn<Movie> languageColumn = new TextColumn<Movie>() {
+			      @Override
+			      public String getValue(Movie object) {
+			        return object.getLanguage();
+			      }
+			    };
+			table.addColumn(languageColumn, "Language");
+			
+			//Description
+		    TextColumn<Movie> DescriptionColumn = new TextColumn<Movie>() {
+			      @Override
+			      public String getValue(Movie object) {
+			        return object.getDescription();
+			      }
+			    };
+			table.addColumn(DescriptionColumn, "Description");
 		    
 		    
-		    //
-		    TextColumn<Movie> addressColumn = new TextColumn<Movie>() {
+		    //Place
+		    TextColumn<Movie> placeColumn = new TextColumn<Movie>() {
 		      @Override
 		      public String getValue(Movie object) {
 		        return object.getPlace();
 		      }
 		    };
-		    table.addColumn(addressColumn, "adress");
+		    table.addColumn(placeColumn, "Place");
 		
 
-		 		    
 		    
-		    // Add a selection model to handle user selection.
-			    
-		    final SingleSelectionModel<Movie> selectionModel = new SingleSelectionModel<Movie>();
-		    table.setSelectionModel(selectionModel);
-		    
-		    
-		    selectionModel.addSelectionChangeHandler(new SelectionChangeEvent.Handler() {
-		      public void onSelectionChange(SelectionChangeEvent event) {
-		        Movie selected = selectionModel.getSelectedObject();
-		        if (selected != null) {
-		          Window.alert("You selected: " + selected.getName());
-		        }
-		      }
-		    });
+			//dataProvider
+		    List<Movie> list = dataProvider.getList();
+		    for (Movie contact : CONTACTS) {
+		      list.add(contact);
+		    }
+
+		    ListHandler<Movie> columnSortHandler = new ListHandler<Movie>(list);
+		    columnSortHandler.setComparator(idColumn, new Comparator<Movie>() {
+		          public int compare(Movie o1, Movie o2) {
+		            if (o1 == o2) {
+		              return 0;
+		            }
+		            if (o1 != null) {
+		            	String buffer_o1 = String.valueOf(o1.getId());
+		            	String buffer_o2 = String.valueOf(o2.getId());
+		            	
+		              return (o2 != null) ? buffer_o1.compareTo(buffer_o2) : 1;
+		            }
+		            return -1;
+		          }
+
+
+		        });
+		
+		    table.addColumnSortHandler(columnSortHandler);
+		    table.getColumnSortList().push(idColumn);
 		    table.setRowCount(CONTACTS.size(), true);
-		    // Push the data into the widget.
 		    table.setRowData(0, CONTACTS);
-		    // Add it to the root panel.
 		    RootPanel.get().add(table);
 		    }
 		
