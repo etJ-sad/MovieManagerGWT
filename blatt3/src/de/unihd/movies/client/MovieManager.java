@@ -1,3 +1,8 @@
+/**
+ * @Version 3.3.8:release
+ */
+
+
 package de.unihd.movies.client;
 
 import java.util.Arrays;
@@ -19,10 +24,7 @@ public class MovieManager  implements EntryPoint {
 			  new Movie (4,	"Star Wars IV",	149, "English", "First Film old Trilogy", "space"),
 			  new Movie (5,	"Star Wars V",	154, "English", "Second Film old Trilogy", "space"),
 			  new Movie (6,	"Star Wars VI",	171, "English", "Three Film old Trilogy", "space"));  
-	
-	public MovieManager() {
-	}
-	
+		
 	public void onModuleLoad() {
 			  MovieUI run = new MovieUI();
 			  run.show();
