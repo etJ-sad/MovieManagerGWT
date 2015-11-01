@@ -1,0 +1,34 @@
+Gültige ÄK:
+    -ratingMovie: x aus [0,5]; Randfälle: 0,5
+    -ratingPerformer: enthält einen oder mehrere Werte y aus [0,5];
+        Liste mit nur einem gültigen Element;
+        Liste mit maximalem Element am Anfang;
+        Liste mit maximalem Element am Ende;
+Ungültige ÄK:
+    -ratingMovie: x < 0;
+                  x > 5;
+    -ratingPerformer: enthält Wert y < 0;
+                      enthält Wert y > 5;
+                      ist leer;
+
+Kombinationen:
+gültig:
+    x = 0, y = [0,1,2,3,4,5];
+    x = 0, y = [5];
+    x = 0, y = [0,5];
+    x = 5, y = [0,1,2,3,4,5];
+    x = 5, y = [0,5];
+    x = 5, y = [5];
+ungültig:
+    x = -1, y = [];
+    x = 6, y = [];
+    x = -1, y = [0,6];
+    x = 6, y = [0,6];
+    x = -1, y = [0,-1];
+    x = 6, y = [0,-1];
+Für die Kombinationen Verbinden wir jeweils die erste Spalte von oben/
+unten mit der zweiten Spalten von unten/oben.
+
+Minimal sinnvolle Kombinationen:
+gültig: x = 5, y = [0,1,2,3,4,5]
+
