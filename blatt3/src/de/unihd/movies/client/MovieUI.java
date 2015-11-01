@@ -1,6 +1,7 @@
 /**
- * @Version 3.3.26:release
+ * @Version 3.3.78:release
  */
+
 package de.unihd.movies.client;
 
 import java.util.Comparator;
@@ -62,12 +63,12 @@ public class MovieUI extends Composite {
 			    }; table.addColumn(languageColumn, "Language");
 			
 			//Description
-		    TextColumn<Movie> DescriptionColumn = new TextColumn<Movie>() {
+		    TextColumn<Movie> descriptionColumn = new TextColumn<Movie>() {
 			      @Override
 			      public String getValue(Movie object) {
 			        return object.getDescription();
 			      }
-			    }; table.addColumn(DescriptionColumn, "Description");
+			    }; table.addColumn(descriptionColumn, "Description");
 		    
 		    
 		    //Place
@@ -80,25 +81,79 @@ public class MovieUI extends Composite {
 			
 		    
 		    
+		    // setSortable
 		    idColumn.setSortable(true);
+		    nameColumn.setSortable(true);
+		    timeColumn.setSortable(true);
+		    languageColumn.setSortable(true);
+		    descriptionColumn.setSortable(true);
+		    placeColumn.setSortable(true);
 		    
-		    //dataProvider
-		    List<Movie> list = dataProvider.getList();
-		    for (Movie contact : manager.CONTACTS) {
-		      list.add(contact);
-		    }
+		    
+		    //dataProvider;
+			dataProvider.setList(manager.CONTACTS);
+			dataProvider.addDataDisplay(table);
 
 		    //Handler
-		    ListHandler<Movie> columnSortHandler = new ListHandler<Movie>(list);
-		    columnSortHandler.setComparator(idColumn,
-		            new Comparator<Movie>() {
-		              public int compare(Movie t1, Movie t2) {
-		            	  final String BUFFER_T1 = String.valueOf(t1.getId());
-		            	  final String BUFFER_T2 = String.valueOf(t2.getId()); 
-		                return BUFFER_T1.compareTo(BUFFER_T2);
-		              }
-		            });
-		
+			ListHandler<Movie> columnSortHandler = new ListHandler<Movie>(
+					dataProvider.getList()
+			);
+	
+			// Sorts:
+			
+			// idColumn sort
+			columnSortHandler.setComparator(idColumn, new Comparator<Movie>() {
+				@Override
+				public int compare(Movie m1, Movie m2) {
+					if(m1.getId() > m2.getId()) return 1;
+					if(m1.getId() < m2.getId()) return -1;
+					return 0;
+				};
+			});
+			
+			// nameCoulmn sort	
+			columnSortHandler.setComparator(nameColumn, new Comparator<Movie>() {
+				@Override
+				public int compare(Movie m1, Movie m2) {
+					return (m1.getName().compareTo(m2.getName()));
+				};
+			});
+			
+			// timeColumn sort
+			columnSortHandler.setComparator(timeColumn, new Comparator<Movie>() {
+				@Override
+				public int compare(Movie m1, Movie m2) {
+					if(m1.getId() > m2.getId()) return 1;
+					if(m1.getId() < m2.getId()) return -1;
+					return 0;
+				};
+			});
+			
+			// languageColumn sort
+			columnSortHandler.setComparator(languageColumn, new Comparator<Movie>() {
+				@Override
+				public int compare(Movie m1, Movie m2) {
+					return (m1.getName().compareTo(m2.getName()));
+				};
+			});
+			
+			// descriptionColumn sort
+			columnSortHandler.setComparator(descriptionColumn, new Comparator<Movie>() {
+				@Override
+				public int compare(Movie m1, Movie m2) {
+					return (m1.getName().compareTo(m2.getName()));
+				};
+			});
+			
+			// placeColumn Sort
+			
+			columnSortHandler.setComparator(placeColumn, new Comparator<Movie>() {
+				@Override
+				public int compare(Movie m1, Movie m2) {
+					return (m1.getName().compareTo(m2.getName()));
+				};
+			});
+			
 		    // add
 		    table.addColumnSortHandler(columnSortHandler);
 		    table.getColumnSortList().push(idColumn);
