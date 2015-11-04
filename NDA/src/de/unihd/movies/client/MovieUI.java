@@ -13,17 +13,24 @@ import com.google.gwt.user.cellview.client.HasKeyboardSelectionPolicy.KeyboardSe
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
+
 import com.google.gwt.view.client.ListDataProvider;
 
+import com.google.gwt.user.client.ui.*;
 public class MovieUI extends Composite {
 
 	MovieManager manager = new MovieManager();
 	
 	private VerticalPanel panel;
 	
-	public static CellTable<Movie> table = new CellTable<Movie>();
+	public final static CellTable<Movie> table = new CellTable<Movie>();
+    public final PushButton addButton = new PushButton("Add movie");
+    public final PushButton delButton = new PushButton("Del movie");
+    public final TextBox tbox = new TextBox();
+    public final ListBox lbox = new ListBox();
 	
-	public MovieUI() {
+    //(table,10,140);
+	public void setTable(){
 		  MovieUI.table.setKeyboardSelectionPolicy(KeyboardSelectionPolicy.ENABLED);
 		  ListDataProvider<Movie> dataProvider = new ListDataProvider<Movie>();
 		    
@@ -55,7 +62,8 @@ public class MovieUI extends Composite {
 			
 			//Language
 		    TextColumn<Movie> languageColumn = new TextColumn<Movie>() {
-			      @Override
+			      
+		    	@Override
 			      public String getValue(Movie object) {
 			        return object.getLanguage();
 			      }
@@ -77,6 +85,8 @@ public class MovieUI extends Composite {
 		        return object.getPlace();
 		      }
 		    }; table.addColumn(placeColumn, "Place");
+		    
+		   
 			
 		    
 		    
@@ -158,9 +168,38 @@ public class MovieUI extends Composite {
 		    table.getColumnSortList().push(idColumn);
 		    table.setRowCount(manager.CONTACTS.size(), true);
 		    table.setRowData(0, manager.CONTACTS);
-		    RootPanel.get().add(table);
-		    }
+		    RootPanel.get().add(table,10,140);
+		    
+		    
+
 		
+	}
+	
+	//(addButton,10,100); (delButton,100,100);
+	public void setButton(){
+		
+		addButton.setWidth("65px");
+	    delButton.setWidth("65px");
+	   	    
+	    RootPanel.get().add(addButton,10,100);
+	    RootPanel.get().add(delButton,100,100);
+	    
+	}	
+	
+	//(tbox,210,100);
+	public void setTextBox(){
+	      RootPanel.get().add(tbox,210,100);
+	}
+	
+	// NULL
+	public void setListBox(){
+		lbox.addItem("German");
+		lbox.addItem("English");
+		lbox.addItem("Spanish");
+		lbox.addItem("France");
+		panel.add(lbox);
+		
+	}
 	
 	public void show() {
 		initWidget(panel);
