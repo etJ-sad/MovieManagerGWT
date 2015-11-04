@@ -14,6 +14,7 @@ import java.util.List;
 import com.google.gwt.cell.client.TextCell;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 import com.google.gwt.user.cellview.client.CellList;
 import com.google.gwt.user.cellview.client.CellTable;
 
@@ -27,7 +28,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.view.client.ListDataProvider;
 import com.google.gwt.view.client.SelectionChangeEvent;
 import com.google.gwt.view.client.SingleSelectionModel;
-
+import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.Window;
 
 import com.google.gwt.user.client.ui.*;
@@ -48,7 +49,25 @@ public class MovieUI extends Composite {
     
 	public final TextBox tbox = new TextBox();
     public final ListBox lbox = new ListBox();
+    
+	int numRows = table.getRowCount();
+	int ids;
+	
 
+	class CustomEditCell{
+	    
+	    public void render(com.google.gwt.cell.client.Cell.Context context,
+	            String value, SafeHtmlBuilder sb) {
+	        // context.getColumn()==2 indicate Record ID column and context.getIndex()==0 indicate non editable cell in 1st empty row
+	        if(context.getColumn()==2 &&    ( context.getIndex()==0  || context.getIndex()%10 == 0)){
+	            sb.appendHtmlConstant("<div contentEditable='false' unselectable='true'></div>");
+	        }else{
+	        render(context, value, sb);
+	        }
+
+	    }
+	}
+	
     //-------------------------------------------//
     
     public void createTable(){
@@ -178,20 +197,26 @@ public class MovieUI extends Composite {
     //(table,10,140);
 	public void setTable(){
 	 
-	    table.setRowCount(manager.getList().size());
+		table.setRowCount(numRows+1);
+		table.setRowCount(manager.getList().size());
 	    dataProvider.addDataDisplay(table);
 	    table.setSelectionModel(selectionModel);
 	    RootPanel.get().add(table);
+	    ids = table.getRowCount();	
+	
+	    
 	}
-
+	
 
 	
 	//(addButton,10,100);
 	public void addButton(){
+		
 		Button addButton = new Button("Add movie", new ClickHandler() {
-			public void onClick(ClickEvent event) {
-				dataProvider.getList().addAll(dataProvider.getList().size(), manager.empty());
-
+			public void onClick(ClickEvent event) {				
+				dataProvider.getList().addAll(numRows, manager.empty());
+				dataProvider.getList().get(numRows).setId(ids+1);
+				ids++;
 				}
 	      }); RootPanel.get().add(addButton,10,100);
 		}
