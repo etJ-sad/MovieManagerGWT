@@ -18,6 +18,8 @@ import com.google.gwt.core.client.EntryPoint;
  */
 
 public class MovieManager  implements EntryPoint {
+	
+	public final List<String> LANG = Arrays.asList("German", "English", "Spanish", "France", "Russish");
 		  
 	public final List<Movie> CONTACTS = Arrays.asList(
 			  new Movie (1,	"Star Wars I",	166, "English", "First Film new Trilogy", "space"),

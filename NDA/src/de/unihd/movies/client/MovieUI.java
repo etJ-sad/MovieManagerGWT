@@ -6,7 +6,12 @@ package de.unihd.movies.client;
 
 import java.util.Comparator;
 
+
+
+import com.google.gwt.cell.client.TextCell;
+import com.google.gwt.user.cellview.client.CellList;
 import com.google.gwt.user.cellview.client.CellTable;
+
 import com.google.gwt.user.cellview.client.ColumnSortEvent.ListHandler;
 import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.cellview.client.HasKeyboardSelectionPolicy.KeyboardSelectionPolicy;
@@ -15,8 +20,17 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 import com.google.gwt.view.client.ListDataProvider;
+import com.google.gwt.view.client.SelectionChangeEvent;
+import com.google.gwt.view.client.SingleSelectionModel;
+
+import com.google.gwt.user.client.Window;
 
 import com.google.gwt.user.client.ui.*;
+
+
+
+
+
 public class MovieUI extends Composite {
 
 	MovieManager manager = new MovieManager();
@@ -24,13 +38,34 @@ public class MovieUI extends Composite {
 	private VerticalPanel panel;
 	
 	public final static CellTable<Movie> table = new CellTable<Movie>();
-    public final PushButton addButton = new PushButton("Add movie");
+	public final TextCell textCell = new TextCell();
+	public final CellList<String> cellList = new CellList<String>(textCell);
+	public final SingleSelectionModel<String> selectionModel = new SingleSelectionModel<String>();
+	public final PushButton addButton = new PushButton("Add movie");
     public final PushButton delButton = new PushButton("Del movie");
     public final TextBox tbox = new TextBox();
     public final ListBox lbox = new ListBox();
 	
     //(table,10,140);
 	public void setTable(){
+
+	    cellList.setKeyboardSelectionPolicy(KeyboardSelectionPolicy.ENABLED);
+	    cellList.setSelectionModel(selectionModel);
+		
+	    selectionModel.addSelectionChangeHandler(new SelectionChangeEvent.Handler() {
+	      public void onSelectionChange(SelectionChangeEvent event) {
+	        String selected = selectionModel.getSelectedObject();
+	        if (selected != null) {
+	          Window.alert("You selected: " + selected);
+	        }
+	      }
+	    });
+	    
+	    
+	    cellList.setRowCount(manager.LANG.size(), true);
+	    cellList.setRowData(0, manager.LANG);
+	    RootPanel.get().add(cellList,500,500);
+		
 		  MovieUI.table.setKeyboardSelectionPolicy(KeyboardSelectionPolicy.ENABLED);
 		  ListDataProvider<Movie> dataProvider = new ListDataProvider<Movie>();
 		    
@@ -65,9 +100,22 @@ public class MovieUI extends Composite {
 			      
 		    	@Override
 			      public String getValue(Movie object) {
-			        return object.getLanguage();
+			        return selectionModel.getSelectedObject();
 			      }
 			    }; table.addColumn(languageColumn, "Language");
+			    
+			    
+			    
+			    
+			    
+			    
+			    
+			    
+			    
+			    
+			    
+			    
+			    
 			
 			//Description
 		    TextColumn<Movie> descriptionColumn = new TextColumn<Movie>() {
@@ -209,3 +257,4 @@ public class MovieUI extends Composite {
 	}
 
 }
+
