@@ -39,25 +39,20 @@ import com.google.gwt.user.client.ui.*;
 public class MovieUI extends Composite {
 
 	MovieManager manager = new MovieManager();
-	
 	private VerticalPanel panel;
-	
-	public final static CellTable<Movie> table = new CellTable<Movie>();
 
-    public final TextBox tbox = new TextBox();
+	final CellTable<Movie> table = new CellTable<Movie>();
+	
+	final ListDataProvider<Movie> dataProvider = new ListDataProvider<Movie>(manager.getList());
+    final SingleSelectionModel<Movie> selectionModel = new SingleSelectionModel<Movie>();
+    
+	public final TextBox tbox = new TextBox();
     public final ListBox lbox = new ListBox();
+
+    //-------------------------------------------//
     
-    int ids = manager.CONTACTS.size();
-    
-    
-    // --
-    
-    //(table,10,140);
-	public void setTable(){
-		
-		final CellTable<Movie> table = new CellTable<Movie>();
-	    final ListDataProvider<Movie> dataProvider = new ListDataProvider<Movie>(getList());
-		   //id 
+    public void createTable(){
+    	//id 
 	    TextColumn<Movie> idColumn = new TextColumn<Movie>() {
 		      @Override
 		      public String getValue(Movie object) {
@@ -117,83 +112,94 @@ public class MovieUI extends Composite {
 	    descriptionColumn.setSortable(true);
 	    placeColumn.setSortable(true);
 	    
-	  //Handler
-		ListHandler<Movie> columnSortHandler = new ListHandler<Movie>(
-				dataProvider.getList()
-		);
+		  //Handler
+			ListHandler<Movie> columnSortHandler = new ListHandler<Movie>(
+					dataProvider.getList()
+			);
 
-		// Sorts:
-		
-		// idColumn sort
-		columnSortHandler.setComparator(idColumn, new Comparator<Movie>() {
-			@Override
-			public int compare(Movie m1, Movie m2) {
-				if(m1.getId() > m2.getId()) return 1;
-				if(m1.getId() < m2.getId()) return -1;
-				return 0;
-			};
-		});
-		
-		// nameCoulmn sort	
-		columnSortHandler.setComparator(nameColumn, new Comparator<Movie>() {
-			@Override
-			public int compare(Movie m1, Movie m2) {
-				return (m1.getName().compareTo(m2.getName()));
-			};
-		});
-		
-		// timeColumn sort
-		columnSortHandler.setComparator(timeColumn, new Comparator<Movie>() {
-			@Override
-			public int compare(Movie m1, Movie m2) {
-				if(m1.getId() > m2.getId()) return 1;
-				if(m1.getId() < m2.getId()) return -1;
-				return 0;
-			};
-		});
-		
-		// languageColumn sort
-		columnSortHandler.setComparator(languageColumn, new Comparator<Movie>() {
-			@Override
-			public int compare(Movie m1, Movie m2) {
-				return (m1.getName().compareTo(m2.getName()));
-			};
-		});
-		
-		// descriptionColumn sort
-		columnSortHandler.setComparator(descriptionColumn, new Comparator<Movie>() {
-			@Override
-			public int compare(Movie m1, Movie m2) {
-				return (m1.getName().compareTo(m2.getName()));
-			};
-		});
-		
-		// placeColumn Sort
-		
-		columnSortHandler.setComparator(placeColumn, new Comparator<Movie>() {
-			@Override
-			public int compare(Movie m1, Movie m2) {
-				return (m1.getName().compareTo(m2.getName()));
-			};
-		});
-		
-	    // add
-	    table.addColumnSortHandler(columnSortHandler);
-	    table.getColumnSortList().push(idColumn);
-	    
-	    
-	    //-
-
-	    table.setRowCount(getList().size());
-
+			// Sorts:
+			
+			// idColumn sort
+			columnSortHandler.setComparator(idColumn, new Comparator<Movie>() {
+				@Override
+				public int compare(Movie m1, Movie m2) {
+					if(m1.getId() > m2.getId()) return 1;
+					if(m1.getId() < m2.getId()) return -1;
+					return 0;
+				};
+			});
+			
+			// nameCoulmn sort	
+			columnSortHandler.setComparator(nameColumn, new Comparator<Movie>() {
+				@Override
+				public int compare(Movie m1, Movie m2) {
+					return (m1.getName().compareTo(m2.getName()));
+				};
+			});
+			
+			// timeColumn sort
+			columnSortHandler.setComparator(timeColumn, new Comparator<Movie>() {
+				@Override
+				public int compare(Movie m1, Movie m2) {
+					if(m1.getId() > m2.getId()) return 1;
+					if(m1.getId() < m2.getId()) return -1;
+					return 0;
+				};
+			});
+			
+			// languageColumn sort
+			columnSortHandler.setComparator(languageColumn, new Comparator<Movie>() {
+				@Override
+				public int compare(Movie m1, Movie m2) {
+					return (m1.getName().compareTo(m2.getName()));
+				};
+			});
+			
+			// descriptionColumn sort
+			columnSortHandler.setComparator(descriptionColumn, new Comparator<Movie>() {
+				@Override
+				public int compare(Movie m1, Movie m2) {
+					return (m1.getName().compareTo(m2.getName()));
+				};
+			});
+			
+			// placeColumn Sort
+			
+			columnSortHandler.setComparator(placeColumn, new Comparator<Movie>() {
+				@Override
+				public int compare(Movie m1, Movie m2) {
+					return (m1.getName().compareTo(m2.getName()));
+				};
+			});
+			
+			table.addColumnSortHandler(columnSortHandler);
+    }
+    
+    //(table,10,140);
+	public void setTable(){
+	 
+	    table.setRowCount(manager.getList().size());
 	    dataProvider.addDataDisplay(table);
-
-	    final SingleSelectionModel<Movie> selectionModel = new SingleSelectionModel<Movie>();
 	    table.setSelectionModel(selectionModel);
+	    RootPanel.get().add(table);
+	}
 
-	    Button btn = new Button("delete entry");
-	    btn.addClickHandler(new ClickHandler() {
 
+	
+	//(addButton,10,100);
+	public void addButton(){
+		Button addButton = new Button("Add movie", new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				dataProvider.getList().addAll(dataProvider.getList().size(), manager.empty());
+
+				}
+	      }); RootPanel.get().add(addButton,10,100);
+		}
+	
+	//(delButton,100,100);
+	public void delButton(){
+		Button delButton = new Button("Delete movie");
+	    delButton.addClickHandler(new ClickHandler() {
 	        @Override
 	        public void onClick(ClickEvent event) {
 	            Movie selected = selectionModel.getSelectedObject();
@@ -201,41 +207,7 @@ public class MovieUI extends Composite {
 	                dataProvider.getList().remove(selected);
 	            }
 	        }
-	    });
-
-	    RootPanel.get().add(table);
-	    RootPanel.get().add(btn);
-
-	}
-
-	private LinkedList<Movie> getList() {
-	    LinkedList<Movie> list = new LinkedList<Movie>();
-		
-				list.add(new Movie (1,	"Star Wars I",	166, "English", "First Film new Trilogy", "space"));
-				list.add(new Movie (1,	"Star Wars I",	166, "English", "First Film new Trilogy", "space"));
-				list.add(new Movie (3,	"Star Wars III",211, "English", "Three Film new Trilogy", "space"));
-				list.add(new Movie (4,	"Star Wars IV",	149, "English", "First Film old Trilogy", "space"));
-				list.add(new Movie (5,	"Star Wars V",	154, "English", "Second Film old Trilogy", "space"));
-				list.add(new Movie (6,	"Star Wars VI",	171, "English", "Three Film old Trilogy", "space"));  
-				
-	    return list;
-	}
-	
-	//(addButton,10,100);
-	public void addButton(){
-		Button addButton = new Button("Add movie", new ClickHandler() {
-			public void onClick(ClickEvent event) {
-				table.setRowData(ids, manager.EMPTY);
-				ids ++;
-				}
-	      });
-		
-	    RootPanel.get().add(addButton,10,100);
-	}
-	
-	//(delButton,100,100);
-	public void delButton(){
-
+	    }); RootPanel.get().add(delButton,100,100);
 	}	
 	
 	//(tbox,210,100);
