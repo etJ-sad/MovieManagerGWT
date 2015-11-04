@@ -4,9 +4,9 @@
 
 package de.unihd.movies.client;
 
+import java.util.Collection;
 import java.util.Comparator;
-
-
+import java.util.List;
 
 import com.google.gwt.cell.client.TextCell;
 import com.google.gwt.user.cellview.client.CellList;
@@ -47,11 +47,12 @@ public class MovieUI extends Composite {
     public final ListBox lbox = new ListBox();
 	
     //(table,10,140);
+	@SuppressWarnings("unchecked")
 	public void setTable(){
 
 	    cellList.setKeyboardSelectionPolicy(KeyboardSelectionPolicy.ENABLED);
 	    cellList.setSelectionModel(selectionModel);
-		
+	    
 	    selectionModel.addSelectionChangeHandler(new SelectionChangeEvent.Handler() {
 	      public void onSelectionChange(SelectionChangeEvent event) {
 	        String selected = selectionModel.getSelectedObject();
@@ -96,12 +97,17 @@ public class MovieUI extends Composite {
 			    }; table.addColumn(timeColumn, "Time");
 			
 			//Language
-		    TextColumn<Movie> languageColumn = new TextColumn<Movie>() {
+		    TextColumn languageColumn = new TextColumn() {
 			      
-		    	@Override
-			      public String getValue(Movie object) {
-			        return selectionModel.getSelectedObject();
-			      }
+	
+
+				
+				
+				@SuppressWarnings("deprecation")
+				@Override
+				public Object getValue(Object object) {
+					return cellList.getDisplayedItem(0);
+				}
 			    }; table.addColumn(languageColumn, "Language");
 			    
 			    
