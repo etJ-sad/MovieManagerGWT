@@ -4,11 +4,14 @@
 
 package de.unihd.movies.client;
 
+
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 
 import com.google.gwt.cell.client.TextCell;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.cellview.client.CellList;
 import com.google.gwt.user.cellview.client.CellTable;
 
@@ -41,10 +44,10 @@ public class MovieUI extends Composite {
 	public final TextCell textCell = new TextCell();
 	public final CellList<String> cellList = new CellList<String>(textCell);
 	public final SingleSelectionModel<String> selectionModel = new SingleSelectionModel<String>();
-	public final PushButton addButton = new PushButton("Add movie");
-    public final PushButton delButton = new PushButton("Del movie");
     public final TextBox tbox = new TextBox();
     public final ListBox lbox = new ListBox();
+    
+
 	
     //(table,10,140);
 	@SuppressWarnings("unchecked")
@@ -65,6 +68,8 @@ public class MovieUI extends Composite {
 	    
 	    cellList.setRowCount(manager.LANG.size(), true);
 	    cellList.setRowData(0, manager.LANG);
+	    
+	    
 	    RootPanel.get().add(cellList,500,500);
 		
 		  MovieUI.table.setKeyboardSelectionPolicy(KeyboardSelectionPolicy.ENABLED);
@@ -97,31 +102,12 @@ public class MovieUI extends Composite {
 			    }; table.addColumn(timeColumn, "Time");
 			
 			//Language
-		    TextColumn languageColumn = new TextColumn() {
-			      
-	
-
-				
-				
-				@SuppressWarnings("deprecation")
-				@Override
-				public Object getValue(Object object) {
-					return cellList.getDisplayedItem(0);
-				}
-			    }; table.addColumn(languageColumn, "Language");
-			    
-			    
-			    
-			    
-			    
-			    
-			    
-			    
-			    
-			    
-			    
-			    
-			    
+			    TextColumn<Movie> languageColumn = new TextColumn<Movie>() {
+				      @Override
+				      public String getValue(Movie object) {
+				        return object.getLanguage();
+				      }
+				       }; table.addColumn(languageColumn, "Name");
 			
 			//Description
 		    TextColumn<Movie> descriptionColumn = new TextColumn<Movie>() {
@@ -156,10 +142,31 @@ public class MovieUI extends Composite {
 		    //dataProvider;
 			dataProvider.setList(manager.CONTACTS);
 			dataProvider.addDataDisplay(table);
+			
+			
+        	table.setRowCount(manager.CONTACTS.size());
+        	ListDataProvider<Movie> dataProvider1 = new ListDataProvider<Movie>();
+        	dataProvider1.setList(manager.CONTACTS);
+            dataProvider1.addDataDisplay(table);
+
+            final SingleSelectionModel<Movie> selectionModel = new SingleSelectionModel<Movie>();
+            table.setSelectionModel(selectionModel);
+			
+			final Button delButton = new Button("Delete movie", new ClickHandler() {
+		        public void onClick(ClickEvent event) {
+		        			            
+		            Movie selected = selectionModel.getSelectedObject();
+		            if (selected != null) {
+		                dataProvider1.getList().remove(selected);
+		            }
+		        }
+		      });
+			
+		    RootPanel.get().add(delButton,100,100);
 
 		    //Handler
 			ListHandler<Movie> columnSortHandler = new ListHandler<Movie>(
-					dataProvider.getList()
+					dataProvider1.getList()
 			);
 	
 			// Sorts:
@@ -229,15 +236,24 @@ public class MovieUI extends Composite {
 		
 	}
 	
-	//(addButton,10,100); (delButton,100,100);
-	public void setButton(){
+	//(addButton,10,100);
+	public void addButton(){
 		
-		addButton.setWidth("65px");
-	    delButton.setWidth("65px");
-	   	    
+		final Button addButton = new Button("Add movie", new ClickHandler() {
+	        @SuppressWarnings("unchecked")
+			public void onClick(ClickEvent event) {
+	        	table.setRowCount(((List<String>) table).size(), true);
+	        	table.setRowData(0, (List<? extends Movie>) table);
+	        }
+	      });
+		
 	    RootPanel.get().add(addButton,10,100);
-	    RootPanel.get().add(delButton,100,100);
-	    
+	}
+	
+	//(delButton,100,100);
+	public void delButton(){
+		
+	
 	}	
 	
 	//(tbox,210,100);

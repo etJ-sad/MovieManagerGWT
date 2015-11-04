@@ -32,8 +32,9 @@ public class MovieManager  implements EntryPoint {
 	public void onModuleLoad() {
 			  MovieUI run = new MovieUI();
 			  run.setTable();
-			  run.setButton();
+			  run.addButton();
 			  run.setTextBox();
+			  run.delButton();
 			  run.show();
 		}
 }
