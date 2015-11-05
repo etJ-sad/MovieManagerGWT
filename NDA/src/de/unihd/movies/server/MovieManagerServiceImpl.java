@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
@@ -35,17 +36,17 @@ public class MovieManagerServiceImpl extends RemoteServiceServlet implements
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public ArrayList<Movie> loadMovies() {
-		ArrayList<Movie> movies = new ArrayList<Movie>();
+	public LinkedList<Movie> loadMovies() {
+		LinkedList<Movie> movies = new LinkedList<Movie>();
 		try {
 			FileInputStream fileIn = new FileInputStream(fileName);
 			ObjectInputStream in = new ObjectInputStream(fileIn);
-			movies = (ArrayList<Movie>) in.readObject();
+			movies = (LinkedList<Movie>) in.readObject();
 			in.close();
 			fileIn.close();
 		} catch (FileNotFoundException e) {
 			// if no file is found, create empty ArrayList
-			movies = new ArrayList<Movie>();
+			movies = new LinkedList<Movie>();
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -55,7 +56,7 @@ public class MovieManagerServiceImpl extends RemoteServiceServlet implements
 	}
 
 	@Override
-	public void saveMovies(ArrayList<Movie> movies) {
+	public void saveMovies(LinkedList<Movie> movies) {
 		try {
 			FileOutputStream fileOut = new FileOutputStream(fileName);
 			ObjectOutputStream out = new ObjectOutputStream(fileOut);

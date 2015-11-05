@@ -5,41 +5,57 @@
 package de.unihd.movies.client;
 
 
+import java.awt.List;
+import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.LinkedList;
+import java.util.Random;
 
 import com.google.gwt.cell.client.EditTextCell;
 import com.google.gwt.cell.client.SelectionCell;
+import com.google.gwt.core.shared.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.logical.shared.ValueChangeEvent;
+import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.Column;
 import com.google.gwt.user.cellview.client.ColumnSortEvent.ListHandler;
 import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.view.client.ListDataProvider;
 import com.google.gwt.view.client.SingleSelectionModel;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.*;
+
+import de.unihd.movies.client.filter.FilteredListDataProvider;
+import de.unihd.movies.client.filter.MovieFilter;
+import de.unihd.movies.client.service.*;
 
 
 public class MovieUI extends Composite {
 
 	MovieManager manager = new MovieManager();
 	private VerticalPanel panel;
-
 	final CellTable<Movie> table = new CellTable<Movie>();
-	
-	final ListDataProvider<Movie> dataProvider = new ListDataProvider<Movie>(manager.getList());
+	final ListDataProvider<Movie> dataProvider = new ListDataProvider<Movie>();
     final SingleSelectionModel<Movie> selectionModel = new SingleSelectionModel<Movie>();
     SelectionCell categoryCell = new SelectionCell(manager.LANG);
-
-	public final TextBox tbox = new TextBox();
-    
+    public final TextBox tbox = new TextBox();
+	private FilteredListDataProvider<Movie> filterDataProvider;
+	private final MovieManagerServiceAsync movieService = GWT.create(MovieManagerService.class);
+   
+	public LinkedList<Movie> movieList = new LinkedList<Movie>();
     
 	int numRows = table.getRowCount();
 	int ids;
-		
+	
+	
+	
     //-------------------------------------------//
     
-    public void setupColumn(){ 	
+    public void setupColumn(LinkedList<Movie> movies){ 	
+    	movieList = movies;
+    	dataProvider.setList(movieList);
        	//id 
 	    TextColumn<Movie> idColumn = new TextColumn<Movie>() {
 		      @Override
@@ -57,16 +73,16 @@ public class MovieUI extends Composite {
 	      }
 	       }; table.addColumn(nameColumn, "Name");
 	    
-	    //Time @0xDA0B04E
+	    //Time @1x
 	    Column<Movie, String> timeColumn = new Column<Movie, String>( new EditTextCell()) {
 		      @Override
-		      public String getValue(Movie object) {
-		    	  if (object.getTime() < 0 ){
-		    		  String swap_buff = "Error, only positive number";
-		    		  return swap_buff;
-		    	  }else {
+		      public String getValue(Movie object) {		    		 
 		    	  String buffer = String.valueOf(object.getTime());
-		    	  return buffer;
+		    	  if (buffer == "0") {
+		    			  String swap_buff = "Only positive number";
+			    		  return swap_buff;
+		    	  } else {
+		    		  return buffer;
 		    	  }
 		      }
 		    }; table.addColumn(timeColumn, "Time");
@@ -173,19 +189,26 @@ public class MovieUI extends Composite {
 	    dataProvider.addDataDisplay(table);
 	    table.setSelectionModel(selectionModel);
 	    ids = table.getRowCount();
+	    filterDataProvider = new FilteredListDataProvider<Movie>(new MovieFilter());
+		filterDataProvider.setList(manager.getList());
 	    RootPanel.get().add(table);
 	}
 		
 	//(addButton,10,100);
 	public void addButton(){
-		Button addButton = new Button("Add movie", new ClickHandler() {
+		Button addButton = new Button("Add Movie");
+		
+		addButton.addClickHandler(new ClickHandler() {
+			@Override
 			public void onClick(ClickEvent event) {				
 				dataProvider.getList().addAll(numRows, manager.empty());
 				dataProvider.getList().get(numRows).setId(ids+1);
 				ids++;
+				saveMovies_ALL();
+				update();
 				}
 	      }); RootPanel.get().add(addButton,10,100);
-		}
+	}
 	
 	//(delButton,100,100);
 	public void delButton(){
@@ -196,6 +219,8 @@ public class MovieUI extends Composite {
 	            Movie selected = selectionModel.getSelectedObject();
 	            if (selected != null) {
 	                dataProvider.getList().remove(selected);
+	                saveMovies_ALL();
+	                update();
 	            }
 	        }
 	    }); RootPanel.get().add(delButton,100,100);
@@ -203,8 +228,37 @@ public class MovieUI extends Composite {
 	
 	//(tbox,210,100);
 	public void addTextBox(){
+		tbox.addValueChangeHandler(new ValueChangeHandler<String>() {		
+			@Override
+			public void onValueChange(ValueChangeEvent<String> event) {
+				filterDataProvider.setFilter(tbox.getText());
+			}
+		});
 		RootPanel.get().add(tbox,210,100);
 	}
+	
+	
+	private void update(){
+		movieList = (LinkedList<Movie>) dataProvider.getList();
+		dataProvider.setList(movieList);
+	}
+	
+	private void saveMovies_ALL() {
+		LinkedList<Movie> swap_list = (LinkedList<Movie>) dataProvider.getList();
+		movieService.saveMovies(swap_list, new AsyncCallback<Void>() {
+
+			@Override
+			public void onFailure(Throwable caught) {
+				GWT.log(caught.getMessage());
+			}
+
+			@Override
+			public void onSuccess(Void result) {
+				GWT.log("All changes saved.");
+			}
+		});
+	}
+	
 	
 	public void show() {
 		initWidget(panel);

@@ -2,8 +2,10 @@
 
 package de.unihd.movies.client.service;
 
-import java.util.ArrayList;
 
+import java.util.LinkedList;
+
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
@@ -17,7 +19,7 @@ public interface MovieManagerService extends RemoteService {
 	 * 
 	 * @return A list containing all movies.
 	 * */
-	public ArrayList<Movie> loadMovies();
+	public LinkedList<Movie> loadMovies();
 
 	/**
 	 * Saves the given list of movies on the server.
@@ -25,6 +27,8 @@ public interface MovieManagerService extends RemoteService {
 	 * @param movies
 	 *            The list of movies to save.
 	 * */
-	public void saveMovies(ArrayList<Movie> movies);
+	public void saveMovies(LinkedList<Movie> movies);
+	
+
 
 }

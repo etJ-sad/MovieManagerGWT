@@ -3,6 +3,7 @@
 package de.unihd.movies.client.service;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
@@ -21,7 +22,7 @@ public interface MovieManagerServiceAsync {
 	 * @param callback
 	 *            The callback to handle the movies loading.
 	 * */
-	void loadMovies(AsyncCallback<ArrayList<Movie>> callback);
+	void loadMovies(AsyncCallback<LinkedList<Movie>> callback);
 
 	/**
 	 * Callback to handle the storage of movies.
@@ -31,6 +32,6 @@ public interface MovieManagerServiceAsync {
 	 * @param callback
 	 *            The callback to handle the movies storage.
 	 * */
-	void saveMovies(ArrayList<Movie> movies, AsyncCallback<Void> callback);
+	void saveMovies(LinkedList<Movie> movies, AsyncCallback<Void> callback);
 
 }

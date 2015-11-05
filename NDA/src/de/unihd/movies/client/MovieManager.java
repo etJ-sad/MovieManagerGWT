@@ -5,12 +5,18 @@
 
 package de.unihd.movies.client;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
+
+import com.google.gwt.user.client.rpc.AsyncCallback;
+
+
 import de.unihd.movies.client.service.MovieManagerService;
+import de.unihd.movies.client.service.MovieManagerServiceAsync;
 
 
 /**
@@ -19,7 +25,9 @@ import de.unihd.movies.client.service.MovieManagerService;
 
 public class MovieManager  implements EntryPoint {
 	
-	
+	private final MovieManagerServiceAsync movieService = GWT.create(MovieManagerService.class);
+
+
 	
 	LinkedList<Movie> getList() {
 	    LinkedList<Movie> list = new LinkedList<Movie>();		
@@ -32,28 +40,41 @@ public class MovieManager  implements EntryPoint {
 				
 	    return list;
 	}
-	
+		
 	//
 	public final List<String> LANG = Arrays.asList("German", "English", "Spanish", "France", "Russish");
   	
 	//
 	LinkedList<Movie> empty() {
 	    LinkedList<Movie> list = new LinkedList<Movie>();
-			list.add(new Movie (0,	"",	0, "", "", "")); 
+			list.add(new Movie (0,	"",	-1, "", "", "")); 
 			return list;
 	}
 		
 	
 	
 	public void onModuleLoad() {
-		MovieUI runModule = new MovieUI();
-		runModule.setupColumn();
+		final MovieUI runModule = new MovieUI();
+		runModule.setupColumn(getList());
 		runModule.createTable();
 		runModule.addButton();
 		runModule.delButton();
 		runModule.addTextBox();
 		runModule.show();
-		GWT.create(MovieManagerService.class);
+		
+		movieService.loadMovies(new AsyncCallback<LinkedList<Movie>>() {
+
+			@Override
+			public void onSuccess(LinkedList<Movie> result) {
+				runModule.setupColumn(result);
+			}
+
+			@Override
+			public void onFailure(Throwable caught) {
+				GWT.log(caught.getMessage());
+			}
+		});
+
 	}
 }
 
