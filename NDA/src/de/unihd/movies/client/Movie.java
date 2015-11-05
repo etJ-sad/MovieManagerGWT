@@ -55,9 +55,15 @@ public class Movie implements Serializable
 	 */
 	public Movie(int id, String name, int time, String language, String description, String place)
 	{
+		
 		this.id = id;
 		this.name = name;
+		
+		if(time < 0 ) {
+			this.time = 0; 	
+		} else {
 		this.time = time;
+		}
 		this.language = language;
 		this.description = description;
 		this.place = place;

@@ -7,6 +7,7 @@ package de.unihd.movies.client;
 
 import java.util.Comparator;
 
+import com.google.gwt.cell.client.Cell;
 import com.google.gwt.cell.client.EditTextCell;
 import com.google.gwt.cell.client.SelectionCell;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -57,15 +58,20 @@ public class MovieUI extends Composite {
 	      }
 	       }; table.addColumn(nameColumn, "Name");
 	    
-	    //Time
+	    //Time @0xDA0B04C
 	    Column<Movie, String> timeColumn = new Column<Movie, String>( new EditTextCell()) {
 		      @Override
 		      public String getValue(Movie object) {
+		    	  if (object.getTime() < 0 ){
+		    		  String swap_buff = "Error, only positive number";
+		    		  return swap_buff;
+		    	  }else {
 		    	  String buffer = String.valueOf(object.getTime());
 		    	  return buffer;
+		    	  }
 		      }
 		    }; table.addColumn(timeColumn, "Time");
-		
+		    
 		//Language
 	    Column<Movie,String> languageColumn = new Column<Movie,String>( categoryCell) {
 		      @Override

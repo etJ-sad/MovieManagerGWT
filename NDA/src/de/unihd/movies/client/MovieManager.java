@@ -5,19 +5,13 @@
 
 package de.unihd.movies.client;
 
-
-
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.user.client.rpc.AsyncCallback;
-
 import de.unihd.movies.client.service.MovieManagerService;
-import de.unihd.movies.client.service.MovieManagerServiceAsync;
-import de.unihd.movies.server.MovieManagerServiceImpl;
+
 
 /**
  * The Class MovieManager.
@@ -29,7 +23,7 @@ public class MovieManager  implements EntryPoint {
 	
 	LinkedList<Movie> getList() {
 	    LinkedList<Movie> list = new LinkedList<Movie>();		
-	    list.add(new Movie (1,	"Star Wars I",	166, "English", "First Film new Trilogy", "space"));
+	    list.add(new Movie (1,	"Star Wars I",	-410, "English", "First Film new Trilogy", "space"));
 	    list.add(new Movie (2,	"Star Wars I",	166, "English", "First Film new Trilogy", "space"));
 	    list.add(new Movie (3,	"Star Wars III",211, "English", "Three Film new Trilogy", "space"));
 	    list.add(new Movie (4,	"Star Wars IV",	149, "English", "First Film old Trilogy", "space"));
