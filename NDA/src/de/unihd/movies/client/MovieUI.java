@@ -1,5 +1,5 @@
 /**
- * @Version 3.4.637:release
+ * @Version 3.4.642:release
  */
 
 package de.unihd.movies.client;
@@ -57,7 +57,7 @@ public class MovieUI extends Composite {
 	      }
 	       }; table.addColumn(nameColumn, "Name");
 	    
-	    //Time @0xDA0B04D
+	    //Time @0xDA0B04E
 	    Column<Movie, String> timeColumn = new Column<Movie, String>( new EditTextCell()) {
 		      @Override
 		      public String getValue(Movie object) {
