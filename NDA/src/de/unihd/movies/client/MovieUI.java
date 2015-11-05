@@ -4,7 +4,7 @@
 
 package de.unihd.movies.client;
 
-import java.sql.Date;
+
 import java.util.Comparator;
 
 import com.google.gwt.cell.client.EditTextCell;
@@ -17,12 +17,8 @@ import com.google.gwt.user.cellview.client.ColumnSortEvent.ListHandler;
 import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.view.client.ListDataProvider;
 import com.google.gwt.view.client.SingleSelectionModel;
-
-import de.unihd.movies.client.filter.FilteredListDataProvider;
-import de.unihd.movies.client.filter.MovieFilter;
-
 import com.google.gwt.user.client.ui.*;
-import com.google.gwt.user.datepicker.client.DateBox;
+
 
 public class MovieUI extends Composite {
 
