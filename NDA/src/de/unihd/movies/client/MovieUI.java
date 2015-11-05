@@ -57,7 +57,7 @@ public class MovieUI extends Composite {
 	      }
 	       }; table.addColumn(nameColumn, "Name");
 	    
-	    //Time @0xDA0B04C
+	    //Time @0xDA0B04D
 	    Column<Movie, String> timeColumn = new Column<Movie, String>( new EditTextCell()) {
 		      @Override
 		      public String getValue(Movie object) {
