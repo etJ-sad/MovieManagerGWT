@@ -1,5 +1,5 @@
 /**
- * @Version 3.3.99:release
+ * @Version 3.4.637:release
  */
 
 package de.unihd.movies.client;
@@ -7,7 +7,6 @@ package de.unihd.movies.client;
 
 import java.util.Comparator;
 
-import com.google.gwt.cell.client.Cell;
 import com.google.gwt.cell.client.EditTextCell;
 import com.google.gwt.cell.client.SelectionCell;
 import com.google.gwt.event.dom.client.ClickEvent;
