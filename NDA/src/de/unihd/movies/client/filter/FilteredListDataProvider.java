@@ -36,7 +36,9 @@ public class FilteredListDataProvider<T> extends ListDataProvider<T> {
 		super();
 		this.filter = filter;
 	}
-
+//
+	
+	
 	/**
 	 * Sets the filter text.
 	 * 
