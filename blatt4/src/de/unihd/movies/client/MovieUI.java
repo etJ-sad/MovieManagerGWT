@@ -1,3 +1,7 @@
+/**
+ * @version 4.4.843:RC
+ */
+
 package de.unihd.movies.client;
 
 import java.util.ArrayList;
@@ -30,13 +34,7 @@ import de.unihd.movies.client.filter.MovieFilter;
 import de.unihd.movies.client.service.MovieManagerService;
 import de.unihd.movies.client.service.MovieManagerServiceAsync;
 
-
-
-
 public class MovieUI {
-	
-	private final HTML Header = new HTML("<h1>MovieManager</h1>");
-	
 	public final FilteredListDataProvider<Movie> dataProvider;
 	public final ArrayList<Movie> movieList;
 	public final MovieManagerServiceAsync service = GWT.create(MovieManagerService.class);
@@ -44,21 +42,20 @@ public class MovieUI {
 	public final Button deleteButton = new Button("Del Movie");
 	public final TextBox textBox = new TextBox();
 	public final SingleSelectionModel<Movie> selection = new SingleSelectionModel<Movie>();
-	public final HorizontalPanel hp = new HorizontalPanel();
+	public final HorizontalPanel hPanel = new HorizontalPanel();
 	public final ArrayList<String> LANG = new ArrayList<String>();
 
 	public MovieUI(ArrayList<Movie> movie) {
 		movieList = movie;
-		RootPanel rootPanel = RootPanel.get("content");
-		VerticalPanel vp = new VerticalPanel();
+		RootPanel rootPanel = RootPanel.get("SIGNAL");
+		VerticalPanel vPanel = new VerticalPanel();
 		final CellTable<Movie> table = new CellTable<Movie>();
 		table.setSelectionModel(selection);
+		
+		vPanel.add(hPanel);
+		vPanel.add(table);
 
-		vp.add(Header);
-		vp.add(hp);
-		vp.add(table);
-
-		rootPanel.add(vp);
+		rootPanel.add(vPanel);
 
 		setAddButton();
 		setDelButton();
@@ -95,13 +92,14 @@ public class MovieUI {
 			@Override
 			public String getValue(Movie object) {
 				int B = object.getTime();
-				if (B < 0){
-					Window.alert("Error");
-					return "Error, Positive time please " ;
+				if (B > 0){
 					
+					return "" + B;
 				} 
-				else {
-					return "" + object.getTime();
+				else{
+					//Window.alert("Error, Positive time please ");
+					return "Error, Positive time please ";
+				
 				}
 			}
 				
@@ -109,11 +107,12 @@ public class MovieUI {
 		timeColumn.setFieldUpdater(new FieldUpdater<Movie, String>() {
 			@Override
 			public void update(int index, Movie object, String value) {
-				if(Integer.valueOf(value) < 0) {
-					Window.alert("Error");
-					object.setTime(0);					
-				}else {
+				if(Integer.valueOf(value) > 0) {
 					object.setTime(Integer.valueOf(value));
+				
+				}else {
+					//Window.alert("Error");
+					object.setTime(0);	
 				}
 				saveMovies();
 				updateTable();
@@ -255,7 +254,7 @@ public class MovieUI {
 				saveMovies();
 				updateTable();
 			}
-		}); hp.add(addButton);
+		}); hPanel.add(addButton);
 	}
 	
 	public final void setDelButton(){
@@ -274,7 +273,7 @@ public class MovieUI {
 					saveMovies();
 					updateTable();
 				}
-			} });hp.add(deleteButton);
+			} });hPanel.add(deleteButton);
 		}
 	
 	public final  void setLANG(){
@@ -292,7 +291,7 @@ public class MovieUI {
 				dataProvider.setFilter(textBox.getText());
 			}
 		});
-		hp.add(textBox);
+		hPanel.add(textBox);
 	}
 	
 	private final void updateTable() {
