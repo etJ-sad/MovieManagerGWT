@@ -15,6 +15,7 @@ import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.Column;
 import com.google.gwt.user.cellview.client.ColumnSortEvent.ListHandler;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HTML;
@@ -50,7 +51,7 @@ public class MovieUI {
 		movieList = movie;
 		RootPanel rootPanel = RootPanel.get("content");
 		VerticalPanel vp = new VerticalPanel();
-		CellTable<Movie> table = new CellTable<Movie>();
+		final CellTable<Movie> table = new CellTable<Movie>();
 		table.setSelectionModel(selection);
 
 		vp.add(Header);
@@ -93,13 +94,27 @@ public class MovieUI {
 		Column<Movie, String> timeColumn = new Column<Movie, String>(new EditTextCell()) {
 			@Override
 			public String getValue(Movie object) {
-				return "" + object.getTime();
+				int B = object.getTime();
+				if (B < 0){
+					Window.alert("Error");
+					return "Error, Positive time please " ;
+					
+				} 
+				else {
+					return "" + object.getTime();
 				}
-			};
+			}
+				
+		};
 		timeColumn.setFieldUpdater(new FieldUpdater<Movie, String>() {
 			@Override
 			public void update(int index, Movie object, String value) {
-				object.setTime(Integer.valueOf(value));
+				if(Integer.valueOf(value) < 0) {
+					Window.alert("Error");
+					object.setTime(0);					
+				}else {
+					object.setTime(Integer.valueOf(value));
+				}
 				saveMovies();
 				updateTable();
 			}
