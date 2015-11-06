@@ -93,15 +93,19 @@ public class MovieUI {
 		Column<Movie, String> timeColumn = new Column<Movie, String>(new EditTextCell()) {
 			@Override
 			public String getValue(Movie object) {
-				if (object.getTime() < 0) {
-					return "Error, Only positive times.";
-				}else {
 				return "" + object.getTime();
 				}
+			};
+		timeColumn.setFieldUpdater(new FieldUpdater<Movie, String>() {
+			@Override
+			public void update(int index, Movie object, String value) {
+				object.setTime(Integer.valueOf(value));
+				saveMovies();
+				updateTable();
 			}
-			
-		};
-			table.addColumn(timeColumn, "Time");
+		});table.addColumn(timeColumn, "Time");
+		
+		
 		
 		Column<Movie, String> languageColumn = new Column<Movie, String>(new SelectionCell(LANG)) {
 

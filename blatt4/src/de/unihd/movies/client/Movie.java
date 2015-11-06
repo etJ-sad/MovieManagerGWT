@@ -103,8 +103,9 @@ public class Movie implements Serializable
 	 * @return the time
 	 */
 	public int getTime() {
-		return time;
-	}
+		return time; 
+		}
+		
 
 	/**
 	 * Sets the time.
