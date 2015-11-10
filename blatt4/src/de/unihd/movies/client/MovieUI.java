@@ -39,7 +39,7 @@ public class MovieUI {
 	public final MovieManagerServiceAsync service = GWT.create(MovieManagerService.class);
 	public final Button addButton = new Button("Add Movie");
 	public final Button deleteButton = new Button("Del Movie");
-	public final     Label lbl = new Label("Filter:");
+	public final Label lbl = new Label("Filter:");
 	public final TextBox textBox = new TextBox();
 	public final SingleSelectionModel<Movie> selection = new SingleSelectionModel<Movie>();
 	public final HorizontalPanel hPanel = new HorizontalPanel();
