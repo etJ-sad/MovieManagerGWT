@@ -1,6 +1,8 @@
 /**
- * @version 4.4.843:RC-2
+ * @version 4.4.843:RC-5
  */
+
+// #dns
 
 package de.unihd.movies.client;
 
@@ -57,11 +59,11 @@ public class MovieUI {
 
 		rootPanel.add(vPanel);
 
-		setAddButton();
-		setDelButton();
-		setLabel();
-		setTextBox();
-		setLANG();
+		setAddButton();  // <
+		setDelButton();  // <
+		setLabel();		 // <
+		setTextBox();	 // <
+		setLANG();		 // <!
 
 		// { Columns } 
 		
@@ -92,18 +94,16 @@ public class MovieUI {
 		Column<Movie, String> timeColumn = new Column<Movie, String>(new EditTextCell()) {
 			@Override
 			public String getValue(Movie object) {
-				int B = object.getTime();
+				long B = object.getTime();
 				if (B > 0){
 					
 					return "" + B;
 				} 
 				else{
 					//Window.alert("Error, Positive time please ");
-					return "Error, Positive time please ";
-				
+					return "Error, Positive time please ";			
 				}
 			}
-				
 		};
 		timeColumn.setFieldUpdater(new FieldUpdater<Movie, String>() {
 			@Override
@@ -313,7 +313,7 @@ public class MovieUI {
 
 			@Override
 			public void onSuccess(Void result) {
-				GWT.log("Saved.");
+				GWT.log(" > Saved.");
 			}
 		});
 	}

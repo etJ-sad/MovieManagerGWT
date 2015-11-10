@@ -22,7 +22,7 @@ public class Movie implements Serializable
 	private String name;
 	
 	/** The time. */
-	private int time;
+	private long time;
 	
 	/** The language. */
 	private String language;
@@ -106,7 +106,7 @@ public class Movie implements Serializable
 	 *
 	 * @return the time
 	 */
-	public int getTime() {
+	public long getTime() {
 		return time; 
 		}
 		
