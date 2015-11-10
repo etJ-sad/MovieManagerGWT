@@ -25,9 +25,9 @@ public class MovieManager implements EntryPoint {
 	public void onModuleLoad() { 
 		service.loadMovies(new AsyncCallback<ArrayList<Movie>>() {
 			@Override
-			public void onSuccess(ArrayList<Movie> result) {
+			public void onSuccess(ArrayList<Movie> res) {
 
-				new MovieUI(result);
+				new MovieUI(res);
 			}
 			@Override
 			public void onFailure(Throwable caught) {
