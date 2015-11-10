@@ -22,6 +22,7 @@ import com.google.gwt.user.cellview.client.ColumnSortEvent.ListHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -38,11 +39,12 @@ public class MovieUI {
 	public final MovieManagerServiceAsync service = GWT.create(MovieManagerService.class);
 	public final Button addButton = new Button("Add Movie");
 	public final Button deleteButton = new Button("Del Movie");
+	public final     Label lbl = new Label("Filter:");
 	public final TextBox textBox = new TextBox();
 	public final SingleSelectionModel<Movie> selection = new SingleSelectionModel<Movie>();
 	public final HorizontalPanel hPanel = new HorizontalPanel();
 	public final ArrayList<String> LANG = new ArrayList<String>();
-
+	
 	public MovieUI(ArrayList<Movie> movie) {
 		movieList = movie;
 		RootPanel rootPanel = RootPanel.get("SIGNAL");
@@ -57,6 +59,7 @@ public class MovieUI {
 
 		setAddButton();
 		setDelButton();
+		setLabel();
 		setTextBox();
 		setLANG();
 
@@ -282,6 +285,10 @@ public class MovieUI {
 		LANG.add("Russian");
 	}
 	
+	public void setLabel(){
+		hPanel.add(lbl);
+	}
+	
 	public final void setTextBox(){
 		textBox.addValueChangeHandler(new ValueChangeHandler<String>() {
 			@Override
@@ -306,7 +313,7 @@ public class MovieUI {
 
 			@Override
 			public void onSuccess(Void result) {
-				GWT.log("All changes saved.");
+				GWT.log("Saved.");
 			}
 		});
 	}
