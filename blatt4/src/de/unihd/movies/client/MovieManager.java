@@ -17,14 +17,8 @@ import de.unihd.movies.client.service.MovieManagerServiceAsync;
 
 
 
-/**
- * A simple web application showing a list of books.
- * */
 public class MovieManager implements EntryPoint {
 
-	/**
-	 * The service to connect to the server side BookService.
-	 * */
 	private final MovieManagerServiceAsync service = GWT.create(MovieManagerService.class);
 
 	@Override
