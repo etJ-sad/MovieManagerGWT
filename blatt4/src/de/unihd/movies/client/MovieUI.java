@@ -1,6 +1,8 @@
 /**
- * @version 4.4.843:RC-2
+ * @version 4.4.843:RC-5
  */
+
+// #dns
 
 package de.unihd.movies.client;
 
@@ -22,6 +24,7 @@ import com.google.gwt.user.cellview.client.ColumnSortEvent.ListHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -38,11 +41,12 @@ public class MovieUI {
 	public final MovieManagerServiceAsync service = GWT.create(MovieManagerService.class);
 	public final Button addButton = new Button("Add Movie");
 	public final Button deleteButton = new Button("Del Movie");
+	public final Label lbl = new Label("Filter:");
 	public final TextBox textBox = new TextBox();
 	public final SingleSelectionModel<Movie> selection = new SingleSelectionModel<Movie>();
 	public final HorizontalPanel hPanel = new HorizontalPanel();
 	public final ArrayList<String> LANG = new ArrayList<String>();
-
+	
 	public MovieUI(ArrayList<Movie> movie) {
 		movieList = movie;
 		RootPanel rootPanel = RootPanel.get("SIGNAL");
@@ -55,10 +59,11 @@ public class MovieUI {
 
 		rootPanel.add(vPanel);
 
-		setAddButton();
-		setDelButton();
-		setTextBox();
-		setLANG();
+		setAddButton();  // <
+		setDelButton();  // <
+		setLabel();		 // <
+		setTextBox();	 // <
+		setLANG();		 // <!
 
 		// { Columns } 
 		
@@ -89,18 +94,16 @@ public class MovieUI {
 		Column<Movie, String> timeColumn = new Column<Movie, String>(new EditTextCell()) {
 			@Override
 			public String getValue(Movie object) {
-				int B = object.getTime();
+				long B = object.getTime();
 				if (B > 0){
 					
 					return "" + B;
 				} 
 				else{
 					//Window.alert("Error, Positive time please ");
-					return "Error, Positive time please ";
-				
+					return "Error, Positive time please ";			
 				}
 			}
-				
 		};
 		timeColumn.setFieldUpdater(new FieldUpdater<Movie, String>() {
 			@Override
@@ -282,6 +285,10 @@ public class MovieUI {
 		LANG.add("Russian");
 	}
 	
+	public void setLabel(){
+		hPanel.add(lbl);
+	}
+	
 	public final void setTextBox(){
 		textBox.addValueChangeHandler(new ValueChangeHandler<String>() {
 			@Override
@@ -306,7 +313,7 @@ public class MovieUI {
 
 			@Override
 			public void onSuccess(Void result) {
-				GWT.log("All changes saved.");
+				GWT.log(" > Saved.");
 			}
 		});
 	}
