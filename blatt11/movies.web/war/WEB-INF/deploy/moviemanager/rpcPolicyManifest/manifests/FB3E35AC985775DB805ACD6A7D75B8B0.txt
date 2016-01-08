@@ -1,0 +1,2 @@
+serviceClass: movies.client.service.MovieManagerService
+path: 1398F069719CEC7689F234A5E3AF5176.gwt.rpc

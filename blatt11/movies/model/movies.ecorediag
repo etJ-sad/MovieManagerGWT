@@ -1,0 +1,594 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmi:id="_uYwlUKMyEeWM-9X3llYhPA" type="EcoreTools" measurementUnit="Pixel">
+  <children xmi:type="notation:Node" xmi:id="_uY3TAKMyEeWM-9X3llYhPA" type="1001">
+    <children xmi:type="notation:Node" xmi:id="_uY3TA6MyEeWM-9X3llYhPA" type="4001"/>
+    <children xmi:type="notation:Node" xmi:id="_uY36EKMyEeWM-9X3llYhPA" type="5001">
+      <children xmi:type="notation:Node" xmi:id="_uY36GKMyEeWM-9X3llYhPA" type="2001">
+        <element xmi:type="ecore:EAttribute" href="movies.ecore#//Movie/title"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_uY36GaMyEeWM-9X3llYhPA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_uY4hIKMyEeWM-9X3llYhPA" type="2001">
+        <element xmi:type="ecore:EAttribute" href="movies.ecore#//Movie/title_orig"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_uY4hIaMyEeWM-9X3llYhPA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_uY4hIqMyEeWM-9X3llYhPA" type="2001">
+        <element xmi:type="ecore:EAttribute" href="movies.ecore#//Movie/time"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_uY4hI6MyEeWM-9X3llYhPA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_uY4hJKMyEeWM-9X3llYhPA" type="2001">
+        <element xmi:type="ecore:EAttribute" href="movies.ecore#//Movie/category"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_uY4hJaMyEeWM-9X3llYhPA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_uY5IMKMyEeWM-9X3llYhPA" type="2001">
+        <element xmi:type="ecore:EAttribute" href="movies.ecore#//Movie/rating"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_uY5IMaMyEeWM-9X3llYhPA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_uY5IMqMyEeWM-9X3llYhPA" type="2001">
+        <element xmi:type="ecore:EAttribute" href="movies.ecore#//Movie/overallRating"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_uY5IM6MyEeWM-9X3llYhPA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_uY5INKMyEeWM-9X3llYhPA" type="2001">
+        <element xmi:type="ecore:EAttribute" href="movies.ecore#//Movie/lastWatchDate"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_uY5INaMyEeWM-9X3llYhPA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_uY5vQKMyEeWM-9X3llYhPA" type="2001">
+        <element xmi:type="ecore:EAttribute" href="movies.ecore#//Movie/loaned"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_uY5vQaMyEeWM-9X3llYhPA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_uY5vQqMyEeWM-9X3llYhPA" type="2001">
+        <element xmi:type="ecore:EAttribute" href="movies.ecore#//Movie/loanedUntil"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_uY5vQ6MyEeWM-9X3llYhPA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_uY5vRKMyEeWM-9X3llYhPA" type="2001">
+        <element xmi:type="ecore:EAttribute" href="movies.ecore#//Movie/imdbUrl"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_uY5vRaMyEeWM-9X3llYhPA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_uY6WUKMyEeWM-9X3llYhPA" type="2001">
+        <element xmi:type="ecore:EAttribute" href="movies.ecore#//Movie/ofdbID"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_uY6WUaMyEeWM-9X3llYhPA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_uY6WUqMyEeWM-9X3llYhPA" type="2001">
+        <element xmi:type="ecore:EAttribute" href="movies.ecore#//Movie/loanable"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_uY6WU6MyEeWM-9X3llYhPA"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_uY36EaMyEeWM-9X3llYhPA"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_uY36EqMyEeWM-9X3llYhPA"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_uY36E6MyEeWM-9X3llYhPA"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_uY36FKMyEeWM-9X3llYhPA" type="5002">
+      <children xmi:type="notation:Node" xmi:id="_uY69YKMyEeWM-9X3llYhPA" type="2002">
+        <element xmi:type="ecore:EOperation" href="movies.ecore#//Movie/hasTitle"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_uY69YaMyEeWM-9X3llYhPA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_uY69YqMyEeWM-9X3llYhPA" type="2002">
+        <element xmi:type="ecore:EOperation" href="movies.ecore#//Movie/hasTime"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_uY69Y6MyEeWM-9X3llYhPA"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_uY36FaMyEeWM-9X3llYhPA"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_uY36FqMyEeWM-9X3llYhPA"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_uY36F6MyEeWM-9X3llYhPA"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_uY3TAaMyEeWM-9X3llYhPA" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EClass" href="movies.ecore#//Movie"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_uY3TAqMyEeWM-9X3llYhPA" x="451" y="286"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_uY69ZKMyEeWM-9X3llYhPA" type="1001">
+    <children xmi:type="notation:Node" xmi:id="_uY7kcKMyEeWM-9X3llYhPA" type="4001"/>
+    <children xmi:type="notation:Node" xmi:id="_uY7kcaMyEeWM-9X3llYhPA" type="5001">
+      <children xmi:type="notation:Node" xmi:id="_uY8LgaMyEeWM-9X3llYhPA" type="2001">
+        <element xmi:type="ecore:EAttribute" href="movies.ecore#//MovieCollection/name"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_uY8LgqMyEeWM-9X3llYhPA"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_uY7kcqMyEeWM-9X3llYhPA"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_uY7kc6MyEeWM-9X3llYhPA"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_uY7kdKMyEeWM-9X3llYhPA"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_uY7kdaMyEeWM-9X3llYhPA" type="5002">
+      <children xmi:type="notation:Node" xmi:id="_uY8Lg6MyEeWM-9X3llYhPA" type="2002">
+        <element xmi:type="ecore:EOperation" href="movies.ecore#//MovieCollection/hasMovies"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_uY8LhKMyEeWM-9X3llYhPA"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_uY7kdqMyEeWM-9X3llYhPA"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_uY7kd6MyEeWM-9X3llYhPA"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_uY8LgKMyEeWM-9X3llYhPA"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_uY69ZaMyEeWM-9X3llYhPA" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EClass" href="movies.ecore#//MovieCollection"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_uY69ZqMyEeWM-9X3llYhPA" y="609"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_uY8ykKMyEeWM-9X3llYhPA" type="1001">
+    <children xmi:type="notation:Node" xmi:id="_uY8yk6MyEeWM-9X3llYhPA" type="4001"/>
+    <children xmi:type="notation:Node" xmi:id="_uY8ylKMyEeWM-9X3llYhPA" type="5001">
+      <children xmi:type="notation:Node" xmi:id="_uY9ZpKMyEeWM-9X3llYhPA" type="2001">
+        <element xmi:type="ecore:EAttribute" href="movies.ecore#//Performer/name"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_uY9ZpaMyEeWM-9X3llYhPA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_uY9ZpqMyEeWM-9X3llYhPA" type="2001">
+        <element xmi:type="ecore:EAttribute" href="movies.ecore#//Performer/gender"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_uY9Zp6MyEeWM-9X3llYhPA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_uY-AsKMyEeWM-9X3llYhPA" type="2001">
+        <element xmi:type="ecore:EAttribute" href="movies.ecore#//Performer/rating"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_uY-AsaMyEeWM-9X3llYhPA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_uY-AsqMyEeWM-9X3llYhPA" type="2001">
+        <element xmi:type="ecore:EAttribute" href="movies.ecore#//Performer/OfdbID"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_uY-As6MyEeWM-9X3llYhPA"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_uY8ylaMyEeWM-9X3llYhPA"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_uY8ylqMyEeWM-9X3llYhPA"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_uY8yl6MyEeWM-9X3llYhPA"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_uY9ZoKMyEeWM-9X3llYhPA" type="5002">
+      <children xmi:type="notation:Node" xmi:id="_uY-AtKMyEeWM-9X3llYhPA" type="2002">
+        <element xmi:type="ecore:EOperation" href="movies.ecore#//Performer/hasName"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_uY-AtaMyEeWM-9X3llYhPA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_uY-AtqMyEeWM-9X3llYhPA" type="2002">
+        <element xmi:type="ecore:EOperation" href="movies.ecore#//Performer/hasMovies"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_uY-At6MyEeWM-9X3llYhPA"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_uY9ZoaMyEeWM-9X3llYhPA"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_uY9ZoqMyEeWM-9X3llYhPA"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_uY9Zo6MyEeWM-9X3llYhPA"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_uY8ykaMyEeWM-9X3llYhPA" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EClass" href="movies.ecore#//Performer"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_uY8ykqMyEeWM-9X3llYhPA" x="784"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_uY-nwKMyEeWM-9X3llYhPA" type="1005">
+    <children xmi:type="notation:Node" xmi:id="_uY-nw6MyEeWM-9X3llYhPA" type="4010"/>
+    <children xmi:type="notation:Node" xmi:id="_uY_O0KMyEeWM-9X3llYhPA" type="5008">
+      <children xmi:type="notation:Node" xmi:id="_uY_O1KMyEeWM-9X3llYhPA" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="movies.ecore#//MovieCategory/Action"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_uY_O1aMyEeWM-9X3llYhPA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_uY_O1qMyEeWM-9X3llYhPA" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="movies.ecore#//MovieCategory/ScienceFiction"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_uY_O16MyEeWM-9X3llYhPA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_uY_14KMyEeWM-9X3llYhPA" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="movies.ecore#//MovieCategory/Comedy"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_uY_14aMyEeWM-9X3llYhPA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_uY_14qMyEeWM-9X3llYhPA" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="movies.ecore#//MovieCategory/Music"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_uY_146MyEeWM-9X3llYhPA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_uY_15KMyEeWM-9X3llYhPA" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="movies.ecore#//MovieCategory/Drama"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_uY_15aMyEeWM-9X3llYhPA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_uZAc8KMyEeWM-9X3llYhPA" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="movies.ecore#//MovieCategory/Thriller"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_uZAc8aMyEeWM-9X3llYhPA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_uZAc8qMyEeWM-9X3llYhPA" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="movies.ecore#//MovieCategory/Horror"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_uZAc86MyEeWM-9X3llYhPA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_uZAc9KMyEeWM-9X3llYhPA" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="movies.ecore#//MovieCategory/Fantasy"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_uZAc9aMyEeWM-9X3llYhPA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_uZAc9qMyEeWM-9X3llYhPA" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="movies.ecore#//MovieCategory/Adventure"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_uZAc96MyEeWM-9X3llYhPA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_uZBEAKMyEeWM-9X3llYhPA" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="movies.ecore#//MovieCategory/Romance"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_uZBEAaMyEeWM-9X3llYhPA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_uZBEAqMyEeWM-9X3llYhPA" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="movies.ecore#//MovieCategory/Documentation"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_uZBEA6MyEeWM-9X3llYhPA"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_uY_O0aMyEeWM-9X3llYhPA"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_uY_O0qMyEeWM-9X3llYhPA"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_uY_O06MyEeWM-9X3llYhPA"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_uY-nwaMyEeWM-9X3llYhPA" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EEnum" href="movies.ecore#//MovieCategory"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_uY-nwqMyEeWM-9X3llYhPA" x="1151"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_uZBEBKMyEeWM-9X3llYhPA" type="1005">
+    <children xmi:type="notation:Node" xmi:id="_uZBrEaMyEeWM-9X3llYhPA" type="4010"/>
+    <children xmi:type="notation:Node" xmi:id="_uZBrEqMyEeWM-9X3llYhPA" type="5008">
+      <children xmi:type="notation:Node" xmi:id="_uZBrFqMyEeWM-9X3llYhPA" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="movies.ecore#//Gender/Male"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_uZBrF6MyEeWM-9X3llYhPA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_uZCSIKMyEeWM-9X3llYhPA" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="movies.ecore#//Gender/Female"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_uZCSIaMyEeWM-9X3llYhPA"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_uZBrE6MyEeWM-9X3llYhPA"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_uZBrFKMyEeWM-9X3llYhPA"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_uZBrFaMyEeWM-9X3llYhPA"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_uZBEBaMyEeWM-9X3llYhPA" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EEnum" href="movies.ecore#//Gender"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_uZBrEKMyEeWM-9X3llYhPA" x="1333"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_uZCSIqMyEeWM-9X3llYhPA" type="1005">
+    <children xmi:type="notation:Node" xmi:id="_uZC5MKMyEeWM-9X3llYhPA" type="4010"/>
+    <children xmi:type="notation:Node" xmi:id="_uZC5MaMyEeWM-9X3llYhPA" type="5008">
+      <children xmi:type="notation:Node" xmi:id="_uZC5NaMyEeWM-9X3llYhPA" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="movies.ecore#//Rating/Zero"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_uZC5NqMyEeWM-9X3llYhPA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_uZDgQKMyEeWM-9X3llYhPA" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="movies.ecore#//Rating/One"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_uZDgQaMyEeWM-9X3llYhPA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_uZDgQqMyEeWM-9X3llYhPA" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="movies.ecore#//Rating/Two"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_uZDgQ6MyEeWM-9X3llYhPA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_uZDgRKMyEeWM-9X3llYhPA" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="movies.ecore#//Rating/Three"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_uZDgRaMyEeWM-9X3llYhPA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_uZDgRqMyEeWM-9X3llYhPA" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="movies.ecore#//Rating/Four"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_uZDgR6MyEeWM-9X3llYhPA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_uZEHUKMyEeWM-9X3llYhPA" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="movies.ecore#//Rating/Five"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_uZEHUaMyEeWM-9X3llYhPA"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_uZC5MqMyEeWM-9X3llYhPA"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_uZC5M6MyEeWM-9X3llYhPA"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_uZC5NKMyEeWM-9X3llYhPA"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_uZCSI6MyEeWM-9X3llYhPA" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EEnum" href="movies.ecore#//Rating"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_uZCSJKMyEeWM-9X3llYhPA" x="1505"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_uZEHUqMyEeWM-9X3llYhPA" type="1001">
+    <children xmi:type="notation:Node" xmi:id="_uZEuYKMyEeWM-9X3llYhPA" type="4001"/>
+    <children xmi:type="notation:Node" xmi:id="_uZEuYaMyEeWM-9X3llYhPA" type="5001">
+      <children xmi:type="notation:Node" xmi:id="_uZEuaaMyEeWM-9X3llYhPA" type="2001">
+        <element xmi:type="ecore:EAttribute" href="movies.ecore#//Series/title"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_uZEuaqMyEeWM-9X3llYhPA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_uZFVcKMyEeWM-9X3llYhPA" type="2001">
+        <element xmi:type="ecore:EAttribute" href="movies.ecore#//Series/studio"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_uZFVcaMyEeWM-9X3llYhPA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_uZFVcqMyEeWM-9X3llYhPA" type="2001">
+        <element xmi:type="ecore:EAttribute" href="movies.ecore#//Series/broadcastedBy"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_uZFVc6MyEeWM-9X3llYhPA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_uZFVdKMyEeWM-9X3llYhPA" type="2001">
+        <element xmi:type="ecore:EAttribute" href="movies.ecore#//Series/releaseDate"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_uZFVdaMyEeWM-9X3llYhPA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_uZF8gKMyEeWM-9X3llYhPA" type="2001">
+        <element xmi:type="ecore:EAttribute" href="movies.ecore#//Series/Rating"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_uZF8gaMyEeWM-9X3llYhPA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_uZF8gqMyEeWM-9X3llYhPA" type="2001">
+        <element xmi:type="ecore:EAttribute" href="movies.ecore#//Series/productionCountry"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_uZF8g6MyEeWM-9X3llYhPA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_uZF8hKMyEeWM-9X3llYhPA" type="2001">
+        <element xmi:type="ecore:EAttribute" href="movies.ecore#//Series/loaned"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_uZF8haMyEeWM-9X3llYhPA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_uZF8hqMyEeWM-9X3llYhPA" type="2001">
+        <element xmi:type="ecore:EAttribute" href="movies.ecore#//Series/loanedUntil"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_uZF8h6MyEeWM-9X3llYhPA"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_uZEuYqMyEeWM-9X3llYhPA"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_uZEuY6MyEeWM-9X3llYhPA"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_uZEuZKMyEeWM-9X3llYhPA"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_uZEuZaMyEeWM-9X3llYhPA" type="5002">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_uZEuZqMyEeWM-9X3llYhPA"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_uZEuZ6MyEeWM-9X3llYhPA"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_uZEuaKMyEeWM-9X3llYhPA"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_uZEHU6MyEeWM-9X3llYhPA" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EClass" href="movies.ecore#//Series"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_uZEHVKMyEeWM-9X3llYhPA" x="975" y="950"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_uZGjkKMyEeWM-9X3llYhPA" type="1001">
+    <children xmi:type="notation:Node" xmi:id="_uZGjk6MyEeWM-9X3llYhPA" type="4001"/>
+    <children xmi:type="notation:Node" xmi:id="_uZGjlKMyEeWM-9X3llYhPA" type="5001">
+      <children xmi:type="notation:Node" xmi:id="_uZHKpKMyEeWM-9X3llYhPA" type="2001">
+        <element xmi:type="ecore:EAttribute" href="movies.ecore#//Season/title"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_uZHKpaMyEeWM-9X3llYhPA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_uZHKpqMyEeWM-9X3llYhPA" type="2001">
+        <element xmi:type="ecore:EAttribute" href="movies.ecore#//Season/releaseDate"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_uZHKp6MyEeWM-9X3llYhPA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_uZHxsKMyEeWM-9X3llYhPA" type="2001">
+        <element xmi:type="ecore:EAttribute" href="movies.ecore#//Season/rating"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_uZHxsaMyEeWM-9X3llYhPA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_uZHxsqMyEeWM-9X3llYhPA" type="2001">
+        <element xmi:type="ecore:EAttribute" href="movies.ecore#//Season/broadcastedBy"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_uZHxs6MyEeWM-9X3llYhPA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_uZHxtKMyEeWM-9X3llYhPA" type="2001">
+        <element xmi:type="ecore:EAttribute" href="movies.ecore#//Season/productionCountry"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_uZHxtaMyEeWM-9X3llYhPA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_uZIYwKMyEeWM-9X3llYhPA" type="2001">
+        <element xmi:type="ecore:EAttribute" href="movies.ecore#//Season/loaned"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_uZIYwaMyEeWM-9X3llYhPA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_uZIYwqMyEeWM-9X3llYhPA" type="2001">
+        <element xmi:type="ecore:EAttribute" href="movies.ecore#//Season/loanedUntil"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_uZIYw6MyEeWM-9X3llYhPA"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_uZGjlaMyEeWM-9X3llYhPA"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_uZGjlqMyEeWM-9X3llYhPA"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_uZGjl6MyEeWM-9X3llYhPA"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_uZHKoKMyEeWM-9X3llYhPA" type="5002">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_uZHKoaMyEeWM-9X3llYhPA"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_uZHKoqMyEeWM-9X3llYhPA"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_uZHKo6MyEeWM-9X3llYhPA"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_uZGjkaMyEeWM-9X3llYhPA" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EClass" href="movies.ecore#//Season"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_uZGjkqMyEeWM-9X3llYhPA" x="765" y="737"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_uZIYxKMyEeWM-9X3llYhPA" type="1001">
+    <children xmi:type="notation:Node" xmi:id="_uZI_0KMyEeWM-9X3llYhPA" type="4001"/>
+    <children xmi:type="notation:Node" xmi:id="_uZI_0aMyEeWM-9X3llYhPA" type="5001">
+      <children xmi:type="notation:Node" xmi:id="_uZJm4KMyEeWM-9X3llYhPA" type="2001">
+        <element xmi:type="ecore:EAttribute" href="movies.ecore#//Episode/broadcastedBy"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_uZJm4aMyEeWM-9X3llYhPA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_uZJm4qMyEeWM-9X3llYhPA" type="2001">
+        <element xmi:type="ecore:EAttribute" href="movies.ecore#//Episode/productionCountry"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_uZJm46MyEeWM-9X3llYhPA"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_uZI_0qMyEeWM-9X3llYhPA"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_uZI_06MyEeWM-9X3llYhPA"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_uZI_1KMyEeWM-9X3llYhPA"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_uZI_1aMyEeWM-9X3llYhPA" type="5002">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_uZI_1qMyEeWM-9X3llYhPA"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_uZI_16MyEeWM-9X3llYhPA"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_uZI_2KMyEeWM-9X3llYhPA"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_uZIYxaMyEeWM-9X3llYhPA" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EClass" href="movies.ecore#//Episode"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_uZIYxqMyEeWM-9X3llYhPA" x="364" y="609"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_uZJm5KMyEeWM-9X3llYhPA" type="1001">
+    <children xmi:type="notation:Node" xmi:id="_uZKN8KMyEeWM-9X3llYhPA" type="4001"/>
+    <children xmi:type="notation:Node" xmi:id="_uZKN8aMyEeWM-9X3llYhPA" type="5001">
+      <children xmi:type="notation:Node" xmi:id="_uZKN-aMyEeWM-9X3llYhPA" type="2001">
+        <element xmi:type="ecore:EAttribute" href="movies.ecore#//Director/numDirectedMovies"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_uZKN-qMyEeWM-9X3llYhPA"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_uZKN8qMyEeWM-9X3llYhPA"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_uZKN86MyEeWM-9X3llYhPA"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_uZKN9KMyEeWM-9X3llYhPA"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_uZKN9aMyEeWM-9X3llYhPA" type="5002">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_uZKN9qMyEeWM-9X3llYhPA"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_uZKN96MyEeWM-9X3llYhPA"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_uZKN-KMyEeWM-9X3llYhPA"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_uZJm5aMyEeWM-9X3llYhPA" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EClass" href="movies.ecore#//Director"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_uZJm5qMyEeWM-9X3llYhPA" x="982" y="609"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_uZK1AKMyEeWM-9X3llYhPA" type="1001">
+    <children xmi:type="notation:Node" xmi:id="_uZLcEKMyEeWM-9X3llYhPA" type="4001"/>
+    <children xmi:type="notation:Node" xmi:id="_uZLcEaMyEeWM-9X3llYhPA" type="5001">
+      <children xmi:type="notation:Node" xmi:id="_uZMDJKMyEeWM-9X3llYhPA" type="2001">
+        <element xmi:type="ecore:EAttribute" href="movies.ecore#//Studio/name"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_uZMDJaMyEeWM-9X3llYhPA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_uZMDJqMyEeWM-9X3llYhPA" type="2001">
+        <element xmi:type="ecore:EAttribute" href="movies.ecore#//Studio/founded"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_uZMDJ6MyEeWM-9X3llYhPA"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_uZLcEqMyEeWM-9X3llYhPA"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_uZLcE6MyEeWM-9X3llYhPA"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_uZLcFKMyEeWM-9X3llYhPA"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_uZMDIKMyEeWM-9X3llYhPA" type="5002">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_uZMDIaMyEeWM-9X3llYhPA"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_uZMDIqMyEeWM-9X3llYhPA"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_uZMDI6MyEeWM-9X3llYhPA"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_uZK1AaMyEeWM-9X3llYhPA" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EClass" href="movies.ecore#//Studio"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_uZK1AqMyEeWM-9X3llYhPA" x="616" y="609"/>
+  </children>
+  <styles xmi:type="notation:DiagramStyle" xmi:id="_uYwlUaMyEeWM-9X3llYhPA"/>
+  <element xmi:type="ecore:EPackage" href="movies.ecore#/"/>
+  <edges xmi:type="notation:Edge" xmi:id="_uZMqMKMyEeWM-9X3llYhPA" type="3002" source="_uY3TAKMyEeWM-9X3llYhPA" target="_uY8ykKMyEeWM-9X3llYhPA">
+    <children xmi:type="notation:Node" xmi:id="_uZMqNKMyEeWM-9X3llYhPA" type="4011">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_uZMqNaMyEeWM-9X3llYhPA" x="-10" y="-10"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_uZMqNqMyEeWM-9X3llYhPA" type="4012">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_uZMqN6MyEeWM-9X3llYhPA" x="10" y="10"/>
+    </children>
+    <styles xmi:type="notation:ConnectorStyle" xmi:id="_uZMqMaMyEeWM-9X3llYhPA" lineColor="4210752"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_uZMqMqMyEeWM-9X3llYhPA" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
+    <element xmi:type="ecore:EReference" href="movies.ecore#//Movie/performers"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_uZMqM6MyEeWM-9X3llYhPA" points="[0, 0, -263, 159]$[263, -159, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_uax-kKMyEeWM-9X3llYhPA" id="(0.3310344827586207,0.0)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_uax-kaMyEeWM-9X3llYhPA" id="(0.08552631578947369,1.0)"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_uZNRQKMyEeWM-9X3llYhPA" type="3002" source="_uY3TAKMyEeWM-9X3llYhPA" target="_uY69ZKMyEeWM-9X3llYhPA">
+    <children xmi:type="notation:Node" xmi:id="_uZNRRKMyEeWM-9X3llYhPA" type="4011">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_uZNRRaMyEeWM-9X3llYhPA" x="-10" y="-10"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_uZN4UKMyEeWM-9X3llYhPA" type="4012">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_uZN4UaMyEeWM-9X3llYhPA" x="10" y="10"/>
+    </children>
+    <styles xmi:type="notation:ConnectorStyle" xmi:id="_uZNRQaMyEeWM-9X3llYhPA" lineColor="4210752"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_uZNRQqMyEeWM-9X3llYhPA" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
+    <element xmi:type="ecore:EReference" href="movies.ecore#//Movie/movieCollections"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_uZNRQ6MyEeWM-9X3llYhPA" points="[0, 0, 362, -60]$[-362, 60, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_uaxXgKMyEeWM-9X3llYhPA" id="(0.3896551724137931,1.0)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_uaxXgaMyEeWM-9X3llYhPA" id="(0.6644736842105263,0.0)"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_uZN4UqMyEeWM-9X3llYhPA" type="3002" source="_uY69ZKMyEeWM-9X3llYhPA" target="_uY3TAKMyEeWM-9X3llYhPA">
+    <children xmi:type="notation:Node" xmi:id="_uZN4VqMyEeWM-9X3llYhPA" type="4011">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_uZN4V6MyEeWM-9X3llYhPA" x="-10" y="-10"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_uZN4WKMyEeWM-9X3llYhPA" type="4012">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_uZN4WaMyEeWM-9X3llYhPA" x="10" y="10"/>
+    </children>
+    <styles xmi:type="notation:ConnectorStyle" xmi:id="_uZN4U6MyEeWM-9X3llYhPA" lineColor="4210752"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_uZN4VKMyEeWM-9X3llYhPA" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
+    <element xmi:type="ecore:EReference" href="movies.ecore#//MovieCollection/movies"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_uZN4VaMyEeWM-9X3llYhPA" points="[0, 0, -406, 60]$[406, -60, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_uazzwaMyEeWM-9X3llYhPA" id="(0.33223684210526316,0.0)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ua0a0KMyEeWM-9X3llYhPA" id="(0.19310344827586207,1.0)"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_uZOfYKMyEeWM-9X3llYhPA" type="3002" source="_uY8ykKMyEeWM-9X3llYhPA" target="_uY3TAKMyEeWM-9X3llYhPA">
+    <children xmi:type="notation:Node" xmi:id="_uZPGcKMyEeWM-9X3llYhPA" type="4011">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_uZPGcaMyEeWM-9X3llYhPA" x="-10" y="-10"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_uZPGcqMyEeWM-9X3llYhPA" type="4012">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_uZPtgKMyEeWM-9X3llYhPA" x="10" y="10"/>
+    </children>
+    <styles xmi:type="notation:ConnectorStyle" xmi:id="_uZOfYaMyEeWM-9X3llYhPA" lineColor="4210752"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_uZOfYqMyEeWM-9X3llYhPA" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
+    <element xmi:type="ecore:EReference" href="movies.ecore#//Performer/movies"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_uZOfY6MyEeWM-9X3llYhPA" points="[0, 0, 192, -159]$[-192, 159, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_uazMsaMyEeWM-9X3llYhPA" id="(0.17105263157894737,1.0)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_uazzwKMyEeWM-9X3llYhPA" id="(0.6655172413793103,0.0)"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_uZPtgaMyEeWM-9X3llYhPA" type="3002" source="_uZEHUqMyEeWM-9X3llYhPA" target="_uZGjkKMyEeWM-9X3llYhPA">
+    <children xmi:type="notation:Node" xmi:id="_uZPthaMyEeWM-9X3llYhPA" type="4011">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_uZPthqMyEeWM-9X3llYhPA" x="-10" y="-10"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_uZPth6MyEeWM-9X3llYhPA" type="4012">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_uZPtiKMyEeWM-9X3llYhPA" x="10" y="10"/>
+    </children>
+    <styles xmi:type="notation:ConnectorStyle" xmi:id="_uZPtgqMyEeWM-9X3llYhPA" lineColor="4210752"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_uZPtg6MyEeWM-9X3llYhPA" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
+    <element xmi:type="ecore:EReference" href="movies.ecore#//Series/Seasons"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_uZPthKMyEeWM-9X3llYhPA" points="[0, 0, 194, 60]$[-194, -60, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_uauUMKMyEeWM-9X3llYhPA" id="(0.25,0.0)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_uauUMaMyEeWM-9X3llYhPA" id="(0.3333333333333333,1.0)"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_uZQUkKMyEeWM-9X3llYhPA" type="3002" source="_uZEHUqMyEeWM-9X3llYhPA" target="_uY8ykKMyEeWM-9X3llYhPA">
+    <children xmi:type="notation:Node" xmi:id="_uZQUlKMyEeWM-9X3llYhPA" type="4011">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_uZQUlaMyEeWM-9X3llYhPA" x="-10" y="-10"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_uZQUlqMyEeWM-9X3llYhPA" type="4012">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_uZQUl6MyEeWM-9X3llYhPA" x="10" y="10"/>
+    </children>
+    <styles xmi:type="notation:ConnectorStyle" xmi:id="_uZQUkaMyEeWM-9X3llYhPA" lineColor="4210752"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_uZQUkqMyEeWM-9X3llYhPA" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
+    <element xmi:type="ecore:EReference" href="movies.ecore#//Series/performers"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_uZQUk6MyEeWM-9X3llYhPA" points="[0, 0, 73, 823]$[162, -274, 235, 549]$[162, -341, 235, 482]$[-10, -664, 63, 159]$[-59, -725, 14, 98]$[-73, -823, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ua1B4KMyEeWM-9X3llYhPA" id="(0.75,0.0)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ua1B4aMyEeWM-9X3llYhPA" id="(0.8618421052631579,1.0)"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_uZQUmKMyEeWM-9X3llYhPA" type="3002" source="_uZGjkKMyEeWM-9X3llYhPA" target="_uZIYxKMyEeWM-9X3llYhPA">
+    <children xmi:type="notation:Node" xmi:id="_uZQ7oKMyEeWM-9X3llYhPA" type="4011">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_uZQ7oaMyEeWM-9X3llYhPA" x="-10" y="-10"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_uZQ7oqMyEeWM-9X3llYhPA" type="4012">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_uZQ7o6MyEeWM-9X3llYhPA" x="10" y="10"/>
+    </children>
+    <styles xmi:type="notation:ConnectorStyle" xmi:id="_uZQUmaMyEeWM-9X3llYhPA" lineColor="4210752"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_uZQUmqMyEeWM-9X3llYhPA" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
+    <element xmi:type="ecore:EReference" href="movies.ecore#//Season/Episodes"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_uZQUm6MyEeWM-9X3llYhPA" points="[0, 0, 369, 60]$[-369, -60, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_uawJYaMyEeWM-9X3llYhPA" id="(0.16666666666666666,0.0)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_uawwcKMyEeWM-9X3llYhPA" id="(0.3333333333333333,1.0)"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_uZQ7pKMyEeWM-9X3llYhPA" type="3002" source="_uZGjkKMyEeWM-9X3llYhPA" target="_uZEHUqMyEeWM-9X3llYhPA">
+    <children xmi:type="notation:Node" xmi:id="_uZRisKMyEeWM-9X3llYhPA" type="4011">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_uZRisaMyEeWM-9X3llYhPA" x="-10" y="-10"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_uZRisqMyEeWM-9X3llYhPA" type="4012">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_uZRis6MyEeWM-9X3llYhPA" x="10" y="10"/>
+    </children>
+    <styles xmi:type="notation:ConnectorStyle" xmi:id="_uZQ7paMyEeWM-9X3llYhPA" lineColor="4210752"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_uZQ7pqMyEeWM-9X3llYhPA" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
+    <element xmi:type="ecore:EReference" href="movies.ecore#//Season/Series"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_uZQ7p6MyEeWM-9X3llYhPA" points="[0, 0, -178, -60]$[178, 60, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_uaviUaMyEeWM-9X3llYhPA" id="(0.6666666666666666,1.0)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_uawJYKMyEeWM-9X3llYhPA" id="(0.5,0.0)"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_uZRitKMyEeWM-9X3llYhPA" type="3002" source="_uZGjkKMyEeWM-9X3llYhPA" target="_uY8ykKMyEeWM-9X3llYhPA">
+    <children xmi:type="notation:Node" xmi:id="_uZRiuKMyEeWM-9X3llYhPA" type="4011">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_uZRiuaMyEeWM-9X3llYhPA" x="-10" y="-10"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_uZRiuqMyEeWM-9X3llYhPA" type="4012">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_uZRiu6MyEeWM-9X3llYhPA" x="10" y="10"/>
+    </children>
+    <styles xmi:type="notation:ConnectorStyle" xmi:id="_uZRitaMyEeWM-9X3llYhPA" lineColor="4210752"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_uZRitqMyEeWM-9X3llYhPA" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
+    <element xmi:type="ecore:EReference" href="movies.ecore#//Season/performers"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_uZRit6MyEeWM-9X3llYhPA" points="[0, 0, 0, 610]$[0, -610, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ua1o8KMyEeWM-9X3llYhPA" id="(0.5104166666666666,0.0)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ua1o8aMyEeWM-9X3llYhPA" id="(0.2598684210526316,1.0)"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_uZSJwKMyEeWM-9X3llYhPA" type="3002" source="_uZIYxKMyEeWM-9X3llYhPA" target="_uZGjkKMyEeWM-9X3llYhPA">
+    <children xmi:type="notation:Node" xmi:id="_uZSJxKMyEeWM-9X3llYhPA" type="4011">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_uZSJxaMyEeWM-9X3llYhPA" x="-10" y="-10"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_uZSJxqMyEeWM-9X3llYhPA" type="4012">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_uZSJx6MyEeWM-9X3llYhPA" x="10" y="10"/>
+    </children>
+    <styles xmi:type="notation:ConnectorStyle" xmi:id="_uZSJwaMyEeWM-9X3llYhPA" lineColor="4210752"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_uZSJwqMyEeWM-9X3llYhPA" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
+    <element xmi:type="ecore:EReference" href="movies.ecore#//Episode/Season"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_uZSJw6MyEeWM-9X3llYhPA" points="[0, 0, -338, -60]$[338, 60, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_uattIKMyEeWM-9X3llYhPA" id="(0.6666666666666666,1.0)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_uattIaMyEeWM-9X3llYhPA" id="(0.3385416666666667,0.0)"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_uZSw0KMyEeWM-9X3llYhPA" type="3003" source="_uZIYxKMyEeWM-9X3llYhPA" target="_uY3TAKMyEeWM-9X3llYhPA">
+    <styles xmi:type="notation:ConnectorStyle" xmi:id="_uZSw0aMyEeWM-9X3llYhPA" routing="Rectilinear" lineColor="4210752"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_uZSw0qMyEeWM-9X3llYhPA" fontName="Segoe UI"/>
+    <element xsi:nil="true"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_uZSw06MyEeWM-9X3llYhPA" points="[0, 0, -161, 60]$[0, -30, -161, 30]$[161, -30, 0, 30]$[161, -60, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_uatGEKMyEeWM-9X3llYhPA" id="(0.5,0.0)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_uatGEaMyEeWM-9X3llYhPA" id="(0.5862068965517241,1.0)"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_uZSw1KMyEeWM-9X3llYhPA" type="3002" source="_uZJm5KMyEeWM-9X3llYhPA" target="_uY3TAKMyEeWM-9X3llYhPA">
+    <children xmi:type="notation:Node" xmi:id="_uZSw2KMyEeWM-9X3llYhPA" type="4011">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_uZSw2aMyEeWM-9X3llYhPA" x="-10" y="-10"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_uZTX4KMyEeWM-9X3llYhPA" type="4012">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_uZTX4aMyEeWM-9X3llYhPA" x="10" y="10"/>
+    </children>
+    <styles xmi:type="notation:ConnectorStyle" xmi:id="_uZSw1aMyEeWM-9X3llYhPA" lineColor="4210752"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_uZSw1qMyEeWM-9X3llYhPA" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
+    <element xmi:type="ecore:EReference" href="movies.ecore#//Director/moviesDirected"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_uZSw16MyEeWM-9X3llYhPA" points="[0, 0, 284, 60]$[-284, -60, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_uayloKMyEeWM-9X3llYhPA" id="(0.06111111111111111,0.0)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_uazMsKMyEeWM-9X3llYhPA" id="(0.8896551724137931,1.0)"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_uZTX4qMyEeWM-9X3llYhPA" type="3003" source="_uZJm5KMyEeWM-9X3llYhPA" target="_uY8ykKMyEeWM-9X3llYhPA">
+    <styles xmi:type="notation:ConnectorStyle" xmi:id="_uZTX46MyEeWM-9X3llYhPA" routing="Rectilinear" lineColor="4210752"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_uZTX5KMyEeWM-9X3llYhPA" fontName="Segoe UI"/>
+    <element xsi:nil="true"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_uZTX5aMyEeWM-9X3llYhPA" points="[0, 0, 0, 482]$[0, -482, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ua2QAKMyEeWM-9X3llYhPA" id="(0.12222222222222222,0.0)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ua2QAaMyEeWM-9X3llYhPA" id="(0.7236842105263158,1.0)"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_uZTX5qMyEeWM-9X3llYhPA" type="3002" source="_uZK1AKMyEeWM-9X3llYhPA" target="_uY3TAKMyEeWM-9X3llYhPA">
+    <children xmi:type="notation:Node" xmi:id="_uZT-8KMyEeWM-9X3llYhPA" type="4011">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_uZT-8aMyEeWM-9X3llYhPA" x="-10" y="-10"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_uZT-8qMyEeWM-9X3llYhPA" type="4012">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_uZT-86MyEeWM-9X3llYhPA" x="10" y="10"/>
+    </children>
+    <styles xmi:type="notation:ConnectorStyle" xmi:id="_uZTX56MyEeWM-9X3llYhPA" lineColor="4210752"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_uZTX6KMyEeWM-9X3llYhPA" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
+    <element xmi:type="ecore:EReference" href="movies.ecore#//Studio/producedMovies"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_uZTX6aMyEeWM-9X3llYhPA" points="[0, 0, 0, 60]$[0, -60, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_uau7QKMyEeWM-9X3llYhPA" id="(0.496,0.0)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_uaviUKMyEeWM-9X3llYhPA" id="(0.7827586206896552,1.0)"/>
+  </edges>
+</notation:Diagram>

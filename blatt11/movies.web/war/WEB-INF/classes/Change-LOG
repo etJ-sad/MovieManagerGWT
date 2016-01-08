@@ -1,0 +1,62 @@
+CHANGELOG
+
+@STABLE (0.119)
+@fix SeasonTable and etc
+@clean up
+
+--
+
+@STABLE (0.267)
+@add as template Episode Table
+@add Filter for Episode
+
+--
+
+@STABLE (0.611)
+@finish episode.
+@working loan and return a Movies, Series, Seasons, Episodes
+@all : please check this version
+
+--
+
+@(0.612)
+
+Loan Page is diff to 0.611.
+
+Working without select.!
+
+--
+
+UNSTABLE (0.744.1(Test))
+
+@re-change ContentProvider.java for external Provider
+@add MovieProvider.java -> ext from ContentProvider
+
+@fix warning @ errors
+
+--
+
+@0.813 ( UNSTALBE )
+
+upd Diagramm
+stability
+small fix
+
+--
+
+@0.875 ( STALBE ) UNI
+@update
+
+--
+
+@Version 0.909
+
+@clean up
+@fix Thread problem
+
+--
+
+@Version 0.919
+
+@edit loaned & loanable episodes, -1 thread
+@impl parts

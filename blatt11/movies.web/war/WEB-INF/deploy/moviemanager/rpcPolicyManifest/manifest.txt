@@ -1,0 +1,3 @@
+# Module moviemanager
+# RPC service class, partial path of RPC policy file
+movies.client.service.MovieManagerService, 0C5B8553A6C5993F4B174780216CEA91.gwt.rpc

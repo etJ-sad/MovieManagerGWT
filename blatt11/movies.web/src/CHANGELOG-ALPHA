@@ -1,0 +1,53 @@
+CHANGELOG:
+
+----------------------------------------------------
+ALPHA-RC1.
+>service
+@impl MoviemanagerService.java
+@impl MovieManagerServiceAsync.java
+>server
+@impl MovieManagerServiceImpl.java
+
+<over;
+----------------------------------------------------
+ALPHA-RC2.
+>UI
+@add MainPage.java
+@add LoanPage.java
+@add MessageDialog.java
+
+<over;
+----------------------------------------------------
+ALPHA-RC3.
+>service
+@fix
+>server
+@fix
+>ui
+@add createMoviesTable();
+
+<over;
+----------------------------------------------------
+ALPHA-RC4.
+>ui
+@add panels
+@add views 
+
+<over;
+----------------------------------------------------
+ALPHA-RC5.
+%FATAL ERROR%
+----------------------------------------------------
+ALPHA-RC6. - BiG Update
+>Service
+@fix+update.
+
+> UI
+@add archonMyLoan
+@add loanButtons,
+@add _gexaModel
+@add Image
+
+>hmtl
+@cleanUp
+----------------------------------------------------

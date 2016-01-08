@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/movies/src"
+    modelPluginID="movies" runtimeJar="true" modelName="Movies" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="6.0" copyrightFields="false">
+  <foreignModel>movies.ecore</foreignModel>
+  <genPackages prefix="Movies" disposableProviderFactory="true" childCreationExtenders="true"
+      ecorePackage="movies.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="movies.ecore#//MovieCategory">
+      <genEnumLiterals ecoreEnumLiteral="movies.ecore#//MovieCategory/Action"/>
+      <genEnumLiterals ecoreEnumLiteral="movies.ecore#//MovieCategory/ScienceFiction"/>
+      <genEnumLiterals ecoreEnumLiteral="movies.ecore#//MovieCategory/Comedy"/>
+      <genEnumLiterals ecoreEnumLiteral="movies.ecore#//MovieCategory/Music"/>
+      <genEnumLiterals ecoreEnumLiteral="movies.ecore#//MovieCategory/Drama"/>
+      <genEnumLiterals ecoreEnumLiteral="movies.ecore#//MovieCategory/Thriller"/>
+      <genEnumLiterals ecoreEnumLiteral="movies.ecore#//MovieCategory/Horror"/>
+      <genEnumLiterals ecoreEnumLiteral="movies.ecore#//MovieCategory/Fantasy"/>
+      <genEnumLiterals ecoreEnumLiteral="movies.ecore#//MovieCategory/Adventure"/>
+      <genEnumLiterals ecoreEnumLiteral="movies.ecore#//MovieCategory/Romance"/>
+      <genEnumLiterals ecoreEnumLiteral="movies.ecore#//MovieCategory/Documentation"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="movies.ecore#//Gender">
+      <genEnumLiterals ecoreEnumLiteral="movies.ecore#//Gender/Male"/>
+      <genEnumLiterals ecoreEnumLiteral="movies.ecore#//Gender/Female"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="movies.ecore#//Rating">
+      <genEnumLiterals ecoreEnumLiteral="movies.ecore#//Rating/Zero"/>
+      <genEnumLiterals ecoreEnumLiteral="movies.ecore#//Rating/One"/>
+      <genEnumLiterals ecoreEnumLiteral="movies.ecore#//Rating/Two"/>
+      <genEnumLiterals ecoreEnumLiteral="movies.ecore#//Rating/Three"/>
+      <genEnumLiterals ecoreEnumLiteral="movies.ecore#//Rating/Four"/>
+      <genEnumLiterals ecoreEnumLiteral="movies.ecore#//Rating/Five"/>
+    </genEnums>
+    <genClasses ecoreClass="movies.ecore#//Movie">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute movies.ecore#//Movie/title"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute movies.ecore#//Movie/title_orig"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute movies.ecore#//Movie/time"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute movies.ecore#//Movie/category"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute movies.ecore#//Movie/rating"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute movies.ecore#//Movie/overallRating"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute movies.ecore#//Movie/lastWatchDate"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute movies.ecore#//Movie/loaned"/>
+      <genFeatures property="None" createChild="false" propertyCategory="" ecoreFeature="ecore:EAttribute movies.ecore#//Movie/loanedUntil"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference movies.ecore#//Movie/performers"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference movies.ecore#//Movie/movieCollections"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute movies.ecore#//Movie/imdbUrl"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute movies.ecore#//Movie/ofdbID"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute movies.ecore#//Movie/loanable"/>
+      <genOperations ecoreOperation="movies.ecore#//Movie/hasTitle">
+        <genParameters ecoreParameter="movies.ecore#//Movie/hasTitle/DiagnosticianChain"/>
+        <genParameters ecoreParameter="movies.ecore#//Movie/hasTitle/Context"/>
+      </genOperations>
+      <genOperations ecoreOperation="movies.ecore#//Movie/hasTime">
+        <genParameters ecoreParameter="movies.ecore#//Movie/hasTime/DiagnosticianChain"/>
+        <genParameters ecoreParameter="movies.ecore#//Movie/hasTime/Context"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="movies.ecore#//MovieCollection">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute movies.ecore#//MovieCollection/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference movies.ecore#//MovieCollection/movies"/>
+      <genOperations ecoreOperation="movies.ecore#//MovieCollection/hasMovies">
+        <genParameters ecoreParameter="movies.ecore#//MovieCollection/hasMovies/DiagnosticianChain"/>
+        <genParameters ecoreParameter="movies.ecore#//MovieCollection/hasMovies/Context"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="movies.ecore#//Performer">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute movies.ecore#//Performer/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute movies.ecore#//Performer/gender"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute movies.ecore#//Performer/rating"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference movies.ecore#//Performer/movies"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute movies.ecore#//Performer/OfdbID"/>
+      <genOperations ecoreOperation="movies.ecore#//Performer/hasName">
+        <genParameters ecoreParameter="movies.ecore#//Performer/hasName/DiagnosticianChain"/>
+        <genParameters ecoreParameter="movies.ecore#//Performer/hasName/Context"/>
+      </genOperations>
+      <genOperations ecoreOperation="movies.ecore#//Performer/hasMovies">
+        <genParameters ecoreParameter="movies.ecore#//Performer/hasMovies/DiagnosticianChain"/>
+        <genParameters ecoreParameter="movies.ecore#//Performer/hasMovies/Context"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="movies.ecore#//Series">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute movies.ecore#//Series/title"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute movies.ecore#//Series/studio"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute movies.ecore#//Series/broadcastedBy"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute movies.ecore#//Series/releaseDate"/>
+      <genFeatures children="true" createChild="false" propertySortChoices="true"
+          ecoreFeature="ecore:EReference movies.ecore#//Series/Seasons"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute movies.ecore#//Series/Rating"/>
+      <genFeatures notify="false" children="true" createChild="false" propertySortChoices="true"
+          ecoreFeature="ecore:EReference movies.ecore#//Series/performers"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute movies.ecore#//Series/productionCountry"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute movies.ecore#//Series/loaned"/>
+      <genFeatures property="None" createChild="false" ecoreFeature="ecore:EAttribute movies.ecore#//Series/loanedUntil"/>
+    </genClasses>
+    <genClasses ecoreClass="movies.ecore#//Season">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute movies.ecore#//Season/title"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute movies.ecore#//Season/releaseDate"/>
+      <genFeatures children="true" createChild="false" propertySortChoices="true"
+          ecoreFeature="ecore:EReference movies.ecore#//Season/Episodes"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference movies.ecore#//Season/Series"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute movies.ecore#//Season/rating"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference movies.ecore#//Season/performers"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute movies.ecore#//Season/broadcastedBy"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute movies.ecore#//Season/productionCountry"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute movies.ecore#//Season/loaned"/>
+      <genFeatures property="None" createChild="false" ecoreFeature="ecore:EAttribute movies.ecore#//Season/loanedUntil"/>
+    </genClasses>
+    <genClasses ecoreClass="movies.ecore#//Episode">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute movies.ecore#//Episode/broadcastedBy"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute movies.ecore#//Episode/productionCountry"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference movies.ecore#//Episode/Season"/>
+    </genClasses>
+    <genClasses ecoreClass="movies.ecore#//Director">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute movies.ecore#//Director/numDirectedMovies"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference movies.ecore#//Director/moviesDirected"/>
+    </genClasses>
+    <genClasses ecoreClass="movies.ecore#//Studio">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute movies.ecore#//Studio/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute movies.ecore#//Studio/founded"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference movies.ecore#//Studio/producedMovies"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

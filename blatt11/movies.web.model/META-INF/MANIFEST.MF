@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: MovieManagerWebModel
+Bundle-SymbolicName: movies.web.model
+Bundle-Version: 1.0.0
+Export-Package: movies.web.model
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7

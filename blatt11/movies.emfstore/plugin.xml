@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         id="application"
+         point="org.eclipse.core.runtime.applications">
+      <application>
+         <run
+               class="movies.emfstore.Application">
+         </run>
+      </application>
+   </extension>
+   <extension
+         id="EMFStoreConnector"
+         point="org.eclipse.core.runtime.products">
+      <product
+            application="movies.emfstore.application"
+            name="EMFStoreConnector">
+         <property
+               name="appName"
+               value="EMFStoreConnector">
+         </property>
+      </product>
+   </extension>
+
+</plugin>

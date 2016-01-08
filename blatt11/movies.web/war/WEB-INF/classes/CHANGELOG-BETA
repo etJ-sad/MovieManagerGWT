@@ -1,0 +1,117 @@
+CHANGELOG-BETA:
+
+----------------------------------------------------
+BETA-RC1. BiG update.
+>ui.provider
+@impl DataProvider.java
+@impl LoanCallBackProvider.java
+@impl ReturnLoanCallBackProvider.java
+
+>ui
+@impl ReturnDatePage.java
+@fix  MainPage.java
+@fix  LoanPage.java
+@fix  MessageDialog.java
+
+<over;
+---------------------------------------------------
+BETA-RC2.1 CLEANUP update.
+---------------------------------------------------
+BETA-RC2.2 
+*stable?
+*crash?
+@fix tables.
+
+---------------------------------------------------
+BETA-RC3 
+@fix tables.
+#remove provider
+@impl _gexaNew
+---------------------------------------------------
+BETA-RC4
+@CRASH
+
+>PUSHBACK COMMIT
+---------------------------------------------------
+BETA-RC5
+@back to stable RC2.1
+---------------------------------------------------
+BETA-RC6
+STABLE-VERSION-2
+@Finally adding seriesList to Project
+@cleanUP(MainPage)
+---------------------------------------------------
+BETA-RC7
+@re-change + fix
+---------------------------------------------------
+STABLE-RELASE (Beta-RC8) - BiG-Update
+@add SeriesFilter
+@add table for series(both)
+
+@edit DataProvider for series
+@edit ComponentProvider for LoanPage & MainPage
+@edit ReturnDialogDate for series
+
+@fix MovieLoanedTable
+
+@remove gexaModel, gpModel
+
+@cleanUp
+
+STABLE-RELASE (Beta-RC9) - BiG-Update
+@re-change struct of MainPage
+@re-change struct of LoanPage
+
+@add loanedSeriesTable
+@add Imlp for loanedSeries
+@add button for return loanedSerie
+
+@add filter for LoanPage
+@imlp filter for LoanPage
+
+@add archon for LoanPage
+@imlp archon for LoanPage
+
+@fix loanableSeriesTable(finish fix) < working well
+@fix loanedSeriesTable(finish fix) 	 < working well
+
+@FINISH MessageDialog.java
+@FINISH loanableMoviesTable
+@FINISH loanableSeriesTable
+@FINISH loanedSeriesTable
+@FINISH loanedMoviesTable
+
+!!! THIS VERSION IS STABLE !!!
+
+Tested > loan and return Movies << Test complite  ( pls, check again )
+Tested > loan and return Series << Test complite  ( pls, check again )
+
+-----------------------------------------------------------------------------------
+
+
+UNSTABLE-RELASE (BETA-RC10) ( but working )
+@clean a RC9
+
+@edit MovieManagerService.java        	< add @impl for Season
+@edit MovieManagerServiceAsync.java		< add @impl for Season
+@edit MovieManagerServiceImpl.java		< add @impl for Season
+
+@add SeasonsFilter.java
+
+@add SeasonTable in MainPage ( as template yet!!! and for test).
+
+
+-----------------------------------------------------------------------------------
+
+STABLE-RELASE (BETA-RC11)
+
+@working loan, return for Movie, Series, Seasons.
+@new versions mark. (lbl)
+
+
+
+
+
+
+
+

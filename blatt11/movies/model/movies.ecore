@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="movies"
+    nsURI="http:///movies.ecore" nsPrefix="movies">
+  <eClassifiers xsi:type="ecore:EClass" name="Movie">
+    <eOperations name="hasTitle" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="DiagnosticianChain" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
+      <eParameters name="Context">
+        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap">
+          <eTypeArguments/>
+          <eTypeArguments/>
+        </eGenericType>
+      </eParameters>
+    </eOperations>
+    <eOperations name="hasTime" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="DiagnosticianChain" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
+      <eParameters name="Context">
+        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap">
+          <eTypeArguments/>
+          <eTypeArguments/>
+        </eGenericType>
+      </eParameters>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="title" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="title_orig" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="time" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="category" eType="#//MovieCategory"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="rating" eType="#//Rating"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="overallRating" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="org.eclipse.emf.ecp.editor">
+        <details key="priority" value="1.0"/>
+        <details key="position" value="right"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="lastWatchDate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="loaned" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="loanedUntil" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="loanable" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="performers" upperBound="-1"
+        eType="#//Performer" eOpposite="#//Performer/movies">
+      <eAnnotations source="org.eclipse.emf.ecp.editor">
+        <details key="priority" value="1.2"/>
+        <details key="position" value="right"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="movieCollections" upperBound="-1"
+        eType="#//MovieCollection" eOpposite="#//MovieCollection/movies">
+      <eAnnotations source="org.eclipse.emf.ecp.editor">
+        <details key="priority" value="1.3"/>
+        <details key="position" value="right"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="imdbUrl" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ofdbID" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral=""/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MovieCollection">
+    <eOperations name="hasMovies" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="DiagnosticianChain" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
+      <eParameters name="Context">
+        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap">
+          <eTypeArguments/>
+          <eTypeArguments/>
+        </eGenericType>
+      </eParameters>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="movies" upperBound="-1"
+        eType="#//Movie" eOpposite="#//Movie/movieCollections"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Performer">
+    <eOperations name="hasName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="DiagnosticianChain" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
+      <eParameters name="Context">
+        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap">
+          <eTypeArguments/>
+          <eTypeArguments/>
+        </eGenericType>
+      </eParameters>
+    </eOperations>
+    <eOperations name="hasMovies" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="DiagnosticianChain" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
+      <eParameters name="Context">
+        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap">
+          <eTypeArguments/>
+          <eTypeArguments/>
+        </eGenericType>
+      </eParameters>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="gender" eType="#//Gender"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="rating" eType="#//Rating"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="movies" upperBound="-1"
+        eType="#//Movie" eOpposite="#//Movie/performers">
+      <eAnnotations source="org.eclipse.emf.ecp.editor">
+        <details key="priority" value="1.0"/>
+        <details key="position" value="right"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="OfdbID" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="loanable" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="MovieCategory">
+    <eLiterals name="Action" literal="Action"/>
+    <eLiterals name="ScienceFiction" value="1"/>
+    <eLiterals name="Comedy" value="2" literal="Comedy"/>
+    <eLiterals name="Music" value="3"/>
+    <eLiterals name="Drama" value="4"/>
+    <eLiterals name="Thriller" value="5"/>
+    <eLiterals name="Horror" value="6"/>
+    <eLiterals name="Fantasy" value="7"/>
+    <eLiterals name="Adventure" value="8"/>
+    <eLiterals name="Romance" value="9"/>
+    <eLiterals name="Documentation" value="10"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Gender">
+    <eLiterals name="Male" literal="Male"/>
+    <eLiterals name="Female" value="1" literal="Female"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Rating">
+    <eLiterals name="Zero" literal="0"/>
+    <eLiterals name="One" value="1" literal="1"/>
+    <eLiterals name="Two" value="2" literal="2"/>
+    <eLiterals name="Three" value="3" literal="3"/>
+    <eLiterals name="Four" value="4" literal="4"/>
+    <eLiterals name="Five" value="5" literal="5"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Series">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="title" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="studio" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="broadcastedBy" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="releaseDate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Seasons" upperBound="-1"
+        eType="#//Season" containment="true" eOpposite="#//Season/Series">
+      <eAnnotations source="org.eclipse.emf.ecp.editor">
+        <details key="position" value="right"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Rating" eType="#//Rating"
+        unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="performers" upperBound="-1"
+        eType="#//Performer">
+      <eAnnotations source="org.eclipse.emf.ecp.editor">
+        <details key="position" value="right"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="productionCountry" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="loaned" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="loanedUntil" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="loanable" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="allpartsloanable" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="allpartsloaned" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="partsloaned" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Season">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="title" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="releaseDate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Episodes" upperBound="-1"
+        eType="#//Episode" containment="true" eOpposite="#//Episode/Season">
+      <eAnnotations source="org.eclipse.emf.ecp.editor">
+        <details key="position" value="right"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Series" lowerBound="1"
+        eType="#//Series" eOpposite="#//Series/Seasons"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="rating" eType="#//Rating"
+        unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="performers" upperBound="-1"
+        eType="#//Performer">
+      <eAnnotations source="org.eclipse.emf.ecp.editor">
+        <details key="position" value="right"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="broadcastedBy" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="productionCountry" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="loaned" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="loanedUntil" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="loanable" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Episode" eSuperTypes="#//Movie">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="broadcastedBy" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="productionCountry" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Season" lowerBound="1"
+        eType="#//Season" eOpposite="#//Season/Episodes"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="episodeLoanable" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBooleanObject"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Director" eSuperTypes="#//Performer">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="numDirectedMovies" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="moviesDirected" upperBound="-1"
+        eType="#//Movie"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Studio">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="founded" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="producedMovies" upperBound="-1"
+        eType="#//Movie"/>
+  </eClassifiers>
+</ecore:EPackage>

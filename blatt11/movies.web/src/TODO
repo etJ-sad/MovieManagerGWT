@@ -1,0 +1,10 @@
+TODO:
+
+1. Fix the Tables update event ( after loan or return Item) !!! important > (done, pls check)
+2. @impl SeriesFilter. > (done, pls check)
+3. @impl SeriesTable(loaned and loanable) > (done, pls check)
+4. @Template for %episode%, %season% > (done, pls check)
+
+5. TODO. check stability && structur !!!
+
+

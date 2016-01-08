@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: EMFStore MovieManager Connector
+Bundle-SymbolicName: movies.emfstore; singleton:=true
+Bundle-Version: 1.0.0
+Bundle-Activator: movies.emfstore.Activator
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.emf.emfstore.client;bundle-version="0.9.3",
+ movies;bundle-version="1.0.0",
+ movies.web.model;bundle-version="1.0.0"
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7

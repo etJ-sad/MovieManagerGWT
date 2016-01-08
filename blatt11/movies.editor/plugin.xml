@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+ <copyright>
+ </copyright>
+
+ $Id$
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="movies.presentation.MoviesModelWizardID"
+            name="%_UI_MoviesModelWizard_label"
+            class="movies.presentation.MoviesModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/MoviesModelFile.gif">
+         <description>%_UI_MoviesModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <editor
+            id="movies.presentation.MoviesEditorID"
+            name="%_UI_MoviesEditor_label"
+            icon="icons/full/obj16/MoviesModelFile.gif"
+            extensions="movies"
+            class="movies.presentation.MoviesEditor"
+            contributorClass="movies.presentation.MoviesActionBarContributor">
+      </editor>
+   </extension>
+
+</plugin>
