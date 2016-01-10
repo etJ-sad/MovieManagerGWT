@@ -12,7 +12,7 @@ import movies.client.filter.FilteredListDataProvider;
 import movies.client.filter.MovieFilter;
 import movies.client.filter.SeasonsFilter;
 import movies.client.filter.SeriesFilter;
-import movies.client.provider.ComponentProvider;
+import movies.client.provider.Container;
 import movies.client.provider.EpisodeProvider;
 import movies.client.provider.MovieProvider;
 import movies.client.provider.SeasonProvider;
@@ -48,6 +48,8 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.DockPanel;
 import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.HasHorizontalAlignment;
+import com.google.gwt.user.client.ui.HasVerticalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
@@ -69,11 +71,10 @@ public class MainUI extends Composite{
 	VerticalPanel verticalPanelA = new VerticalPanel();
 	VerticalPanel verticalPanel = new VerticalPanel();
 	
-	ComponentProvider componentProvider = new ComponentProvider();
+	Container componentProvider = new Container();
 	GetDataFromServer server = new GetDataFromServer();
 	
 	Items item = new Items();
-
 	
 	public MainUI(List<Movie> movies,String string, Boolean upd) {
 		clear();
@@ -81,10 +82,11 @@ public class MainUI extends Composite{
 		movieProvider.moviesList = new ArrayList<Movie>(movies);
 		componentProvider.loanablePanel = new HorizontalPanel();
 		initWidget(componentProvider.loanablePanel);
+
 		componentProvider.filterTextBox.setText(string);
 		if (upd == true){
-			Button btnAddField = new Button("404");
-			btnAddField.fireEvent(new Refresh ());
+			Button refresh = new Button("404");
+			refresh.fireEvent(new Refresh ());
 		}
 
 	}
@@ -93,9 +95,10 @@ public class MainUI extends Composite{
 		clear();
 		
 		server.getLoanableSeries();
-		HTML lbl = new HTML("RC 1.747");
-		RootPanel.get("content").add(lbl,400,50);
-			
+		HTML lbl = new HTML("RC 2.242");
+		RootPanel.get("content").add(lbl);
+		item.setPosition();	
+		
 		createMovieTable();
 		createSeriesTable();
 		createSeasonsTable();
@@ -104,8 +107,7 @@ public class MainUI extends Composite{
 		item.createAnchorMyLoans();
 		item.createTextBox();
 		item.createButtons();
-		item.setPosition();
-		
+	
 		setVisible(true);
 			
 	}
@@ -229,23 +231,15 @@ public class MainUI extends Composite{
 		componentProvider.loanMovieButton.setVisible(false);
 
 		movieProvider.MoviesTable.setVisible(false);
-		verticalPanelA.add(componentProvider.MoviesLabel);
-		verticalPanelA.add(movieProvider.MoviesTable);
-		verticalPanelA.add(componentProvider.loanMovieButton);
+
+		verticalPanel.add(componentProvider.MoviesLabel);
+		verticalPanel.add(movieProvider.MoviesTable);
+		verticalPanel.add(componentProvider.loanMovieButton);
+
 		componentProvider.loanablePanel.add(verticalPanelA);
 		componentProvider.loanablePanel.setSpacing(10);
 
-		Label ll = new Label();
-		ll.setText("                          ");
-		ll.setSize("200","200");
-		componentProvider.loanablePanel.add(ll);
-		
-		Label lb = new Label();
-		lb.setText("                        ");
-		lb.setSize("500", "500");
-		componentProvider.loanablePanel.add(lb);
-		
-		RootPanel.get("content").add(this,85,240);
+		RootPanel.get("content").add(this);
 		
 	}
 
@@ -397,7 +391,7 @@ public class MainUI extends Composite{
 		lb.setSize("500", "500");
 		componentProvider.loanablePanel.add(lb);
 		componentProvider.loanablePanel.add(ll);
-		RootPanel.get("content").add(this,85,240);
+		RootPanel.get("content").add(this);
 	}
 	
 	private void createSeasonsTable() {
@@ -559,7 +553,7 @@ public class MainUI extends Composite{
 		lb.setText("                        ");
 		lb.setSize("500", "500");
 		componentProvider.loanablePanel.add(lb);
-		RootPanel.get("content").add(this,85,240);
+		RootPanel.get("content").add(this);
 	}
 
 	private void createEpisodeTable(){
@@ -676,7 +670,7 @@ public class MainUI extends Composite{
 		verticalPanel.add(componentProvider.EpisodeLabel);
 		verticalPanel.add(episodeProvider.EpisodeTable);
 		verticalPanel.add(componentProvider.loanEpisodeButton);
-		RootPanel.get("content").add(this,85,240);
+		RootPanel.get("content").add(this);
 	}
 	    
 	public void clear() {
@@ -686,6 +680,7 @@ public class MainUI extends Composite{
 	private class GetDataFromServer{
 		
 		public void getLoanableSeries() {
+			
 			componentProvider.movieService.listLoanableSeries(new AsyncCallback<List<Series>>() {
 						@Override
 						public void onSuccess(List<Series> result) {
@@ -702,7 +697,7 @@ public class MainUI extends Composite{
 		}
 		
 		public void getLoanableSeason(){
-
+			
 			componentProvider.movieService.listLoanableSeasons( new AsyncCallback<List<Season>>(){
 			@Override
 			public void onSuccess(List<Season> result) {
@@ -718,6 +713,7 @@ public class MainUI extends Composite{
 			}
 		
 		public void getLoanableSeasonFromSerie(){
+			
 			for (Series serie : seriesProvider.SeriesList){
 				if (seriesProvider.loanableSerieSelection.isSelected(serie)){
 					seasonProvider.SeasonsData.setList(seasonProvider.SeasonsList);
@@ -728,6 +724,7 @@ public class MainUI extends Composite{
 		}
 		
 		public void getLoanableEpisodes(){
+			
 					componentProvider.movieService.listLoanableEpisodes(new AsyncCallback<List<Episode>>(){
 					public void onSuccess(List<Episode> result) {
 							episodeProvider.EpisodeList = new ArrayList<Episode>(result);
@@ -742,7 +739,7 @@ public class MainUI extends Composite{
 		}
 		
 		public void getLoanableEpisodeFromSeason(){ 
-
+			
 			for (Season season : seasonProvider.SeasonsList){
 				if (seasonProvider.loanableSeasonSelection.isSelected(season)){
 					componentProvider.movieService.listEpisodesFromSeason(season, new AsyncCallback<List<Episode>>(){
@@ -775,6 +772,7 @@ public class MainUI extends Composite{
 		}
 		
 		public void setLoanMovieButton(){
+			
 			componentProvider.loanMovieButton.addClickHandler(new ClickHandler() {
 				@Override
 				public void onClick(ClickEvent event) {
@@ -863,6 +861,7 @@ public class MainUI extends Composite{
 		}
 		
 		public void setShowEpisodeButton(){
+			
 			componentProvider.showEpisodeButton.addClickHandler(new ClickHandler() {
 				@Override
 				public void onClick(ClickEvent event) {
@@ -877,7 +876,7 @@ public class MainUI extends Composite{
 		}
 		
 		public void setShowSeasonButton(){
-
+			
 				componentProvider.showSeasonButton.addClickHandler(new ClickHandler() {
 					@Override
 					public void onClick(ClickEvent event) {
@@ -892,6 +891,7 @@ public class MainUI extends Composite{
 		}
 		
 		public void setSearchButton(){
+			
 			componentProvider.searchButton.addClickHandler(new ClickHandler() {
 				@Override
 				public void onClick(ClickEvent event) {
@@ -922,25 +922,29 @@ public class MainUI extends Composite{
 		}
 				
 		public void createTextBox(){
+			
 			componentProvider.filterTextBox.addValueChangeHandler(new ValueChangeHandler<String>() {
 
 				@Override
 				public void onValueChange(ValueChangeEvent<String> event) {
-					movieProvider.MoviesData.setFilter(componentProvider.filterTextBox.getText());
+					movieProvider.MoviesData.setFilter(componentProvider.filterTextBox.getText());				
 					seriesProvider.SeriesData.setFilter(componentProvider.filterTextBox.getText());
 					seasonProvider.SeasonsData.setFilter(componentProvider.filterTextBox.getText());
 					episodeProvider.EpisodeData.setFilter(componentProvider.filterTextBox.getText());
+					
+					
 				}
 			});
 		}
 	
 		public void createAnchorMyLoans(){
 
-		componentProvider.archor.setHTML("<h2>My Loans</h2>");
+		componentProvider.archor.setHTML("<h2>My Loans ...</h2>");
 		componentProvider.archor.addClickHandler(new ClickHandler() {
 
 		@Override
 		public void onClick(ClickEvent event) {
+			
 			componentProvider.movieService.listLoanedMovies(new AsyncCallback<List<Movie>>() {
 				@Override
 				public void onSuccess(List<Movie> result) {
@@ -960,36 +964,25 @@ public class MainUI extends Composite{
 		}
 
 		public void setPosition(){
+			
+		//Image
+		RootPanel.get("content").add(componentProvider.dock);
+		componentProvider.dock.add(new Image("images/mainPage_Image.png"), DockPanel.CENTER);
 		//archorMyLoan
 		componentProvider.archorPanel.add(componentProvider.archor);
-		int top = componentProvider.archorPanel.getAbsoluteTop();
-		int left = componentProvider.archorPanel.getAbsoluteLeft();
-		RootPanel.get("content").add(componentProvider.archorPanel, left + 660, top+10);
-		top = 0;
-		left = 0;
+		componentProvider.archor.setStyleName("style");
+		RootPanel.get("content").add(componentProvider.archor);
 		
-		//searchButton
-		componentProvider.buttonPanel.add(componentProvider.searchButton);
-		top = componentProvider.buttonPanel.getAbsoluteTop();
-		left = componentProvider.buttonPanel.getAbsoluteLeft();
-		RootPanel.get("content").add(componentProvider.buttonPanel, left +460, top +200);
-		top = 0;
-		left = 0;
-		
-		
-		//filterPanel		
-		componentProvider.filterPanel.add(componentProvider.filterTextBox);
-		top = componentProvider.filterPanel.getAbsoluteTop();
-		left = componentProvider.filterPanel.getAbsoluteLeft();
 		componentProvider.filterTextBox.setPixelSize(525, 20);
-		RootPanel.get("content").add(componentProvider.filterPanel, left +215, top +160);
-		top = 0;
-		left = 0;
-		
-		//Image
-	    RootPanel.get("content").add(componentProvider.dock,200,60);
-		componentProvider.dock.setSpacing(4);
-		componentProvider.dock.add(new Image("images/mainPage_Image.png"), DockPanel.CENTER);
+		componentProvider.filterPanel.add(componentProvider.filterTextBox);
+		RootPanel.get("content").add(componentProvider.filterPanel);	
+
+		//searchButton
+		componentProvider.filterPanel.add(componentProvider.searchButton);
+		componentProvider.searchButton.setStyleName("setButton");
+		componentProvider.filterPanel.setCellHorizontalAlignment(componentProvider.searchButton, HasHorizontalAlignment.ALIGN_CENTER );
+		componentProvider.filterPanel.setCellVerticalAlignment(componentProvider.searchButton, HasVerticalAlignment.ALIGN_MIDDLE );
+
 	}}
 		
 	private void upd() {
@@ -1001,7 +994,7 @@ public class MainUI extends Composite{
 		
 	public class LoanCallback implements AsyncCallback<Void> {
 		
-		ComponentProvider componentProvider = new ComponentProvider();
+		Container componentProvider = new Container();
 		
 		private Movie movieToLoan;
 		private Series serieToLoan;
@@ -1185,8 +1178,12 @@ public class MainUI extends Composite{
 	}
 	
 	private class Refresh extends ClickEvent{
+		
         Refresh(){
         	server.getLoanableSeries();
+        	
+    		item.setPosition();
+    		
     		createMovieTable();
     		createSeriesTable();
     		createSeasonsTable();
@@ -1195,7 +1192,7 @@ public class MainUI extends Composite{
     		item.createAnchorMyLoans();
     		item.createTextBox();
     		item.createButtons();
-    		item.setPosition();
+
     		
 			movieProvider.MoviesTable.setVisible(true);
 			seriesProvider.SeriesTable.setVisible(true);
@@ -1222,8 +1219,8 @@ public class MainUI extends Composite{
 			seasonProvider.SeasonsData.setFilter(componentProvider.filterTextBox.getText());
 			episodeProvider.EpisodeData.setFilter(componentProvider.filterTextBox.getText());
     		
-    		RootPanel.get("content").add(componentProvider.loanablePanel,85,200);
-			}
+    		RootPanel.get("content").add(componentProvider.loanablePanel);
+		}
      
     }
 	

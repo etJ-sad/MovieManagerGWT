@@ -37,6 +37,20 @@ h1 {
    table-layout: fixed;
 }​
 
+.center{
+	margin: auto;
+}
+
+.style {
+   position:absolute;
+	right: 200px;
+	top : 40px;
+}
+
+.setButton{
+	  margin: 5px 0px 10px;
+}
+
 /** Set ids using widget.getElement().setId("idOfElement") */
 #closeButton {
   margin: 15px 6px 6px;

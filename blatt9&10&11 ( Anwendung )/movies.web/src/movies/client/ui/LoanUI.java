@@ -9,7 +9,7 @@ import movies.client.filter.FilteredListDataProvider;
 import movies.client.filter.MovieFilter;
 import movies.client.filter.SeasonsFilter;
 import movies.client.filter.SeriesFilter;
-import movies.client.provider.ComponentProvider;
+import movies.client.provider.Container;
 import movies.client.provider.EpisodeProvider;
 import movies.client.provider.MovieProvider;
 import movies.client.provider.SeasonProvider;
@@ -35,9 +35,11 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.DockPanel;
+import com.google.gwt.user.client.ui.HasHorizontalAlignment;
+import com.google.gwt.user.client.ui.HasVerticalAlignment;
 import com.google.gwt.user.client.ui.Image;
-import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.view.client.SingleSelectionModel;
 
 public class LoanUI extends Composite {
@@ -47,12 +49,11 @@ public class LoanUI extends Composite {
 	SeasonProvider seasonProvider = new SeasonProvider();
 	EpisodeProvider episodeProvider = new EpisodeProvider();
 	
-	ComponentProvider componentProvider = new ComponentProvider();
+	Container componentProvider = new Container();
 	GetDataFromServer server = new GetDataFromServer();
 	Items item = new Items();
 	
-	Label ll = new Label("  ");
-
+	VerticalPanel verticalPanelA = new VerticalPanel();
 	
 	public LoanUI(List<Movie> movies) {
 		clear();
@@ -62,8 +63,6 @@ public class LoanUI extends Composite {
 	public void init() {
 		
 		server.run();
-		
-		ll.setSize("500", "500");
 		
 		movieProvider.loanSelection = new SingleSelectionModel<Movie>();
 
@@ -84,7 +83,7 @@ public class LoanUI extends Composite {
 		createLoanedEpisodeTable();
 		
 		initWidget(componentProvider.loansPanel);
-		RootPanel.get("content").add(this,100,200);
+		RootPanel.get("content").add(this);
 
 	}
 
@@ -95,107 +94,113 @@ public class LoanUI extends Composite {
 		episodeProvider.EpisodeData.setList(episodeProvider.EpisodeList);
 	}
 	
-	private void createLoanedEpisodeTable(){
+	
+	private void createLoanedMovieTable() {
 		
-		episodeProvider.EpisodeTable = new CellTable<Episode>();
-		episodeProvider.EpisodeData = new FilteredListDataProvider<>(new EpisodesFilter());
+		movieProvider.MoviesTable = new CellTable<Movie>();
+		movieProvider.MoviesData = new FilteredListDataProvider<>(new MovieFilter());
+		movieProvider.MoviesData.addDataDisplay(movieProvider.MoviesTable);
+		movieProvider.MoviesData.setList(movieProvider.moviesList);
+		movieProvider.MoviesTable.setSelectionModel(movieProvider.loanSelection);
+		movieProvider.MoviesTable.setStyleName("cellTableCell");
 		
-		episodeProvider.EpisodeData.addDataDisplay(episodeProvider.EpisodeTable);
-		episodeProvider.EpisodeList = episodeProvider.EpisodeData.getList();
-		episodeProvider.EpisodeData.setList(episodeProvider.EpisodeList);
-		episodeProvider.EpisodeTable.setSelectionModel(episodeProvider.loanEpisodeSelection);
-
-		episodeProvider.EpisodeTable.setStyleName("cellTableCell");
-
-		Column<Episode, String> titleColumn = new Column<Episode, String>(new TextCell()) {
+		Column<Movie, String> titleColumn = new Column<Movie, String>(new TextCell()) {
 			@Override
-			public String getValue(Episode object) {
+			public String getValue(Movie object) {
 				return object.getTitle();
 			}
 		};
-		
-		Column<Episode, String> timeColumn = new Column<Episode, String>(new TextCell()) {
+
+		Column<Movie, String> timeColumn = new Column<Movie, String>(
+				new TextCell()) {
+
 			@Override
-			public String getValue(Episode object) {
+			public String getValue(Movie object) {
 				return "" + object.getTime();
 			}
 		};
-		
-		Column<Episode, String> categoryColumn = new Column<Episode, String>(
+
+		Column<Movie, String> categoryColumn = new Column<Movie, String>(
 				new TextCell()) {
 
 			@Override
-			public String getValue(Episode object) {
+			public String getValue(Movie object) {
 				return object.getCategory().name();
 			}
 		};
-		
 
-		Column<Episode, String> ratingColumn = new Column<Episode, String>(
+		Column<Movie, String> ratingColumn = new Column<Movie, String>(
 				new TextCell()) {
 
 			@Override
-			public String getValue(Episode object) {
+			public String getValue(Movie object) {
 				return "" + object.getRating().ordinal();
 			}
 		};
-		
-		Column<Episode, String> getSeasonColumn = new Column<Episode, String>(
+
+
+
+		Column<Movie, String> loanedUntilColumn = new Column<Movie, String>(
 				new TextCell()) {
 
 			@Override
-			public String getValue(Episode object) {
-				return "" + object.getSeason().getTitle();
-			}
-		};
-		
-		Column<Episode, String> getSerieColumn = new Column<Episode, String>(
-				new TextCell()) {
-
-			@Override
-			public String getValue(Episode object) {
-				return "" + object.getSeason().getSeries().getTitle();
-			}
-		};
-		
-
-		Column<Episode, String> loanedUntilColumn = new Column<Episode, String>(
-				new TextCell()) {
-
-			@Override
-			public String getValue(Episode object) {
+			public String getValue(Movie object) {
 				DateTimeFormat format = DateTimeFormat.getFormat("dd.MM.yyyy");
 				return format.format(object.getLoanedUntil());
 			}
 		};
-
-		episodeProvider.EpisodeTable.addColumn(getSerieColumn, "Series");
-		episodeProvider.EpisodeTable.addColumn(getSeasonColumn, "Season");	
-		episodeProvider.EpisodeTable.addColumn(titleColumn, "Title");
-		episodeProvider.EpisodeTable.addColumn(timeColumn, "Time");
-		episodeProvider.EpisodeTable.addColumn(categoryColumn, "Category");	
-		episodeProvider.EpisodeTable.addColumn(ratingColumn, "Rating");
 		
-		episodeProvider.EpisodeTable.addColumn(loanedUntilColumn,"Return date");
+		movieProvider.MoviesTable.addColumn(titleColumn, "Title");
+		movieProvider.MoviesTable.addColumn(timeColumn, "Time");
+		movieProvider.MoviesTable.addColumn(categoryColumn, "Category");
+		movieProvider.MoviesTable.addColumn(ratingColumn, "Rating");
+
+		movieProvider.MoviesTable.addColumn(loanedUntilColumn, "Return Date");
 
 		titleColumn.setSortable(true);
+		timeColumn.setSortable(true);
 		ratingColumn.setSortable(true);
+		categoryColumn.setSortable(true);
+		loanedUntilColumn.setSortable(true);
 
-		ListHandler<Episode> sortHandler = new ListHandler<Episode>(episodeProvider.EpisodeData.getList());
-		episodeProvider.EpisodeTable.addColumnSortHandler(sortHandler);
+		ListHandler<Movie> sortHandler = new ListHandler<Movie>(movieProvider.MoviesData.getList());
+		movieProvider.MoviesTable.addColumnSortHandler(sortHandler);
 
-		sortHandler.setComparator(titleColumn, new Comparator<Episode>() {
+		sortHandler.setComparator(titleColumn, new Comparator<Movie>() {
 
 			@Override
-			public int compare(Episode o1, Episode o2) {
+			public int compare(Movie o1, Movie o2) {
 				return o1.getTitle().compareTo(o2.getTitle());
 			}
 		});
 
-		sortHandler.setComparator(ratingColumn, new Comparator<Episode>() {
+		sortHandler.setComparator(timeColumn, new Comparator<Movie>() {
 
 			@Override
-			public int compare(Episode o1, Episode o2) {
+			public int compare(Movie o1, Movie o2) {
+				if (o1.getTime() > o2.getTime()) {
+					return 1;
+				}
+				if (o1.getTime() < o2.getTime()) {
+					return -1;
+				}
+				return 0;
+			}
+		});
+
+		sortHandler.setComparator(categoryColumn, new Comparator<Movie>() {
+
+			@Override
+			public int compare(Movie o1, Movie o2) {
+				return o1.getCategory().name()
+						.compareTo(o2.getCategory().name());
+			}
+		});
+
+		sortHandler.setComparator(ratingColumn, new Comparator<Movie>() {
+
+			@Override
+			public int compare(Movie o1, Movie o2) {
 				if (o1.getRating().ordinal() > o2.getRating().ordinal()) {
 					return 1;
 				}
@@ -206,20 +211,24 @@ public class LoanUI extends Composite {
 			}
 		});
 
-		componentProvider.loanEpisodeButton.setVisible(true);
-		componentProvider.EpisodeLabel.setVisible(true);
-		episodeProvider.EpisodeTable.setVisible(true);
+		sortHandler.setComparator(loanedUntilColumn, new Comparator<Movie>() {
 
-		componentProvider.loanEpisodeButton.setText("Return");
-		componentProvider.EpisodeLabel.setHTML("<h2>Episodes to return</h2>");
+			@Override
+			public int compare(Movie o1, Movie o2) {
+				return o1.getLoanedUntil().compareTo(o2.getLoanedUntil());
+			}
+		});
+
+		componentProvider.loanMovieButton.setText("Return");
+		componentProvider.MoviesLabel.setHTML("<h2>Movies to return</h2>");
 		
-		componentProvider.loansPanel.add(componentProvider.EpisodeLabel);
-		componentProvider.loansPanel.add(episodeProvider.EpisodeTable);
-		componentProvider.loansPanel.add(ll);
-		componentProvider.loansPanel.add(componentProvider.loanEpisodeButton);
+		verticalPanelA.add(componentProvider.MoviesLabel);
+		verticalPanelA.add(movieProvider.MoviesTable);
+		verticalPanelA.add(componentProvider.loanMovieButton);
 		
+		componentProvider.loansPanel.add(verticalPanelA);
 	}
-		
+
 	private void createLoanedSerieTable() {
 		
 		seriesProvider.SeriesTable = new CellTable<Series>();
@@ -329,17 +338,15 @@ public class LoanUI extends Composite {
 
 		componentProvider.loanSerieButton.setText("Return");
 		componentProvider.SeriesLabel.setHTML("<h2>Series to return</h2>");
-		componentProvider.loansPanel.add(ll);
 		componentProvider.PanelS.add(componentProvider.loanSerieButton);
-	//	componentProvider.PanelS.add(componentProvider.showSeasonButton);
 		componentProvider.loansPanel.add(componentProvider.SeriesLabel);
 		componentProvider.loansPanel.add(seriesProvider.SeriesTable);
 		componentProvider.loansPanel.add(componentProvider.PanelS);
 		
 	}
-	
+
 	private void createLoanedSeasonTable() {
-	
+		
 		seasonProvider.SeasonsTable = new CellTable<Season>();
 		seasonProvider.SeasonsData = new FilteredListDataProvider<>(new SeasonsFilter());
 		
@@ -466,123 +473,115 @@ public class LoanUI extends Composite {
 		componentProvider.loanSeasonButton.setText("Return");
 		componentProvider.SeasonLabel.setHTML("<h2>Seasons to return</h2>");
 			
-		componentProvider.loansPanel.add(ll);
 		componentProvider.PanelH.add(componentProvider.loanSeasonButton);
-		componentProvider.loansPanel.add(ll);
 		componentProvider.PanelH.add(componentProvider.showEpisodeButton);
 		
 		componentProvider.loansPanel.add(componentProvider.SeasonLabel);
 		componentProvider.loansPanel.add(seasonProvider.SeasonsTable);
 		componentProvider.loansPanel.add(componentProvider.PanelH);		
 	}
-
-	private void createLoanedMovieTable() {
+	
+	private void createLoanedEpisodeTable(){
 		
-		movieProvider.MoviesTable = new CellTable<Movie>();
-		movieProvider.MoviesData = new FilteredListDataProvider<>(new MovieFilter());
-		movieProvider.MoviesData.addDataDisplay(movieProvider.MoviesTable);
-		movieProvider.MoviesData.setList(movieProvider.moviesList);
-		movieProvider.MoviesTable.setSelectionModel(movieProvider.loanSelection);
-
-		movieProvider.MoviesTable.setStyleName("cellTableCell");
+		episodeProvider.EpisodeTable = new CellTable<Episode>();
+		episodeProvider.EpisodeData = new FilteredListDataProvider<>(new EpisodesFilter());
 		
-		Column<Movie, String> titleColumn = new Column<Movie, String>(new TextCell()) {
+		episodeProvider.EpisodeData.addDataDisplay(episodeProvider.EpisodeTable);
+		episodeProvider.EpisodeList = episodeProvider.EpisodeData.getList();
+		episodeProvider.EpisodeData.setList(episodeProvider.EpisodeList);
+		episodeProvider.EpisodeTable.setSelectionModel(episodeProvider.loanEpisodeSelection);
+
+		episodeProvider.EpisodeTable.setStyleName("cellTableCell");
+
+		Column<Episode, String> titleColumn = new Column<Episode, String>(new TextCell()) {
 			@Override
-			public String getValue(Movie object) {
+			public String getValue(Episode object) {
 				return object.getTitle();
 			}
 		};
-
-		Column<Movie, String> timeColumn = new Column<Movie, String>(
-				new TextCell()) {
-
+		
+		Column<Episode, String> timeColumn = new Column<Episode, String>(new TextCell()) {
 			@Override
-			public String getValue(Movie object) {
+			public String getValue(Episode object) {
 				return "" + object.getTime();
 			}
 		};
-
-		Column<Movie, String> categoryColumn = new Column<Movie, String>(
+		
+		Column<Episode, String> categoryColumn = new Column<Episode, String>(
 				new TextCell()) {
 
 			@Override
-			public String getValue(Movie object) {
+			public String getValue(Episode object) {
 				return object.getCategory().name();
 			}
 		};
+		
 
-		Column<Movie, String> ratingColumn = new Column<Movie, String>(
+		Column<Episode, String> ratingColumn = new Column<Episode, String>(
 				new TextCell()) {
 
 			@Override
-			public String getValue(Movie object) {
+			public String getValue(Episode object) {
 				return "" + object.getRating().ordinal();
 			}
 		};
-
-
-
-		Column<Movie, String> loanedUntilColumn = new Column<Movie, String>(
+		
+		Column<Episode, String> getSeasonColumn = new Column<Episode, String>(
 				new TextCell()) {
 
 			@Override
-			public String getValue(Movie object) {
+			public String getValue(Episode object) {
+				return "" + object.getSeason().getTitle();
+			}
+		};
+		
+		Column<Episode, String> getSerieColumn = new Column<Episode, String>(
+				new TextCell()) {
+
+			@Override
+			public String getValue(Episode object) {
+				return "" + object.getSeason().getSeries().getTitle();
+			}
+		};
+		
+
+		Column<Episode, String> loanedUntilColumn = new Column<Episode, String>(
+				new TextCell()) {
+
+			@Override
+			public String getValue(Episode object) {
 				DateTimeFormat format = DateTimeFormat.getFormat("dd.MM.yyyy");
 				return format.format(object.getLoanedUntil());
 			}
 		};
-		
-		movieProvider.MoviesTable.addColumn(titleColumn, "Title");
-		movieProvider.MoviesTable.addColumn(timeColumn, "Time");
-		movieProvider.MoviesTable.addColumn(categoryColumn, "Category");
-		movieProvider.MoviesTable.addColumn(ratingColumn, "Rating");
 
-		movieProvider.MoviesTable.addColumn(loanedUntilColumn, "Return Date");
+		episodeProvider.EpisodeTable.addColumn(getSerieColumn, "Series");
+		episodeProvider.EpisodeTable.addColumn(getSeasonColumn, "Season");	
+		episodeProvider.EpisodeTable.addColumn(titleColumn, "Title");
+		episodeProvider.EpisodeTable.addColumn(timeColumn, "Time");
+		episodeProvider.EpisodeTable.addColumn(categoryColumn, "Category");	
+		episodeProvider.EpisodeTable.addColumn(ratingColumn, "Rating");
+		
+		episodeProvider.EpisodeTable.addColumn(loanedUntilColumn,"Return date");
 
 		titleColumn.setSortable(true);
-		timeColumn.setSortable(true);
 		ratingColumn.setSortable(true);
-		categoryColumn.setSortable(true);
-		loanedUntilColumn.setSortable(true);
 
-		ListHandler<Movie> sortHandler = new ListHandler<Movie>(movieProvider.MoviesData.getList());
-		movieProvider.MoviesTable.addColumnSortHandler(sortHandler);
+		ListHandler<Episode> sortHandler = new ListHandler<Episode>(episodeProvider.EpisodeData.getList());
+		episodeProvider.EpisodeTable.addColumnSortHandler(sortHandler);
 
-		sortHandler.setComparator(titleColumn, new Comparator<Movie>() {
+		sortHandler.setComparator(titleColumn, new Comparator<Episode>() {
 
 			@Override
-			public int compare(Movie o1, Movie o2) {
+			public int compare(Episode o1, Episode o2) {
 				return o1.getTitle().compareTo(o2.getTitle());
 			}
 		});
 
-		sortHandler.setComparator(timeColumn, new Comparator<Movie>() {
+		sortHandler.setComparator(ratingColumn, new Comparator<Episode>() {
 
 			@Override
-			public int compare(Movie o1, Movie o2) {
-				if (o1.getTime() > o2.getTime()) {
-					return 1;
-				}
-				if (o1.getTime() < o2.getTime()) {
-					return -1;
-				}
-				return 0;
-			}
-		});
-
-		sortHandler.setComparator(categoryColumn, new Comparator<Movie>() {
-
-			@Override
-			public int compare(Movie o1, Movie o2) {
-				return o1.getCategory().name()
-						.compareTo(o2.getCategory().name());
-			}
-		});
-
-		sortHandler.setComparator(ratingColumn, new Comparator<Movie>() {
-
-			@Override
-			public int compare(Movie o1, Movie o2) {
+			public int compare(Episode o1, Episode o2) {
 				if (o1.getRating().ordinal() > o2.getRating().ordinal()) {
 					return 1;
 				}
@@ -593,23 +592,19 @@ public class LoanUI extends Composite {
 			}
 		});
 
-		sortHandler.setComparator(loanedUntilColumn, new Comparator<Movie>() {
+		componentProvider.loanEpisodeButton.setVisible(true);
+		componentProvider.EpisodeLabel.setVisible(true);
+		episodeProvider.EpisodeTable.setVisible(true);
 
-			@Override
-			public int compare(Movie o1, Movie o2) {
-				return o1.getLoanedUntil().compareTo(o2.getLoanedUntil());
-			}
-		});
-
-		componentProvider.loanMovieButton.setText("Return");
-		componentProvider.MoviesLabel.setHTML("<h2>Movies to return</h2>");
+		componentProvider.loanEpisodeButton.setText("Return");
+		componentProvider.EpisodeLabel.setHTML("<h2>Episodes to return</h2>");
 		
-		componentProvider.loansPanel.add(componentProvider.MoviesLabel);
-		componentProvider.loansPanel.add(movieProvider.MoviesTable);
-		componentProvider.loansPanel.add(ll);
-		componentProvider.loansPanel.add(componentProvider.loanMovieButton);
+		componentProvider.loansPanel.add(componentProvider.EpisodeLabel);
+		componentProvider.loansPanel.add(episodeProvider.EpisodeTable);
+		componentProvider.loansPanel.add(componentProvider.loanEpisodeButton);
+		
 	}
-
+		
 	public void show() {
 		setVisible(true);
 	}
@@ -667,25 +662,25 @@ public class LoanUI extends Composite {
 				//archorMyLoan
 				componentProvider.archor.setHTML("<h2>Start Page...</h2>");
 				componentProvider.archorPanel.add(componentProvider.archor);
-				int top = componentProvider.archorPanel.getAbsoluteTop();
-				int left = componentProvider.archorPanel.getAbsoluteLeft();
-				RootPanel.get("content").add(componentProvider.archorPanel, left + 485, top+10);
-				top = 0;
-				left = 0;
-				
-				//filterPanel		
-				componentProvider.filterPanel.add(componentProvider.filterTextBox);
-				top = componentProvider.filterPanel.getAbsoluteTop();
-				left = componentProvider.filterPanel.getAbsoluteLeft();
-				componentProvider.filterTextBox.setPixelSize(525, 20);
-				RootPanel.get("content").add(componentProvider.filterPanel, left +45, top +160);
-				top = 0;
-				left = 0;
-				
+				componentProvider.archor.setStyleName("style");
+				RootPanel.get("content").add(componentProvider.archorPanel);
 				//Image
+				RootPanel.get("content").add(componentProvider.dock);
 				componentProvider.dock.add(new Image("images/mainPage_Image.png"), DockPanel.CENTER);
+				//archorMyLoan
+				componentProvider.archorPanel.add(componentProvider.archor);
+				componentProvider.archor.setStyleName("style");
+				RootPanel.get("content").add(componentProvider.archor);
+				
+				componentProvider.filterTextBox.setPixelSize(525, 20);
+				componentProvider.filterPanel.add(componentProvider.filterTextBox);
+				RootPanel.get("content").add(componentProvider.filterPanel);	
 
-			    RootPanel.get("content").add(componentProvider.dock,25,60);
+				//searchButton
+				componentProvider.filterPanel.add(componentProvider.searchButton);
+				componentProvider.searchButton.setStyleName("setButton");
+				componentProvider.filterPanel.setCellHorizontalAlignment(componentProvider.searchButton, HasHorizontalAlignment.ALIGN_CENTER );
+				componentProvider.filterPanel.setCellVerticalAlignment(componentProvider.searchButton, HasVerticalAlignment.ALIGN_MIDDLE );
 			}
 	
 		public void createTextBox(){
@@ -696,6 +691,7 @@ public class LoanUI extends Composite {
 					movieProvider.MoviesData.setFilter(componentProvider.filterTextBox.getText());
 					seriesProvider.SeriesData.setFilter(componentProvider.filterTextBox.getText());
 					seasonProvider.SeasonsData.setFilter(componentProvider.filterTextBox.getText());
+					episodeProvider.EpisodeData.setFilter(componentProvider.filterTextBox.getText());
 				}
 			});
 		}
@@ -928,8 +924,7 @@ public class LoanUI extends Composite {
 						thread.schedule(500);
 					
 
-				}
-				
+				}	
 				@Override
 				public void onFailure(Throwable caught) {
 					GWT.log(caught.getMessage());

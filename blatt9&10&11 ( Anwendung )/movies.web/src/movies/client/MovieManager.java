@@ -2,7 +2,7 @@ package movies.client;
 
 import java.util.List;
 
-import movies.client.provider.ComponentProvider;
+import movies.client.provider.Container;
 import movies.client.ui.MainUI;
 import movies.web.model.Movie;
 import com.google.gwt.core.client.EntryPoint;
@@ -12,7 +12,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class MovieManager implements EntryPoint {
 	
-	public ComponentProvider provider = new ComponentProvider();
+	public Container provider = new Container();
 	
 	public void onModuleLoad() {
 		
@@ -26,16 +26,15 @@ public class MovieManager implements EntryPoint {
 				Timer thread = new Timer() {
 					@Override
 					public void run() {
-						MainUI mainPage = new MainUI(result,null,false);
+						MainUI mainPage = new MainUI(result,null,true);
 						mainPage.init(); 
 					}
 					
 				};		
-				thread.schedule(100);
-			
+				thread.schedule(1);
 			}
 		});
-		
 	}
+		
 
 }
