@@ -1,5 +1,6 @@
 package movies.client.ui;
 
+
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Date;
@@ -24,13 +25,22 @@ import movies.web.model.Series;
 
 import com.google.gwt.cell.client.TextCell;
 import com.google.gwt.core.shared.GWT;
+
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.DoubleClickEvent;
+import com.google.gwt.event.dom.client.DoubleClickHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
+
 import com.google.gwt.user.cellview.client.CellTable;
+
 import com.google.gwt.user.cellview.client.Column;
 import com.google.gwt.user.cellview.client.ColumnSortEvent.ListHandler;
+
+import com.google.gwt.user.client.Event;
+import com.google.gwt.user.client.Timer;
+
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 import com.google.gwt.user.client.ui.Button;
@@ -45,31 +55,46 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.CalendarUtil;
 import com.google.gwt.user.datepicker.client.DatePicker;
+import com.google.gwt.view.client.CellPreviewEvent;
+import com.google.gwt.view.client.CellPreviewEvent.Handler;
 
 
-public class MainUI extends Composite {
-	
+public class MainUI extends Composite{
+
 	MovieProvider movieProvider = new MovieProvider();
 	SeriesProvider seriesProvider = new SeriesProvider();
 	SeasonProvider seasonProvider = new SeasonProvider();
 	EpisodeProvider episodeProvider = new EpisodeProvider();
 	
+	VerticalPanel verticalPanelA = new VerticalPanel();
+	VerticalPanel verticalPanel = new VerticalPanel();
+	
 	ComponentProvider componentProvider = new ComponentProvider();
 	GetDataFromServer server = new GetDataFromServer();
 	
 	Items item = new Items();
+
 	
-	public MainUI(List<Movie> movies) {
+	public MainUI(List<Movie> movies,String string, Boolean upd) {
 		clear();
+
 		movieProvider.moviesList = new ArrayList<Movie>(movies);
-		componentProvider.loanablePanel = new VerticalPanel();
+		componentProvider.loanablePanel = new HorizontalPanel();
 		initWidget(componentProvider.loanablePanel);
+		componentProvider.filterTextBox.setText(string);
+		if (upd == true){
+			Button btnAddField = new Button("404");
+			btnAddField.fireEvent(new Refresh ());
+		}
+
 	}
 	
 	public void init() {
+		clear();
 		
-		HTML lbl = new HTML("Version : 0.919 ");
-		RootPanel.get().add(lbl,580,0);
+		server.getLoanableSeries();
+		HTML lbl = new HTML("RC 1.747");
+		RootPanel.get("content").add(lbl,400,50);
 			
 		createMovieTable();
 		createSeriesTable();
@@ -85,316 +110,18 @@ public class MainUI extends Composite {
 			
 	}
 		
-	private void createEpisodeTable(){
-		episodeProvider.EpisodeTable = new CellTable<Episode>();
-		episodeProvider.EpisodeData = new FilteredListDataProvider<>(new EpisodesFilter());
-		episodeProvider.EpisodeData.addDataDisplay(episodeProvider.EpisodeTable);
-		episodeProvider.EpisodeList = episodeProvider.EpisodeData.getList();
-		episodeProvider.EpisodeData.setList(episodeProvider.EpisodeList);
-		episodeProvider.EpisodeTable.setSelectionModel(episodeProvider.loanableEpisodeSelection);
-
-		Column<Episode, String> titleColumn = new Column<Episode, String>(new TextCell()) {
-			@Override
-			public String getValue(Episode object) {
-				return object.getTitle();
-			}
-		};
-
-		Column<Episode, String> ratingColumn = new Column<Episode, String>(
-				new TextCell()) {
-
-			@Override
-			public String getValue(Episode object) {
-				return "" + object.getRating().ordinal();
-			}
-		};
-
-		episodeProvider.EpisodeTable.addColumn(titleColumn, "");
-		episodeProvider.EpisodeTable.addColumn(ratingColumn, "");
-
-		titleColumn.setSortable(true);
-		ratingColumn.setSortable(true);
-
-		ListHandler<Episode> sortEpisodeHandler = new ListHandler<Episode>(episodeProvider.EpisodeData.getList());
-		episodeProvider.EpisodeTable.addColumnSortHandler(sortEpisodeHandler);
-
-		sortEpisodeHandler.setComparator(titleColumn, new Comparator<Episode>() {
-
-			@Override
-			public int compare(Episode o1, Episode o2) {
-				return o1.getTitle().compareTo(o2.getTitle());
-			}
-		});
-
-		sortEpisodeHandler.setComparator(ratingColumn, new Comparator<Episode>() {
-
-			@Override
-			public int compare(Episode o1, Episode o2) {
-				if (o1.getRating().ordinal() > o2.getRating().ordinal()) {
-					return 1;
-				}
-				if (o1.getRating().ordinal() < o2.getRating().ordinal()) {
-					return -1;
-				}
-				return 0;
-			}
-		});
-
-		componentProvider.loanEpisodeButton.setVisible(false);
-		componentProvider.EpisodeLabel.setVisible(false);
-		episodeProvider.EpisodeTable.setVisible(false);	
-		
-		componentProvider.loanablePanel.add(componentProvider.EpisodeLabel);
-		componentProvider.loanablePanel.add(episodeProvider.EpisodeTable);
-		componentProvider.loanablePanel.add(componentProvider.loanEpisodeButton);
-		Label ll = new Label();
-		ll.setText("                        ");
-		ll.setSize("500", "500");
-		componentProvider.loanablePanel.add(ll);
-		
-		Label lb = new Label();
-		lb.setText("                        ");
-		lb.setSize("500", "500");
-		componentProvider.loanablePanel.add(lb);
-		RootPanel.get("content").add(this,100,240);
-	}
-	
-	private void createSeasonsTable() {
-		
-		seasonProvider.SeasonsTable = new CellTable<Season>();
-		seasonProvider.SeasonsData = new FilteredListDataProvider<>(new SeasonsFilter());
-		
-		seasonProvider.SeasonsData.addDataDisplay(seasonProvider.SeasonsTable);
-		seasonProvider.SeasonsList = seasonProvider.SeasonsData.getList();
-		seasonProvider.SeasonsData.setList(seasonProvider.SeasonsList);
-		seasonProvider.SeasonsTable.setSelectionModel(seasonProvider.loanableSeasonSelection);
-
-		Column<Season, String> titleColumn = new Column<Season, String>(new TextCell()) {
-			@Override
-			public String getValue(Season object) {
-				return object.getTitle();
-			}
-		};
-
-		Column<Season, String> timeColumn = new Column<Season, String>(
-				new TextCell()) {
-
-			@Override
-			public String getValue(Season object) {
-				return "" + object.getReleaseDate();
-			}
-		};
-
-		Column<Season, String> categoryColumn = new Column<Season, String>(new TextCell()) {
-
-			@Override
-			public String getValue(Season object) {
-				return object.getBroadcastedBy();
-			}
-		};
-
-		Column<Season, String> ratingColumn = new Column<Season, String>(
-				new TextCell()) {
-
-			@Override
-			public String getValue(Season object) {
-				return "" + object.getRating().ordinal();
-			}
-		};
-
-		seasonProvider.SeasonsTable.addColumn(titleColumn, "");
-		seasonProvider.SeasonsTable.addColumn(timeColumn, "");
-		seasonProvider.SeasonsTable.addColumn(categoryColumn, "");
-		seasonProvider.SeasonsTable.addColumn(ratingColumn, "");
-
-		titleColumn.setSortable(true);
-		timeColumn.setSortable(true);
-		categoryColumn.setSortable(true);
-		ratingColumn.setSortable(true);
-
-		ListHandler<Season> sortHandler = new ListHandler<Season>(seasonProvider.SeasonsData.getList());
-		seasonProvider.SeasonsTable.addColumnSortHandler(sortHandler);
-
-		sortHandler.setComparator(titleColumn, new Comparator<Season>() {
-
-			@Override
-			public int compare(Season o1, Season o2) {
-				return o1.getTitle().compareTo(o2.getTitle());
-			}
-		});
-
-		sortHandler.setComparator(categoryColumn, new Comparator<Season>() {
-
-			@Override
-			public int compare(Season o1, Season o2) {
-				return o1.getBroadcastedBy()
-						.compareTo(o2.getBroadcastedBy());
-			}
-		});
-
-		sortHandler.setComparator(ratingColumn, new Comparator<Season>() {
-
-			@Override
-			public int compare(Season o1, Season o2) {
-				if (o1.getRating().ordinal() > o2.getRating().ordinal()) {
-					return 1;
-				}
-				if (o1.getRating().ordinal() < o2.getRating().ordinal()) {
-					return -1;
-				}
-				return 0;
-			}
-		});
-
-		
-		componentProvider.loanSeasonButton.setVisible(false);
-		componentProvider.SeasonLabel.setVisible(false);
-		componentProvider.showEpisodeButton.setVisible(false);
-		seasonProvider.SeasonsTable.setVisible(false);	
-		
-		componentProvider.loanablePanel.add(componentProvider.SeasonLabel);
-		componentProvider.loanablePanel.add(seasonProvider.SeasonsTable);
-		
-		componentProvider.PanelH.add(componentProvider.loanSeasonButton);
-		componentProvider.PanelH.add(componentProvider.showEpisodeButton);
-		
-		componentProvider.loanablePanel.add(componentProvider.PanelH);
-		
-		Label ll = new Label();
-		ll.setText("                        ");
-		ll.setSize("500", "500");
-		componentProvider.loanablePanel.add(ll);
-		
-		Label lb = new Label();
-		lb.setText("                        ");
-		lb.setSize("500", "500");
-		componentProvider.loanablePanel.add(lb);
-		RootPanel.get("content").add(this,100,240);
-		
-		RootPanel.get("content").add(this,100,240);
-	}
-
-	private void createSeriesTable() {
-	
-		
-		seriesProvider.SeriesTable = new CellTable<Series>();
-		seriesProvider.SeriesData = new FilteredListDataProvider<>(new SeriesFilter());
-		
-		seriesProvider.SeriesData.addDataDisplay(seriesProvider.SeriesTable);
-		seriesProvider.SeriesList = seriesProvider.SeriesData.getList();
-		seriesProvider.SeriesData.setList(seriesProvider.SeriesList);
-		seriesProvider.SeriesTable.setSelectionModel(seriesProvider.loanableSerieSelection);
-
-		Column<Series, String> titleColumn = new Column<Series, String>(new TextCell()) {
-			@Override
-			public String getValue(Series object) {
-				return object.getTitle();
-			}
-		};
-
-		Column<Series, String> timeColumn = new Column<Series, String>(
-				new TextCell()) {
-
-			@Override
-			public String getValue(Series object) {
-				return "" + object.getReleaseDate();
-			}
-		};
-
-		Column<Series, String> categoryColumn = new Column<Series, String>(new TextCell()) {
-
-			@Override
-			public String getValue(Series object) {
-				return object.getBroadcastedBy();
-			}
-		};
-
-		Column<Series, String> ratingColumn = new Column<Series, String>(
-				new TextCell()) {
-
-			@Override
-			public String getValue(Series object) {
-				return "" + object.getRating().ordinal();
-			}
-		};
-
-		seriesProvider.SeriesTable.addColumn(titleColumn, "");
-		seriesProvider.SeriesTable.addColumn(timeColumn, "");
-		seriesProvider.SeriesTable.addColumn(categoryColumn, "");
-		seriesProvider.SeriesTable.addColumn(ratingColumn, "");
-
-		titleColumn.setSortable(true);
-		timeColumn.setSortable(true);
-		categoryColumn.setSortable(true);
-		ratingColumn.setSortable(true);
-
-		ListHandler<Series> sortHandler = new ListHandler<Series>(seriesProvider.SeriesData.getList());
-		movieProvider.MoviesTable.addColumnSortHandler(sortHandler);
-
-		sortHandler.setComparator(titleColumn, new Comparator<Series>() {
-
-			@Override
-			public int compare(Series o1, Series o2) {
-				return o1.getTitle().compareTo(o2.getTitle());
-			}
-		});
-
-		sortHandler.setComparator(categoryColumn, new Comparator<Series>() {
-
-			@Override
-			public int compare(Series o1, Series o2) {
-				return o1.getBroadcastedBy()
-						.compareTo(o2.getBroadcastedBy());
-			}
-		});
-
-		sortHandler.setComparator(ratingColumn, new Comparator<Series>() {
-
-			@Override
-			public int compare(Series o1, Series o2) {
-				if (o1.getRating().ordinal() > o2.getRating().ordinal()) {
-					return 1;
-				}
-				if (o1.getRating().ordinal() < o2.getRating().ordinal()) {
-					return -1;
-				}
-				return 0;
-			}
-		});
-
-		componentProvider.loanSerieButton.setVisible(false);
-		componentProvider.SeriesLabel.setVisible(false);
-		componentProvider.showSeasonButton.setVisible(false);
-		seriesProvider.SeriesTable.setVisible(false);	
-			
-		componentProvider.loanablePanel.add(componentProvider.SeriesLabel);
-		componentProvider.loanablePanel.setSpacing(10);
-		componentProvider.loanablePanel.add(seriesProvider.SeriesTable);
-		componentProvider.PanelS.add(componentProvider.loanSerieButton);
-		componentProvider.PanelS.add(componentProvider.showSeasonButton);
-		componentProvider.loanablePanel.add(componentProvider.PanelS);
-
-		Label ll = new Label();
-		ll.setText("                     ");
-		ll.setSize("500","500");
-		
-		Label lb = new Label();
-		lb.setText("                        ");
-		lb.setSize("500", "500");
-		componentProvider.loanablePanel.add(lb);
-		componentProvider.loanablePanel.add(ll);
-		RootPanel.get("content").add(this,100,240);
-	}
-		
 	private void createMovieTable() {
 		
 		movieProvider.MoviesTable = new CellTable<Movie>();
+	
 		movieProvider.MoviesData = new FilteredListDataProvider<>(new MovieFilter());
 		
 		movieProvider.MoviesData.addDataDisplay(movieProvider.MoviesTable);
 		movieProvider.MoviesData.setList(movieProvider.moviesList);
 		movieProvider.MoviesTable.setSelectionModel(movieProvider.loanableSelection);
 
+		movieProvider.MoviesTable.setStyleName("cellTableCell");	
+		
 		Column<Movie, String> titleColumn = new Column<Movie, String>(new TextCell()) {
 			@Override
 			public String getValue(Movie object) {
@@ -429,10 +156,10 @@ public class MainUI extends Composite {
 			}
 		};
 
-		movieProvider.MoviesTable.addColumn(titleColumn, "");
-		movieProvider.MoviesTable.addColumn(timeColumn, "");
-		movieProvider.MoviesTable.addColumn(categoryColumn, "");
-		movieProvider.MoviesTable.addColumn(ratingColumn, "");
+		movieProvider.MoviesTable.addColumn(titleColumn, "Title");
+		movieProvider.MoviesTable.addColumn(timeColumn, "Time");
+		movieProvider.MoviesTable.addColumn(categoryColumn, "Category");
+		movieProvider.MoviesTable.addColumn(ratingColumn, "Rating");
 
 		titleColumn.setSortable(true);
 		timeColumn.setSortable(true);
@@ -487,13 +214,26 @@ public class MainUI extends Composite {
 			}
 		});
 		
+		movieProvider.MoviesTable.addDomHandler(new DoubleClickHandler() {
+			@Override
+			public void onDoubleClick(DoubleClickEvent event) {
+				for (Movie movie : movieProvider.moviesList){
+					if(movieProvider.loanableSelection.isSelected(movie)){
+							new MessageDialog(movie.getOfdbID()).center();
+					}
+				}
+			}
+	    }, DoubleClickEvent.getType());
+		
 		componentProvider.MoviesLabel.setVisible(false);
 		componentProvider.loanMovieButton.setVisible(false);
 
 		movieProvider.MoviesTable.setVisible(false);
-		componentProvider.loanablePanel.add(componentProvider.MoviesLabel);
-		componentProvider.loanablePanel.add(movieProvider.MoviesTable);
-		componentProvider.loanablePanel.add(componentProvider.loanMovieButton);
+		verticalPanelA.add(componentProvider.MoviesLabel);
+		verticalPanelA.add(movieProvider.MoviesTable);
+		verticalPanelA.add(componentProvider.loanMovieButton);
+		componentProvider.loanablePanel.add(verticalPanelA);
+		componentProvider.loanablePanel.setSpacing(10);
 
 		Label ll = new Label();
 		ll.setText("                          ");
@@ -505,19 +245,442 @@ public class MainUI extends Composite {
 		lb.setSize("500", "500");
 		componentProvider.loanablePanel.add(lb);
 		
-		RootPanel.get("content").add(this,100,240);
+		RootPanel.get("content").add(this,85,240);
 		
 	}
 
-	public void clear() {
-		RootPanel.get("content").clear();
+    private void createSeriesTable() {
+    	
+		seriesProvider.SeriesTable = new CellTable<Series>();
+		seriesProvider.SeriesData = new FilteredListDataProvider<>(new SeriesFilter());
+
+		seriesProvider.SeriesData.addDataDisplay(seriesProvider.SeriesTable);
+		seriesProvider.SeriesList = seriesProvider.SeriesData.getList();
+		seriesProvider.SeriesData.setList(seriesProvider.SeriesList);
+		seriesProvider.SeriesTable.setSelectionModel(seriesProvider.loanableSerieSelection);
+		
+		seriesProvider.SeriesTable.setStyleName("cellTableCell");
+
+		Column<Series, String> titleColumn = new Column<Series, String>(new TextCell()) {
+			@Override
+			public String getValue(Series object) {
+				return object.getTitle();
+			}
+		};
+
+		Column<Series, String> yearColumn = new Column<Series, String>(
+				new TextCell()) {
+
+			@Override
+			public String getValue(Series object) {
+				String year = object.getReleaseDate().toString();
+				year = year.substring(28);
+				return year;
+			}
+		};
+
+		Column<Series, String> seasonColumn = new Column<Series, String>(new TextCell()) {
+
+			@Override
+			public String getValue(Series object) {
+				return "" + object.getSeasons().size();
+			}
+		};
+
+		Column<Series, String> ratingColumn = new Column<Series, String>(
+				new TextCell()) {
+
+			@Override
+			public String getValue(Series object) {
+				return "" + object.getRating().ordinal();
+			}
+		};
+		
+		Column<Series, String> studioColumn = new Column<Series, String>(
+				new TextCell()) {
+
+			@Override
+			public String getValue(Series object) {
+				return "" + object.getStudio();
+			}
+		};
+
+		seriesProvider.SeriesTable.addColumn(titleColumn, "Title");
+		seriesProvider.SeriesTable.addColumn(studioColumn,"Studio");
+		seriesProvider.SeriesTable.addColumn(yearColumn, "Date");
+		seriesProvider.SeriesTable.addColumn(seasonColumn, "Quantity");
+
+
+		titleColumn.setSortable(true);
+		yearColumn.setSortable(true);
+		seasonColumn.setSortable(true);
+		ratingColumn.setSortable(true);
+
+		ListHandler<Series> sortHandler = new ListHandler<Series>(seriesProvider.SeriesData.getList());
+		movieProvider.MoviesTable.addColumnSortHandler(sortHandler);
+
+		sortHandler.setComparator(titleColumn, new Comparator<Series>() {
+
+			@Override
+			public int compare(Series o1, Series o2) { 
+				return o1.getTitle().compareTo(o2.getTitle());
+			}
+		});
+
+		sortHandler.setComparator(seasonColumn, new Comparator<Series>() {
+
+			@Override
+			public int compare(Series o1, Series o2) {
+				return o1.getBroadcastedBy()
+						.compareTo(o2.getBroadcastedBy());
+			}
+		});
+
+		sortHandler.setComparator(ratingColumn, new Comparator<Series>() {
+
+			@Override
+			public int compare(Series o1, Series o2) {
+				if (o1.getRating().ordinal() > o2.getRating().ordinal()) {
+					return 1;
+				}
+				if (o1.getRating().ordinal() < o2.getRating().ordinal()) {
+					return -1;
+				}
+				return 0;
+			}
+		});
+//One Click
+		seriesProvider.SeriesTable.addCellPreviewHandler(new Handler<Series>() {
+
+			@Override
+			public void onCellPreview(CellPreviewEvent<Series> event) {
+				server.getLoanableSeasonFromSerie();
+				episodeProvider.EpisodeTable.setVisible(false);
+			//	componentProvider.loanEpisodeButton.setVisible(false);	
+			}
+		}); 
+		
+//
+		seriesProvider.SeriesTable.addDomHandler(new DoubleClickHandler() {
+			@Override
+			public void onDoubleClick(DoubleClickEvent event) {
+				for (Series serie : seriesProvider.SeriesList){
+					if(seriesProvider.loanableSerieSelection.isSelected(serie)){
+							new MessageDialog(serie.getProductionCountry()).center();
+					}
+				}
+			}
+	    }, DoubleClickEvent.getType());
+
+		seriesProvider.SeriesTable.sinkEvents(Event.ONCLICK);
+
+		componentProvider.loanSerieButton.setVisible(false);
+		componentProvider.SeriesLabel.setVisible(false);
+		componentProvider.showSeasonButton.setVisible(false);
+		seriesProvider.SeriesTable.setVisible(false);	
+
+		verticalPanel.add(componentProvider.SeriesLabel);
+	//	componentProvider.loanablePanel.setSpacing(10);
+	
+	//	componentProvider.PanelS.add(componentProvider.showSeasonButton);
+		
+		verticalPanel.add(seriesProvider.SeriesTable);
+		verticalPanel.add(componentProvider.loanSerieButton);
+		componentProvider.loanablePanel.add(verticalPanel);
+
+		Label ll = new Label();
+		ll.setText("                     ");
+		ll.setSize("500","500");
+		
+		Label lb = new Label();
+		lb.setText("                        ");
+		lb.setSize("500", "500");
+		componentProvider.loanablePanel.add(lb);
+		componentProvider.loanablePanel.add(ll);
+		RootPanel.get("content").add(this,85,240);
 	}
 	
-	private void upd() {
-		movieProvider.MoviesData.setList(movieProvider.moviesList);
-		seriesProvider.SeriesData.setList(seriesProvider.SeriesList);
+	private void createSeasonsTable() {
+		
+		seasonProvider.SeasonsTable = new CellTable<Season>();
+
+		seasonProvider.SeasonsData = new FilteredListDataProvider<>(new SeasonsFilter());
+		
+		seasonProvider.SeasonsData.addDataDisplay(seasonProvider.SeasonsTable);
+		seasonProvider.SeasonsList = seasonProvider.SeasonsData.getList();
 		seasonProvider.SeasonsData.setList(seasonProvider.SeasonsList);
-		episodeProvider.EpisodeData.setList(episodeProvider.EpisodeList);
+		seasonProvider.SeasonsTable.setSelectionModel(seasonProvider.loanableSeasonSelection);
+		
+		seasonProvider.SeasonsTable.setStyleName("cellTableCell");
+
+		Column<Season, String> titleColumn = new Column<Season, String>(new TextCell()) {
+			@Override
+			public String getValue(Season object) {
+				return object.getTitle();
+			}
+		};
+		Column<Season, String> categoryColumn = new Column<Season, String>(new TextCell()) {
+
+			@Override
+			public String getValue(Season object) {
+				return object.getBroadcastedBy();
+			}
+		};
+
+		Column<Season, String> ratingColumn = new Column<Season, String>(
+				new TextCell()) {
+
+			@Override
+			public String getValue(Season object) {
+				return "" + object.getRating().ordinal();
+			}
+		};
+		
+		Column<Season, String> dateColumn = new Column<Season, String>(
+				new TextCell()) {
+			@Override
+			public String getValue(Season object) {	
+				String year = object.getReleaseDate().toString();
+				year = year.substring(28);
+				return year;
+			}
+		};
+		
+		Column<Season, String> episodeColumn = new Column<Season, String>(
+				new TextCell()) {
+
+			@Override
+			public String getValue(Season object) { 
+				return "" + object.getEpisodes().size();
+			}
+		};
+		
+		Column<Season, String> getSerieColumn = new Column<Season, String>(
+				new TextCell()) {
+
+			@Override
+			public String getValue(Season object) { 
+				return "" + object.getSeries().getTitle();
+			}
+		};
+		
+		seasonProvider.SeasonsTable.addColumn(getSerieColumn, "Series" );
+		seasonProvider.SeasonsTable.addColumn(titleColumn, "Title");
+		seasonProvider.SeasonsTable.addColumn(dateColumn,"Date");
+		seasonProvider.SeasonsTable.addColumn(episodeColumn, "Quantity");
+
+
+
+		titleColumn.setSortable(true);	
+		categoryColumn.setSortable(true);
+		ratingColumn.setSortable(true);
+
+		ListHandler<Season> sortHandler = new ListHandler<Season>(seasonProvider.SeasonsData.getList());
+		seasonProvider.SeasonsTable.addColumnSortHandler(sortHandler);
+
+		sortHandler.setComparator(titleColumn, new Comparator<Season>() {
+
+			@Override
+			public int compare(Season o1, Season o2) {
+				return o1.getTitle().compareTo(o2.getTitle());
+			}
+		});
+
+		sortHandler.setComparator(categoryColumn, new Comparator<Season>() {
+
+			@Override
+			public int compare(Season o1, Season o2) {
+				return o1.getBroadcastedBy()
+						.compareTo(o2.getBroadcastedBy());
+			}
+		});
+
+		sortHandler.setComparator(ratingColumn, new Comparator<Season>() {
+
+			@Override
+			public int compare(Season o1, Season o2) {
+				if (o1.getRating().ordinal() > o2.getRating().ordinal()) {
+					return 1;
+				}
+				if (o1.getRating().ordinal() < o2.getRating().ordinal()) {
+					return -1;
+				}
+				return 0;
+			}
+		});
+		
+		seasonProvider.SeasonsTable.addCellPreviewHandler(new Handler<Season>() {
+
+			@Override
+			public void onCellPreview(CellPreviewEvent<Season> event) {
+				server.getLoanableEpisodeFromSeason();
+				episodeProvider.EpisodeTable.setVisible(true);
+			//	componentProvider.loanEpisodeButton.setVisible(true);
+			}
+
+		}); 
+		
+
+		seasonProvider.SeasonsTable.sinkEvents(Event.ONCLICK);
+		
+		seasonProvider.SeasonsTable.addDomHandler(new DoubleClickHandler() {
+			@Override
+			public void onDoubleClick(DoubleClickEvent event) {
+				for (Season season : seasonProvider.SeasonsList){
+					if(seasonProvider.loanableSeasonSelection.isSelected(season)){
+							new MessageDialog(season.getBroadcastedBy()).center();
+					}
+				}
+			}
+	    }, DoubleClickEvent.getType());
+		
+
+
+		componentProvider.loanSeasonButton.setVisible(false);
+		componentProvider.SeasonLabel.setVisible(false);
+		componentProvider.showEpisodeButton.setVisible(false);
+		seasonProvider.SeasonsTable.setVisible(false);	
+		
+		
+		verticalPanel.add(componentProvider.SeasonLabel);
+		verticalPanel.add(seasonProvider.SeasonsTable);
+		
+		componentProvider.PanelH.add(componentProvider.loanSeasonButton);
+		componentProvider.PanelH.add(componentProvider.showEpisodeButton);
+		
+		verticalPanel.add(componentProvider.PanelH);
+		
+		Label ll = new Label();
+		ll.setText("                        ");
+		ll.setSize("500", "500");
+		componentProvider.loanablePanel.add(ll);
+		
+		Label lb = new Label();
+		lb.setText("                        ");
+		lb.setSize("500", "500");
+		componentProvider.loanablePanel.add(lb);
+		RootPanel.get("content").add(this,85,240);
+	}
+
+	private void createEpisodeTable(){
+		episodeProvider.EpisodeTable = new CellTable<Episode>();
+		episodeProvider.EpisodeData = new FilteredListDataProvider<>(new EpisodesFilter());
+		episodeProvider.EpisodeData.addDataDisplay(episodeProvider.EpisodeTable);
+		episodeProvider.EpisodeTable.setSelectionModel(episodeProvider.loanableEpisodeSelection);
+		
+		episodeProvider.EpisodeTable.setStyleName("cellTableCell");
+
+		Column<Episode, String> titleColumn = new Column<Episode, String>(new TextCell()) {
+			@Override
+			public String getValue(Episode object) {
+				return object.getTitle();
+			}
+		};
+		
+		Column<Episode, String> timeColumn = new Column<Episode, String>(new TextCell()) {
+			@Override
+			public String getValue(Episode object) {
+				return "" + object.getTime();
+			}
+		};
+		
+		Column<Episode, String> categoryColumn = new Column<Episode, String>(
+				new TextCell()) {
+
+			@Override
+			public String getValue(Episode object) {
+				return object.getCategory().name();
+			}
+		};
+		
+
+		Column<Episode, String> ratingColumn = new Column<Episode, String>(
+				new TextCell()) {
+
+			@Override
+			public String getValue(Episode object) {
+				return "" + object.getRating().ordinal();
+			}
+		};
+		
+		Column<Episode, String> getSeasonColumn = new Column<Episode, String>(
+				new TextCell()) {
+
+			@Override
+			public String getValue(Episode object) {
+				return "" + object.getSeason().getTitle();
+			}
+		};
+		
+		Column<Episode, String> getSerieColumn = new Column<Episode, String>(
+				new TextCell()) {
+
+			@Override
+			public String getValue(Episode object) {
+				return "" + object.getSeason().getSeries().getTitle();
+			}
+		};
+		
+		episodeProvider.EpisodeTable.addColumn(getSerieColumn, "Series");
+		episodeProvider.EpisodeTable.addColumn(getSeasonColumn, "Season");	
+		episodeProvider.EpisodeTable.addColumn(titleColumn, "Title");
+		episodeProvider.EpisodeTable.addColumn(timeColumn, "Time");
+		episodeProvider.EpisodeTable.addColumn(categoryColumn, "Category");	
+		episodeProvider.EpisodeTable.addColumn(ratingColumn, "Rating");
+
+
+		titleColumn.setSortable(true);
+		ratingColumn.setSortable(true);
+
+		ListHandler<Episode> sortEpisodeHandler = new ListHandler<Episode>(episodeProvider.EpisodeData.getList());
+		episodeProvider.EpisodeTable.addColumnSortHandler(sortEpisodeHandler);
+
+		sortEpisodeHandler.setComparator(titleColumn, new Comparator<Episode>() {
+
+			@Override
+			public int compare(Episode o1, Episode o2) {
+				return o1.getTitle().compareTo(o2.getTitle());
+			}
+		});
+
+		sortEpisodeHandler.setComparator(ratingColumn, new Comparator<Episode>() {
+
+			@Override
+			public int compare(Episode o1, Episode o2) {
+				if (o1.getRating().ordinal() > o2.getRating().ordinal()) {
+					return 1;
+				}
+				if (o1.getRating().ordinal() < o2.getRating().ordinal()) {
+					return -1;
+				}
+				return 0;
+			}
+		});
+		
+		
+		episodeProvider.EpisodeTable.addDomHandler(new DoubleClickHandler() {
+			@Override
+			public void onDoubleClick(DoubleClickEvent event) {
+				for (Episode episode: episodeProvider.EpisodeList){
+					if(episodeProvider.loanableEpisodeSelection.isSelected(episode)){
+							new MessageDialog(episode.getOfdbID()).center();
+					}
+				}
+			}
+	    }, DoubleClickEvent.getType());
+
+		componentProvider.loanEpisodeButton.setVisible(false);
+		componentProvider.EpisodeLabel.setVisible(false);
+		episodeProvider.EpisodeTable.setVisible(false);	
+		
+		verticalPanel.add(componentProvider.EpisodeLabel);
+		verticalPanel.add(episodeProvider.EpisodeTable);
+		verticalPanel.add(componentProvider.loanEpisodeButton);
+		RootPanel.get("content").add(this,85,240);
+	}
+	    
+	public void clear() {
+		RootPanel.get("content").clear();
 	}
 	
 	private class GetDataFromServer{
@@ -557,18 +720,18 @@ public class MainUI extends Composite {
 		public void getLoanableSeasonFromSerie(){
 			for (Series serie : seriesProvider.SeriesList){
 				if (seriesProvider.loanableSerieSelection.isSelected(serie)){
-					seasonProvider.SeasonsList = new ArrayList<Season>(serie.getSeasons());
 					seasonProvider.SeasonsData.setList(seasonProvider.SeasonsList);
+					seasonProvider.SeasonsList = new ArrayList<Season>(serie.getSeasons());
+
 				}
 			}
 		}
 		
 		public void getLoanableEpisodes(){
-					componentProvider.movieService.listLoanableEpisodes(seasonProvider.SeasonsList,new AsyncCallback<List<Episode>>(){
+					componentProvider.movieService.listLoanableEpisodes(new AsyncCallback<List<Episode>>(){
 					public void onSuccess(List<Episode> result) {
 							episodeProvider.EpisodeList = new ArrayList<Episode>(result);
-							episodeProvider.EpisodeData.setList(result);
-						
+							episodeProvider.EpisodeData.setList(result);						
 						}				
 						@Override
 						public void onFailure(Throwable caught) {
@@ -581,19 +744,28 @@ public class MainUI extends Composite {
 		public void getLoanableEpisodeFromSeason(){ 
 
 			for (Season season : seasonProvider.SeasonsList){
-				if (seasonProvider.loanableSeasonSelection.isSelected(season)){			
-					episodeProvider.EpisodeList = new ArrayList<Episode>(season.getEpisodes());
-					episodeProvider.EpisodeData.setList(episodeProvider.EpisodeList);
-				}
-			}
-		}
-	}
+				if (seasonProvider.loanableSeasonSelection.isSelected(season)){
+					componentProvider.movieService.listEpisodesFromSeason(season, new AsyncCallback<List<Episode>>(){
+						
+						@Override
+						public void onSuccess(List<Episode> result) {
+								episodeProvider.EpisodeData.setList(result);
+								episodeProvider.EpisodeList = new ArrayList<Episode>(result);
+						}
+						@Override
+						public void onFailure(Throwable caught) {
+								GWT.log(caught.getMessage());
+								}
+							});  
+						}
+					}
+				}	
+			}		
 
 	private class Items{
 		
 		public void createButtons(){
 			setSearchButton();		
-			
 			setLoanMovieButton();
 			setLoanSerieButton();
 			setLoanSeasonButton();
@@ -711,8 +883,8 @@ public class MainUI extends Composite {
 					public void onClick(ClickEvent event) {
 						server.getLoanableSeasonFromSerie();
 						componentProvider.SeasonLabel.setVisible(true);
-						componentProvider.loanSeasonButton.setVisible(true);
-						componentProvider.showEpisodeButton.setVisible(true);
+						componentProvider.loanSeasonButton.setVisible(false);
+						componentProvider.showEpisodeButton.setVisible(false);
 						episodeProvider.EpisodeTable.setVisible(false);
 						componentProvider.loanEpisodeButton.setVisible(false);
 					
@@ -723,33 +895,32 @@ public class MainUI extends Composite {
 			componentProvider.searchButton.addClickHandler(new ClickHandler() {
 				@Override
 				public void onClick(ClickEvent event) {
-						server.getLoanableSeries();
-						movieProvider.MoviesTable.setVisible(true);
-						seriesProvider.SeriesTable.setVisible(true);
+					
+							movieProvider.MoviesTable.setVisible(true);
+							seriesProvider.SeriesTable.setVisible(true);
 
-						componentProvider.loanSerieButton.setVisible(true);
-						componentProvider.loanMovieButton.setVisible(true);
+							componentProvider.loanSerieButton.setVisible(true);
+							componentProvider.loanMovieButton.setVisible(true);
 
-						componentProvider.showSeasonButton.setVisible(true);
-						
-						componentProvider.SeriesLabel.setVisible(true);
-						componentProvider.MoviesLabel.setVisible(true);
-						seasonProvider.SeasonsTable.setVisible(true);
-						episodeProvider.EpisodeTable.setVisible(true);
-						
-						componentProvider.loanSeasonButton.setVisible(true);
-						componentProvider.SeasonLabel.setVisible(true);
-						componentProvider.showEpisodeButton.setVisible(true);
-						
-						componentProvider.EpisodeLabel.setVisible(true);
-						componentProvider.loanEpisodeButton.setVisible(true);
-						
-					}
+							componentProvider.showSeasonButton.setVisible(false);
+							
+							componentProvider.SeriesLabel.setVisible(true);
+							componentProvider.MoviesLabel.setVisible(true);
+							seasonProvider.SeasonsTable.setVisible(true);
+							episodeProvider.EpisodeTable.setVisible(true);
+							
+							componentProvider.loanSeasonButton.setVisible(true);
+							componentProvider.SeasonLabel.setVisible(true);
+							componentProvider.showEpisodeButton.setVisible(false);
+							
+							componentProvider.EpisodeLabel.setVisible(true);
+							componentProvider.loanEpisodeButton.setVisible(true);
+					
+				}
 			});
 		
 		}
-		
-		
+				
 		public void createTextBox(){
 			componentProvider.filterTextBox.addValueChangeHandler(new ValueChangeHandler<String>() {
 
@@ -758,6 +929,7 @@ public class MainUI extends Composite {
 					movieProvider.MoviesData.setFilter(componentProvider.filterTextBox.getText());
 					seriesProvider.SeriesData.setFilter(componentProvider.filterTextBox.getText());
 					seasonProvider.SeasonsData.setFilter(componentProvider.filterTextBox.getText());
+					episodeProvider.EpisodeData.setFilter(componentProvider.filterTextBox.getText());
 				}
 			});
 		}
@@ -792,7 +964,7 @@ public class MainUI extends Composite {
 		componentProvider.archorPanel.add(componentProvider.archor);
 		int top = componentProvider.archorPanel.getAbsoluteTop();
 		int left = componentProvider.archorPanel.getAbsoluteLeft();
-		RootPanel.get("content").add(componentProvider.archorPanel, left + 485, top+10);
+		RootPanel.get("content").add(componentProvider.archorPanel, left + 660, top+10);
 		top = 0;
 		left = 0;
 		
@@ -800,7 +972,7 @@ public class MainUI extends Composite {
 		componentProvider.buttonPanel.add(componentProvider.searchButton);
 		top = componentProvider.buttonPanel.getAbsoluteTop();
 		left = componentProvider.buttonPanel.getAbsoluteLeft();
-		RootPanel.get("content").add(componentProvider.buttonPanel, left +260, top +200);
+		RootPanel.get("content").add(componentProvider.buttonPanel, left +460, top +200);
 		top = 0;
 		left = 0;
 		
@@ -810,18 +982,27 @@ public class MainUI extends Composite {
 		top = componentProvider.filterPanel.getAbsoluteTop();
 		left = componentProvider.filterPanel.getAbsoluteLeft();
 		componentProvider.filterTextBox.setPixelSize(525, 20);
-		RootPanel.get("content").add(componentProvider.filterPanel, left +45, top +160);
+		RootPanel.get("content").add(componentProvider.filterPanel, left +215, top +160);
 		top = 0;
 		left = 0;
 		
 		//Image
-	    RootPanel.get("content").add(componentProvider.dock,25,60);
+	    RootPanel.get("content").add(componentProvider.dock,200,60);
 		componentProvider.dock.setSpacing(4);
 		componentProvider.dock.add(new Image("images/mainPage_Image.png"), DockPanel.CENTER);
 	}}
 		
-	private class LoanCallback implements AsyncCallback<Void> {
-
+	private void upd() {
+		movieProvider.MoviesData.setList(movieProvider.moviesList);
+		seriesProvider.SeriesData.setList(seriesProvider.SeriesList);
+		seasonProvider.SeasonsData.setList(seasonProvider.SeasonsList);
+		episodeProvider.EpisodeData.setList(episodeProvider.EpisodeList);
+	}
+		
+	public class LoanCallback implements AsyncCallback<Void> {
+		
+		ComponentProvider componentProvider = new ComponentProvider();
+		
 		private Movie movieToLoan;
 		private Series serieToLoan;
 		private Season seasonToLoan;
@@ -829,6 +1010,28 @@ public class MainUI extends Composite {
 		
 		public int FLAG = 0;
 
+		public void refresh(){
+			
+			componentProvider.movieService.listLoanableMovies(new AsyncCallback<List<Movie>>() {
+				@Override
+				public void onFailure(Throwable caught) {
+					GWT.log(caught.getMessage());
+				}
+				@Override
+				public void onSuccess(final List<Movie> result) {
+					Timer thread = new Timer() {
+						@Override
+						public void run() {
+							MainUI mainPage = new MainUI(result,componentProvider.filterTextBox.getText(),true);
+							mainPage.init(); 
+						}
+						
+					};		
+					thread.schedule(1);
+				}
+			});
+		}
+		
 		public LoanCallback(Movie loanMovie) {
 			movieToLoan = loanMovie;
 			FLAG = 1;
@@ -859,24 +1062,28 @@ public class MainUI extends Composite {
 			if(FLAG == 1){
 				movieProvider.moviesList.remove(movieToLoan);
 				upd();
+				refresh();
 			}
 			if(FLAG == 2){
 				seriesProvider.SeriesList.remove(serieToLoan);
 				upd();
+				refresh();
 			}
 			if(FLAG == 3){
 				seasonProvider.SeasonsList.remove(seasonToLoan);
 				upd();
+				refresh();
 			}
 			if(FLAG == 4){
 				episodeProvider.EpisodeList.remove(episodeToLoan);
 				upd();
+				refresh();
 			}
 		}
 
 	}
 	
-	private class ReturnDateDialog extends DialogBox {
+	public class ReturnDateDialog extends DialogBox {	
 		
 		private Date loanedUntil;
 
@@ -892,7 +1099,7 @@ public class MainUI extends Composite {
 		public ReturnDateDialog(final Season loanSeason) { seasonToLoan = loanSeason; FLAG = 3; createDialog();}
 		public ReturnDateDialog(final Episode loanEpisode) { episodeToLoan = loanEpisode; FLAG = 4; createDialog();}
 		
-		public void createDialog() {
+		public void createDialog() {	
 			
 			setAnimationEnabled(true);
 			setGlassEnabled(true);
@@ -921,15 +1128,11 @@ public class MainUI extends Composite {
 				public void onClick(ClickEvent event) {
 					
 					if (isBeforeTommorow(loanedUntil)) {
-						new MessageDialog(
-								"The return date must be later than today's date!")
-								.center();
+						new MessageDialog("The return date must be later than today's date!").center();
 						return;
 					}
 					if (isLoanPeriodExceeded(loanedUntil)) {
-						new MessageDialog(
-								"The return date cannot be later than today's date + 14 days!")
-								.center();
+						new MessageDialog("The return date cannot be later than today's date + 14 days!").center();
 						return;
 					}
 					ReturnDateDialog.this.hide();
@@ -980,4 +1183,48 @@ public class MainUI extends Composite {
 			setWidget(panel);
 		}		
 	}
-	}
+	
+	private class Refresh extends ClickEvent{
+        Refresh(){
+        	server.getLoanableSeries();
+    		createMovieTable();
+    		createSeriesTable();
+    		createSeasonsTable();
+    		createEpisodeTable();
+    		
+    		item.createAnchorMyLoans();
+    		item.createTextBox();
+    		item.createButtons();
+    		item.setPosition();
+    		
+			movieProvider.MoviesTable.setVisible(true);
+			seriesProvider.SeriesTable.setVisible(true);
+
+			componentProvider.loanSerieButton.setVisible(true);
+			componentProvider.loanMovieButton.setVisible(true);
+
+			componentProvider.showSeasonButton.setVisible(false);
+			
+			componentProvider.SeriesLabel.setVisible(true);
+			componentProvider.MoviesLabel.setVisible(true);
+			seasonProvider.SeasonsTable.setVisible(true);
+			episodeProvider.EpisodeTable.setVisible(true);
+			
+			componentProvider.loanSeasonButton.setVisible(true);
+			componentProvider.SeasonLabel.setVisible(true);
+			componentProvider.showEpisodeButton.setVisible(false);
+			
+			componentProvider.EpisodeLabel.setVisible(true);
+			componentProvider.loanEpisodeButton.setVisible(true);
+			
+			movieProvider.MoviesData.setFilter(componentProvider.filterTextBox.getText());
+			seriesProvider.SeriesData.setFilter(componentProvider.filterTextBox.getText());
+			seasonProvider.SeasonsData.setFilter(componentProvider.filterTextBox.getText());
+			episodeProvider.EpisodeData.setFilter(componentProvider.filterTextBox.getText());
+    		
+    		RootPanel.get("content").add(componentProvider.loanablePanel,85,200);
+			}
+     
+    }
+	
+}

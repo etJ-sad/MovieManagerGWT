@@ -49,7 +49,7 @@ public class ComponentProvider {
 
 	public DockPanel dock = new DockPanel();
 	
-	public VerticalPanel loanablePanel;
+	public HorizontalPanel loanablePanel;
 	
 	
 	

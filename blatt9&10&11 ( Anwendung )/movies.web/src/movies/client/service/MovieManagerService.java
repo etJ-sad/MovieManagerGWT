@@ -32,8 +32,9 @@ public interface MovieManagerService extends RemoteService {
 	public void returnSeason(Season series);
 	
 //Episode	
-	public List<Episode> listLoanableEpisodes(List<Season> listOfSeasons);
-	public List<Episode> listLoanedEpisodes(List<Season> listOfSeasons);
+	public List<Episode> listLoanableEpisodes();
+	public List<Episode> listLoanedEpisodes();
+	public List<Episode> listEpisodesFromSeason(Season season);
 	public void loanEpisode(Episode episode);
 	public void returnEpisode(Episode episode);
 

@@ -32,10 +32,12 @@ public interface MovieManagerServiceAsync {
 
 //Episodes
 	
-	void listLoanableEpisodes(List<Season> listOfSeasons,AsyncCallback<List<Episode>> callback);
-	void listLoanedEpisodes(List<Season> listOfSeasons,AsyncCallback<List<Episode>> callback);
+	void listLoanableEpisodes(AsyncCallback<List<Episode>> callback);
+	void listLoanedEpisodes(AsyncCallback<List<Episode>> callback);
 	void loanEpisode(Episode episode, AsyncCallback<Void> callback);
 	void returnEpisode(Episode episode, AsyncCallback<Void> callback);
+	
+	void listEpisodesFromSeason(Season season,AsyncCallback<List<Episode>> callback);
 
 	
 

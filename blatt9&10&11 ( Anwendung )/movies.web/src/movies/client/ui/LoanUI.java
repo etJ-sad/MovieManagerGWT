@@ -36,11 +36,12 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.DockPanel;
 import com.google.gwt.user.client.ui.Image;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.view.client.SingleSelectionModel;
 
 public class LoanUI extends Composite {
-
+	
 	MovieProvider movieProvider = new MovieProvider();
 	SeriesProvider seriesProvider = new SeriesProvider();
 	SeasonProvider seasonProvider = new SeasonProvider();
@@ -49,32 +50,9 @@ public class LoanUI extends Composite {
 	ComponentProvider componentProvider = new ComponentProvider();
 	GetDataFromServer server = new GetDataFromServer();
 	Items item = new Items();
+	
+	Label ll = new Label("  ");
 
-	private class ButtonClickEvent extends ClickEvent{
-        ButtonClickEvent(){
-			componentProvider.movieService.listLoanedSeries(new AsyncCallback<List<Series>>() {
-				@Override
-				public void onSuccess(List<Series> result) {
-					seriesProvider.SeriesData.setList(result);
-					seriesProvider.SeriesList = new ArrayList<Series>(result);
-					Timer thread = new Timer(){
-
-						@Override
-						public void run() {
-							server.getLoanedSeasons();	
-						}};
-						thread.schedule(500);
-					
-
-				}
-				
-				@Override
-				public void onFailure(Throwable caught) {
-					GWT.log(caught.getMessage());
-				}
-			});
-        }
-    }
 	
 	public LoanUI(List<Movie> movies) {
 		clear();
@@ -84,6 +62,8 @@ public class LoanUI extends Composite {
 	public void init() {
 		
 		server.run();
+		
+		ll.setSize("500", "500");
 		
 		movieProvider.loanSelection = new SingleSelectionModel<Movie>();
 
@@ -125,13 +105,31 @@ public class LoanUI extends Composite {
 		episodeProvider.EpisodeData.setList(episodeProvider.EpisodeList);
 		episodeProvider.EpisodeTable.setSelectionModel(episodeProvider.loanEpisodeSelection);
 
+		episodeProvider.EpisodeTable.setStyleName("cellTableCell");
+
 		Column<Episode, String> titleColumn = new Column<Episode, String>(new TextCell()) {
 			@Override
 			public String getValue(Episode object) {
 				return object.getTitle();
 			}
 		};
+		
+		Column<Episode, String> timeColumn = new Column<Episode, String>(new TextCell()) {
+			@Override
+			public String getValue(Episode object) {
+				return "" + object.getTime();
+			}
+		};
+		
+		Column<Episode, String> categoryColumn = new Column<Episode, String>(
+				new TextCell()) {
 
+			@Override
+			public String getValue(Episode object) {
+				return object.getCategory().name();
+			}
+		};
+		
 
 		Column<Episode, String> ratingColumn = new Column<Episode, String>(
 				new TextCell()) {
@@ -142,6 +140,25 @@ public class LoanUI extends Composite {
 			}
 		};
 		
+		Column<Episode, String> getSeasonColumn = new Column<Episode, String>(
+				new TextCell()) {
+
+			@Override
+			public String getValue(Episode object) {
+				return "" + object.getSeason().getTitle();
+			}
+		};
+		
+		Column<Episode, String> getSerieColumn = new Column<Episode, String>(
+				new TextCell()) {
+
+			@Override
+			public String getValue(Episode object) {
+				return "" + object.getSeason().getSeries().getTitle();
+			}
+		};
+		
+
 		Column<Episode, String> loanedUntilColumn = new Column<Episode, String>(
 				new TextCell()) {
 
@@ -152,8 +169,13 @@ public class LoanUI extends Composite {
 			}
 		};
 
-		episodeProvider.EpisodeTable.addColumn(titleColumn, "");
-		episodeProvider.EpisodeTable.addColumn(ratingColumn, "");
+		episodeProvider.EpisodeTable.addColumn(getSerieColumn, "Series");
+		episodeProvider.EpisodeTable.addColumn(getSeasonColumn, "Season");	
+		episodeProvider.EpisodeTable.addColumn(titleColumn, "Title");
+		episodeProvider.EpisodeTable.addColumn(timeColumn, "Time");
+		episodeProvider.EpisodeTable.addColumn(categoryColumn, "Category");	
+		episodeProvider.EpisodeTable.addColumn(ratingColumn, "Rating");
+		
 		episodeProvider.EpisodeTable.addColumn(loanedUntilColumn,"Return date");
 
 		titleColumn.setSortable(true);
@@ -193,6 +215,7 @@ public class LoanUI extends Composite {
 		
 		componentProvider.loansPanel.add(componentProvider.EpisodeLabel);
 		componentProvider.loansPanel.add(episodeProvider.EpisodeTable);
+		componentProvider.loansPanel.add(ll);
 		componentProvider.loansPanel.add(componentProvider.loanEpisodeButton);
 		
 	}
@@ -207,6 +230,8 @@ public class LoanUI extends Composite {
 		seriesProvider.SeriesData.setList(seriesProvider.SeriesList);
 		seriesProvider.SeriesTable.setSelectionModel(seriesProvider.loanSeriesSelection);
 
+		seriesProvider.SeriesTable.setStyleName("cellTableCell");
+
 		Column<Series, String> titleColumn = new Column<Series, String>(new TextCell()) {
 			@Override
 			public String getValue(Series object) {
@@ -214,20 +239,22 @@ public class LoanUI extends Composite {
 			}
 		};
 
-		Column<Series, String> timeColumn = new Column<Series, String>(
+		Column<Series, String> yearColumn = new Column<Series, String>(
 				new TextCell()) {
 
 			@Override
 			public String getValue(Series object) {
-				return "" + object.getReleaseDate();
+				String year = object.getReleaseDate().toString();
+				year = year.substring(28);
+				return year;
 			}
 		};
 
-		Column<Series, String> categoryColumn = new Column<Series, String>(new TextCell()) {
+		Column<Series, String> seasonColumn = new Column<Series, String>(new TextCell()) {
 
 			@Override
 			public String getValue(Series object) {
-				return object.getBroadcastedBy();
+				return "" + object.getSeasons().size();
 			}
 		};
 
@@ -240,6 +267,16 @@ public class LoanUI extends Composite {
 			}
 		};
 		
+		Column<Series, String> studioColumn = new Column<Series, String>(
+				new TextCell()) {
+
+			@Override
+			public String getValue(Series object) {
+				return "" + object.getStudio();
+			}
+		};
+
+	
 		Column<Series, String> loanedUntilColumn = new Column<Series, String>(
 				new TextCell()) {
 
@@ -250,17 +287,17 @@ public class LoanUI extends Composite {
 			}
 		};
 
-		seriesProvider.SeriesTable.addColumn(titleColumn, "");
-		seriesProvider.SeriesTable.addColumn(timeColumn, "");
-		seriesProvider.SeriesTable.addColumn(categoryColumn, "");
-		seriesProvider.SeriesTable.addColumn(ratingColumn, "");
+		seriesProvider.SeriesTable.addColumn(titleColumn, "Title");
+		seriesProvider.SeriesTable.addColumn(studioColumn,"Studio");
+		seriesProvider.SeriesTable.addColumn(yearColumn, "Date");
+		seriesProvider.SeriesTable.addColumn(seasonColumn, "Quantity");
 		seriesProvider.SeriesTable.addColumn(loanedUntilColumn,"Return date");
 
 		titleColumn.setSortable(true);
-		timeColumn.setSortable(true);
-		categoryColumn.setSortable(true);
+		yearColumn.setSortable(true);
+		seasonColumn.setSortable(true);
 		ratingColumn.setSortable(true);
-
+		
 		ListHandler<Series> sortHandler = new ListHandler<Series>(seriesProvider.SeriesData.getList());
 		seriesProvider.SeriesTable.addColumnSortHandler(sortHandler);
 
@@ -269,15 +306,6 @@ public class LoanUI extends Composite {
 			@Override
 			public int compare(Series o1, Series o2) {
 				return o1.getTitle().compareTo(o2.getTitle());
-			}
-		});
-
-		sortHandler.setComparator(categoryColumn, new Comparator<Series>() {
-
-			@Override
-			public int compare(Series o1, Series o2) {
-				return o1.getBroadcastedBy()
-						.compareTo(o2.getBroadcastedBy());
 			}
 		});
 
@@ -297,10 +325,11 @@ public class LoanUI extends Composite {
 
 		componentProvider.loanSerieButton.setVisible(true);
 		componentProvider.SeriesLabel.setVisible(true);
+		
 
 		componentProvider.loanSerieButton.setText("Return");
 		componentProvider.SeriesLabel.setHTML("<h2>Series to return</h2>");
-		
+		componentProvider.loansPanel.add(ll);
 		componentProvider.PanelS.add(componentProvider.loanSerieButton);
 	//	componentProvider.PanelS.add(componentProvider.showSeasonButton);
 		componentProvider.loansPanel.add(componentProvider.SeriesLabel);
@@ -319,22 +348,14 @@ public class LoanUI extends Composite {
 		seasonProvider.SeasonsData.setList(seasonProvider.SeasonsList);
 		seasonProvider.SeasonsTable.setSelectionModel(seasonProvider.loanSeasonSelection);
 
+		seasonProvider.SeasonsTable.setStyleName("cellTableCell");
+
 		Column<Season, String> titleColumn = new Column<Season, String>(new TextCell()) {
 			@Override
 			public String getValue(Season object) {
 				return object.getTitle();
 			}
 		};
-
-		Column<Season, String> timeColumn = new Column<Season, String>(
-				new TextCell()) {
-
-			@Override
-			public String getValue(Season object) {
-				return "" + object.getReleaseDate();
-			}
-		};
-
 		Column<Season, String> categoryColumn = new Column<Season, String>(new TextCell()) {
 
 			@Override
@@ -352,6 +373,34 @@ public class LoanUI extends Composite {
 			}
 		};
 		
+		Column<Season, String> dateColumn = new Column<Season, String>(
+				new TextCell()) {
+			@Override
+			public String getValue(Season object) {	
+				String year = object.getReleaseDate().toString();
+				year = year.substring(28);
+				return year;
+			}
+		};
+		
+		Column<Season, String> episodeColumn = new Column<Season, String>(
+				new TextCell()) {
+
+			@Override
+			public String getValue(Season object) { 
+				return "" + object.getEpisodes().size();
+			}
+		};
+		
+		Column<Season, String> getSerieColumn = new Column<Season, String>(
+				new TextCell()) {
+
+			@Override
+			public String getValue(Season object) { 
+				return "" + object.getSeries().getTitle();
+			}
+		};
+		
 		Column<Season, String> loanedUntilColumn = new Column<Season, String>(
 				new TextCell()) {
 
@@ -362,14 +411,13 @@ public class LoanUI extends Composite {
 			}
 		};
 
-		seasonProvider.SeasonsTable.addColumn(titleColumn, "");
-		seasonProvider.SeasonsTable.addColumn(timeColumn, "");
-		seasonProvider.SeasonsTable.addColumn(categoryColumn, "");
-		seasonProvider.SeasonsTable.addColumn(ratingColumn, "");
+		seasonProvider.SeasonsTable.addColumn(getSerieColumn, "Series" );
+		seasonProvider.SeasonsTable.addColumn(titleColumn, "Title");
+		seasonProvider.SeasonsTable.addColumn(dateColumn,"Date");
+		seasonProvider.SeasonsTable.addColumn(episodeColumn, "Quantity");
 		seasonProvider.SeasonsTable.addColumn(loanedUntilColumn,"Return date");
 
-		titleColumn.setSortable(true);
-		timeColumn.setSortable(true);
+		titleColumn.setSortable(true);	
 		categoryColumn.setSortable(true);
 		ratingColumn.setSortable(true);
 
@@ -418,8 +466,9 @@ public class LoanUI extends Composite {
 		componentProvider.loanSeasonButton.setText("Return");
 		componentProvider.SeasonLabel.setHTML("<h2>Seasons to return</h2>");
 			
-		
+		componentProvider.loansPanel.add(ll);
 		componentProvider.PanelH.add(componentProvider.loanSeasonButton);
+		componentProvider.loansPanel.add(ll);
 		componentProvider.PanelH.add(componentProvider.showEpisodeButton);
 		
 		componentProvider.loansPanel.add(componentProvider.SeasonLabel);
@@ -435,9 +484,9 @@ public class LoanUI extends Composite {
 		movieProvider.MoviesData.setList(movieProvider.moviesList);
 		movieProvider.MoviesTable.setSelectionModel(movieProvider.loanSelection);
 
-		Column<Movie, String> titleColumn = new Column<Movie, String>(
-				new TextCell()) {
-
+		movieProvider.MoviesTable.setStyleName("cellTableCell");
+		
+		Column<Movie, String> titleColumn = new Column<Movie, String>(new TextCell()) {
 			@Override
 			public String getValue(Movie object) {
 				return object.getTitle();
@@ -471,6 +520,8 @@ public class LoanUI extends Composite {
 			}
 		};
 
+
+
 		Column<Movie, String> loanedUntilColumn = new Column<Movie, String>(
 				new TextCell()) {
 
@@ -480,11 +531,12 @@ public class LoanUI extends Composite {
 				return format.format(object.getLoanedUntil());
 			}
 		};
+		
+		movieProvider.MoviesTable.addColumn(titleColumn, "Title");
+		movieProvider.MoviesTable.addColumn(timeColumn, "Time");
+		movieProvider.MoviesTable.addColumn(categoryColumn, "Category");
+		movieProvider.MoviesTable.addColumn(ratingColumn, "Rating");
 
-		movieProvider.MoviesTable.addColumn(titleColumn, "");
-		movieProvider.MoviesTable.addColumn(timeColumn, "");
-		movieProvider.MoviesTable.addColumn(categoryColumn, "");
-		movieProvider.MoviesTable.addColumn(ratingColumn, "");
 		movieProvider.MoviesTable.addColumn(loanedUntilColumn, "Return Date");
 
 		titleColumn.setSortable(true);
@@ -554,6 +606,7 @@ public class LoanUI extends Composite {
 		
 		componentProvider.loansPanel.add(componentProvider.MoviesLabel);
 		componentProvider.loansPanel.add(movieProvider.MoviesTable);
+		componentProvider.loansPanel.add(ll);
 		componentProvider.loansPanel.add(componentProvider.loanMovieButton);
 	}
 
@@ -569,7 +622,7 @@ public class LoanUI extends Composite {
 		
 		public void run(){
 			Button btnAddField = new Button("404");
-			btnAddField.fireEvent(new ButtonClickEvent ());
+			btnAddField.fireEvent(new Shadow ());
 		}
 		
 		public void getLoanedSeasons() {
@@ -590,7 +643,7 @@ public class LoanUI extends Composite {
 		}
 		
 		public void getLoanedEpisodes(){				
-			componentProvider.movieService.listLoanedEpisodes(seasonProvider.SeasonsList,new AsyncCallback<List<Episode>>(){
+			componentProvider.movieService.listLoanedEpisodes(new AsyncCallback<List<Episode>>(){
 						@Override
 						public void onSuccess(List<Episode> result) {
 							episodeProvider.EpisodeData.setList(result);
@@ -662,7 +715,7 @@ public class LoanUI extends Composite {
 							Timer thread = new Timer() {
 								@Override
 								public void run() {
-									MainUI mainPage = new MainUI(result);
+									MainUI mainPage = new MainUI(result,null,false);
 									mainPage.init(); 
 								}
 								
@@ -858,4 +911,30 @@ public class LoanUI extends Composite {
 		}
 	}
 
+	
+	private class Shadow extends ClickEvent{
+        Shadow(){
+			componentProvider.movieService.listLoanedSeries(new AsyncCallback<List<Series>>() {
+				@Override
+				public void onSuccess(List<Series> result) {
+					seriesProvider.SeriesData.setList(result);
+					seriesProvider.SeriesList = new ArrayList<Series>(result);
+					Timer thread = new Timer(){
+
+						@Override
+						public void run() {
+							server.getLoanedSeasons();	
+						}};
+						thread.schedule(500);
+					
+
+				}
+				
+				@Override
+				public void onFailure(Throwable caught) {
+					GWT.log(caught.getMessage());
+				}
+			});
+        }
+    }
 }

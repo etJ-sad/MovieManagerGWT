@@ -28,6 +28,15 @@ h1 {
   color: red;
 }
 
+.cellTableCell {
+   background-color: #ff9933;
+   font-family: Arial,sans-serif;
+   text-align: left;
+   color: black;
+   margin: 5px 2px 15px;
+   table-layout: fixed;
+}​
+
 /** Set ids using widget.getElement().setId("idOfElement") */
 #closeButton {
   margin: 15px 6px 6px;

@@ -3,6 +3,9 @@ package movies.server;
 import java.util.ArrayList;
 import java.util.List;
 
+import movies.client.provider.EpisodeProvider;
+import movies.client.provider.SeasonProvider;
+import movies.client.provider.SeriesProvider;
 import movies.client.service.MovieManagerService;
 import movies.emfstore.client.EMFStoreClient;
 import movies.emfstore.client.EMFStoreClientException;
@@ -19,6 +22,9 @@ public class MovieManagerServiceImpl extends RemoteServiceServlet implements
 	private static final long serialVersionUID = -1;
 
 	private EMFStoreClient client = new EMFStoreClient();
+	SeriesProvider seriesProvider = new SeriesProvider();
+	SeasonProvider seasonProvider = new SeasonProvider();
+	EpisodeProvider episodeProvider = new EpisodeProvider();
 	
 //Movies
 	@Override
@@ -67,15 +73,15 @@ public class MovieManagerServiceImpl extends RemoteServiceServlet implements
 //Series
 	@Override
 	public List<Series> listLoanableSeries() {
-		List<Series> loanableSeries = new ArrayList<Series>();
+		seriesProvider.SeriesList = new ArrayList<Series>();
 
 		for (Series serie : client.getSeries()) {
 			if (serie.isLoanable() && !serie.isLoaned()) {
-				loanableSeries.add(serie);
+				seriesProvider.SeriesList.add(serie);
 				
 			}
 		}
-		return loanableSeries;
+		return seriesProvider.SeriesList;
 	}
 
 	@Override
@@ -111,19 +117,15 @@ public class MovieManagerServiceImpl extends RemoteServiceServlet implements
 //Seasons
 	@Override
 	public List<Season> listLoanableSeasons() {
-		List<Season> loanableSeason = new ArrayList<Season>();	
-			try {
-				for (Series serie : client.getSeries()){
-					for (Season season : client.getSeasonsFromSeries(serie)) {
+		seasonProvider.SeasonsList = new ArrayList<Season>();	
+				for (Series serie : seriesProvider.SeriesList){
+					for (Season season : serie.getSeasons()) {
 						if (season.isLoanable() && !season.isLoaned()) {
-							loanableSeason.add(season);
+							seasonProvider.SeasonsList.add(season);
 							}
 						}
-				}} catch (EMFStoreClientException e) {
-					e.printStackTrace();
-			} 
-			
-		return loanableSeason;
+				} 	
+		return seasonProvider.SeasonsList;
 	}
 
 	@Override
@@ -160,37 +162,30 @@ public class MovieManagerServiceImpl extends RemoteServiceServlet implements
 
 //Episode
 	@Override
-	public List<Episode> listLoanableEpisodes(List<Season> listOfSeasons) {
-		List<Episode> loanableEpisodes = new ArrayList<Episode>();
+	public List<Episode> listLoanableEpisodes() {
+		episodeProvider.EpisodeList = new ArrayList<Episode>();
 
-		try {
-			for (Season season : listOfSeasons){
-				for (Episode episode : client.getEpisodesFromSeason(season)) {
+			for (Season season : seasonProvider.SeasonsList){
+				for (Episode episode : season.getEpisodes()) {
 					if (episode.isLoanable() && !episode.isLoaned()) {
-						loanableEpisodes.add(episode);
+						episodeProvider.EpisodeList.add(episode);
 						
 					}
 				}
-		}} catch (EMFStoreClientException e) {
-			e.printStackTrace();
 		}
-		return loanableEpisodes;
+		return episodeProvider.EpisodeList;
 	}
 
 	@Override
-	public List<Episode> listLoanedEpisodes(List<Season> listOfSeasons) {
+	public List<Episode> listLoanedEpisodes() {
 		List<Episode> loanedEpisodes = new ArrayList<Episode>();
-				for (Season season : listOfSeasons){
-					try {
-						for (Episode episode : client.getEpisodesFromSeason(season)) {
+		for(Series serie : client.getSeries())
+				for (Season season : serie.getSeasons()){
+						for (Episode episode : season.getEpisodes()) {
 							if (episode.isLoaned()) {
 								loanedEpisodes.add(episode);					
 							}
 						}
-					} catch (EMFStoreClientException e) {
-						e.printStackTrace(); 
-					}
-
 				}
 		return loanedEpisodes;
 	}
@@ -211,5 +206,17 @@ public class MovieManagerServiceImpl extends RemoteServiceServlet implements
 		} catch (EMFStoreClientException e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public List<Episode> listEpisodesFromSeason(Season season) {
+		List<Episode> EpisodeFromSeasonList = new ArrayList<Episode>();
+		for(Episode episode : season.getEpisodes()){
+			if(episode.isLoanable() && !episode.isLoaned()){
+				EpisodeFromSeasonList.add(episode);
+			}
+		}
+		return EpisodeFromSeasonList;
+			
 	}
 }
