@@ -1,9 +1,3 @@
-/**
- * @version 4.4.843:RC-5
- */
-
-// #dns
-
 package de.unihd.movies.client;
 
 import java.util.ArrayList;
@@ -23,8 +17,8 @@ import com.google.gwt.user.cellview.client.Column;
 import com.google.gwt.user.cellview.client.ColumnSortEvent.ListHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -35,35 +29,40 @@ import de.unihd.movies.client.filter.MovieFilter;
 import de.unihd.movies.client.service.MovieManagerService;
 import de.unihd.movies.client.service.MovieManagerServiceAsync;
 
+
+
+
 public class MovieUI {
+	
+	private final HTML Header = new HTML("<h1>MovieManager</h1>");
+	
 	public final FilteredListDataProvider<Movie> dataProvider;
 	public final ArrayList<Movie> movieList;
 	public final MovieManagerServiceAsync service = GWT.create(MovieManagerService.class);
 	public final Button addButton = new Button("Add Movie");
 	public final Button deleteButton = new Button("Del Movie");
-	public final Label lbl = new Label("Filter:");
 	public final TextBox textBox = new TextBox();
 	public final SingleSelectionModel<Movie> selection = new SingleSelectionModel<Movie>();
-	public final HorizontalPanel hPanel = new HorizontalPanel();
+	public final HorizontalPanel hp = new HorizontalPanel();
 	public final ArrayList<String> LANG = new ArrayList<String>();
-	
+
 	public MovieUI(ArrayList<Movie> movie) {
 		movieList = movie;
-		RootPanel rootPanel = RootPanel.get("SIGNAL");
-		VerticalPanel vPanel = new VerticalPanel();
-		final CellTable<Movie> table = new CellTable<Movie>();
+		RootPanel rootPanel = RootPanel.get("content");
+		VerticalPanel vp = new VerticalPanel();
+		CellTable<Movie> table = new CellTable<Movie>();
 		table.setSelectionModel(selection);
-		
-		vPanel.add(hPanel);
-		vPanel.add(table);
 
-		rootPanel.add(vPanel);
+		vp.add(Header);
+		vp.add(hp);
+		vp.add(table);
 
-		setAddButton();  // <
-		setDelButton();  // <
-		setLabel();		 // <
-		setTextBox();	 // <
-		setLANG();		 // <!
+		rootPanel.add(vp);
+
+		setAddButton();
+		setDelButton();
+		setTextBox();
+		setLANG();
 
 		// { Columns } 
 		
@@ -94,33 +93,15 @@ public class MovieUI {
 		Column<Movie, String> timeColumn = new Column<Movie, String>(new EditTextCell()) {
 			@Override
 			public String getValue(Movie object) {
-				long B = object.getTime();
-				if (B > 0){
-					
-					return "" + B;
-				} 
-				else{
-					//Window.alert("Error, Positive time please ");
-					return "Error, Positive time please ";			
-				}
-			}
-		};
-		timeColumn.setFieldUpdater(new FieldUpdater<Movie, String>() {
-			@Override
-			public void update(int index, Movie object, String value) {
-				if(Integer.valueOf(value) > 0) {
-					object.setTime(Integer.valueOf(value));
-				
+				if (object.getTime() < 0) {
+					return "Error, Only positive times.";
 				}else {
-					//Window.alert("Error");
-					object.setTime(0);	
+				return "" + object.getTime();
 				}
-				saveMovies();
-				updateTable();
 			}
-		});table.addColumn(timeColumn, "Time");
-		
-		
+			
+		};
+			table.addColumn(timeColumn, "Time");
 		
 		Column<Movie, String> languageColumn = new Column<Movie, String>(new SelectionCell(LANG)) {
 
@@ -255,7 +236,7 @@ public class MovieUI {
 				saveMovies();
 				updateTable();
 			}
-		}); hPanel.add(addButton);
+		}); hp.add(addButton);
 	}
 	
 	public final void setDelButton(){
@@ -274,7 +255,7 @@ public class MovieUI {
 					saveMovies();
 					updateTable();
 				}
-			} });hPanel.add(deleteButton);
+			} });hp.add(deleteButton);
 		}
 	
 	public final  void setLANG(){
@@ -285,10 +266,6 @@ public class MovieUI {
 		LANG.add("Russian");
 	}
 	
-	public void setLabel(){
-		hPanel.add(lbl);
-	}
-	
 	public final void setTextBox(){
 		textBox.addValueChangeHandler(new ValueChangeHandler<String>() {
 			@Override
@@ -296,7 +273,7 @@ public class MovieUI {
 				dataProvider.setFilter(textBox.getText());
 			}
 		});
-		hPanel.add(textBox);
+		hp.add(textBox);
 	}
 	
 	private final void updateTable() {
@@ -313,7 +290,7 @@ public class MovieUI {
 
 			@Override
 			public void onSuccess(Void result) {
-				GWT.log(" > Saved.");
+				GWT.log("All changes saved.");
 			}
 		});
 	}

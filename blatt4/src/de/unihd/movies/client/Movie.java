@@ -1,7 +1,3 @@
-/**
- * @version 4.4.843:RC-2
- */
-
 package de.unihd.movies.client;
 
 import java.io.Serializable;
@@ -22,7 +18,7 @@ public class Movie implements Serializable
 	private String name;
 	
 	/** The time. */
-	private long time;
+	private int time;
 	
 	/** The language. */
 	private String language;
@@ -106,10 +102,9 @@ public class Movie implements Serializable
 	 *
 	 * @return the time
 	 */
-	public long getTime() {
-		return time; 
-		}
-		
+	public int getTime() {
+		return time;
+	}
 
 	/**
 	 * Sets the time.

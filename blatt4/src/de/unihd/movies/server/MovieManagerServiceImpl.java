@@ -1,7 +1,3 @@
-/**
- * @version 4.4.843:RC-2
- */
-
 package de.unihd.movies.server;
 
 import java.io.FileInputStream;

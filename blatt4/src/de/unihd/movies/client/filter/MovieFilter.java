@@ -1,7 +1,3 @@
-/**
- * @version 4.4.843:RC-2
- */
-
 package de.unihd.movies.client.filter;
 
 import de.unihd.movies.client.Movie;
